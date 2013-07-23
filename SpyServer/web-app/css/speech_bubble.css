@@ -1,0 +1,28 @@
+p {
+	background: #e8e8e8;
+	padding: 20px;
+	margin: 20px;
+	position: relative;
+	border-radius: 5px;
+}
+
+p:nth-of-type(odd):after {
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-right: 20px solid #e8e8e8;
+	border-left: none;
+	right: auto;
+	left: -20px;
+}
+
+p:after {
+	content: "";
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	border-left: 20px solid #e8e8e8;
+	right: -20px;
+	position: absolute;
+	top: 10px;
+}
