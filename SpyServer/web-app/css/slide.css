@@ -37,12 +37,12 @@ Version: 1.0
   	clear: right;
   	height: 42px;
 	width: auto;
-  	font-weight: bold;
+  	#font-weight: bold;
 	line-height: 42px;
 	margin: 0;
 	right: 72%;
   	color: black;
-  	font-size: 80%;
+  	#font-size: 80%;
 	text-align: center;
 	background-color: #FFFFFF;
     border-radius: 0 0 5px 5px;

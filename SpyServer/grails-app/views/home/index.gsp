@@ -338,14 +338,14 @@
 				<span class="line" style="margin-bottom:0;"></span>
 			</div>
 		
-			<!-- Navigation / Left -->
-			<div class="one carousel column"><div id="showbiz_left_2" class="sb-navigation-left-2"><i class="icon-angle-left"></i></div></div>
+			<!-- Navigation / right -->
+			<div class="one carousel column"><div id="showbiz_right_2" class="sb-navigation-right-2"><i class="icon-angle-right"></i></div></div>
 		
 			<!-- ShowBiz Carousel -->
 			<div id="our-clients" class="showbiz-container fourteen carousel columns" >
 		
 			<!-- Portfolio Entries -->
-			<div class="showbiz our-clients" data-left="#showbiz_left_2" data-right="#showbiz_right_2">
+			<div class="showbiz our-clients" data-right="#showbiz_right_2" data-left="#showbiz_left_2">
 				<div class="overflowholder">
 		
 					<ul>
@@ -366,8 +366,8 @@
 			</div>
 			</div>
 		
-			<!-- Navigation / Right -->
-			<div class="one carousel column"><div id="showbiz_right_2" class="sb-navigation-right-2"><i class="icon-angle-right"></i></div></div>
+			<!-- Navigation / left -->
+			<div class="one carousel column"><div id="showbiz_left_2" class="sb-navigation-left-2"><i class="icon-angle-left"></i></div></div>
 		
 		</div>
 		<!-- Container / End -->

@@ -112,23 +112,6 @@
 		<!-- Container -->
 		<div class="container">
 		
-			<!-- Logo / Mobile Menu -->
-			<div class="three columns">
-			
-				<div id="mobile-navigation">
-					<form method="GET" id="menu-search" action="#">
-						<input type="text" placeholder="Start Typing..." />
-					</form>
-					<a href="#menu" class="menu-trigger"><i class="icon-reorder"></i></a>
-					<span class="search-trigger"><i class="icon-search"></i></span>
-				</div>
-		
-				<div id="logo">
-					<h1><g:link action="index"><img src="${resource(dir: 'images', file: 'logo.png')}" alt="Astrum"/></g:link></h1>
-				</div>
-			</div>
-		
-		
 		<!-- Navigation
 		================================================== -->
 		<div class="thirteen columns">
@@ -139,20 +122,20 @@
 					
 					<!-- <li style="background-color:rgb(182, 231, 162)"><g:link controller="deview" action="index" ><g:message code="navigation.Deview" default="Dev View - Testing Page"/></g:link></li>-->
 		
-					<li><g:link action="index" id="current"><g:message code="navigation.home" default="Home"/></g:link></li>
+					<li><g:link action="index" id="current"><g:message code="nav.home" default="Home"/></g:link></li>
 		
-					<li><a href="#"><g:message code="navigation.shortcodes" default="Shortcodes"/></a>
+					<li><a href="#"><g:message code="nav.applications" default="applications"/></a>
 						<ul>
-							<li><g:link controller="test" action="elements"><g:message code="navigation.Elements" default="Elements"/></g:link></li>
-							<li><a href="typography.html"><g:message code="navigation.Typography" default="Typography"/></a></li>
-							<li><a href="pricing-tables.html"><g:message code="navigation.PricingTables" default="Pricing Tables"/></a></li>
-							<li><a href="icons.html"><g:message code="navigation.Icons" default="Icons"/></a></li>
+							<li><g:link controller="test" action="elements"><g:message code="nav.applications.spyboy" default="spyboy"/></g:link></li>
+							<li><a href="typography.html"><g:message code="nav.applications.trivia" default="trivia"/></a></li>
+							<li><a href="pricing-tables.html"><g:message code="nav.applications.backandpack" default="backandpack"/></a></li>
+							<li><a href="icons.html"><g:message code="nav.applications.sevicecom" default="sevicecom"/></a></li>
 						</ul>
 					</li>
 		
-					<li><a href="#"><g:message code="navigation.Pages" default="Pages"/></a>
+					<li><a href="#"><g:message code="nav.help" default="Help"/></a>
 						<ul>
-							<li><a href="about.html"><g:message code="navigation.About" default="About"/></a></li>
+							<li><a href="about.html"><g:message code="nav.help.faq" default="About"/></a></li>
 							<li><a href="services.html"><g:message code="navigation.Services" default="Services"/></a></li>
 							<li><a href="faq.html"><g:message code="navigation.FAQ" default="FAQ"/></a></li>
 							<li><a href="sidebar-right.html"><g:message code="navigation.RightSidebar" default="Right Sidebar"/></a></li>
@@ -161,7 +144,7 @@
 						</ul>
 					</li>
 		
-					<li><a href="#"><g:message code="navigation.Portfolio" default="Portfolio"/></a>
+					<li><a href="#"><g:message code="nav.about" default="About"/></a>
 						<ul>
 							<li><a href="portfolio-3-columns.html"><g:message code="navigation.3Columns" default="3 Columns"/></a></li>
 							<li><a href="portfolio-4-columns.html"><g:message code="navigation.4Columns" default="4 Columns"/></a></li>
@@ -178,7 +161,7 @@
 						</ul>
 					</li>
 		
-					<li><a href="contact.html"><g:message code="navigation.Contact" default="Contact"/></a></li>
+					<li><a href="contact.html"><g:message code="nav.contact-us" default="Contact Us"/></a></li>
 					
 					<!-- Search Form -->		
 					<li class="search-container">
@@ -192,6 +175,23 @@
 				</ul>
 			</nav>
 		</div>
+		
+		
+		<!-- Logo / Mobile Menu -->
+			<div class="three columns">
+			
+				<div id="mobile-navigation">
+					<form method="GET" id="menu-search" action="#">
+						<input type="text" placeholder="Start Typing..." />
+					</form>
+					<a href="#menu" class="menu-trigger"><i class="icon-reorder"></i></a>
+					<span class="search-trigger"><i class="icon-search"></i></span>
+				</div>
+		
+				<div id="logo">
+					<h1><g:link action="index"><img src="${resource(dir: 'images', file: 'logo.png')}" alt="Astrum"/></g:link></h1>
+				</div>
+			</div>
 		
 		</div>
 		<!-- Container / End -->

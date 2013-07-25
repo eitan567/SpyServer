@@ -1,5 +1,5 @@
 
-<%@ page import="com.xaviar.Contact" %>
+<%@ page import="com.org.krams.domain.Contact" %>
 <!DOCTYPE html>
 <html>
 	<head>
