@@ -12,7 +12,7 @@ class DeviewController {
 
 	def index= {
 		def keys = redisService.withRedis { Jedis redis ->
-			redis.keys("*");
+			redis.keys("GENERIC_*");
 		}
 
 		List<List<JSONObject>> lists = new ArrayList<List<JSONObject>>();

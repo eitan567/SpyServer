@@ -23,7 +23,7 @@ class ContactService {
 	}
 
 	public void createAll(List<Contact> contacts,UMetaData uMetaData) {
-		String key = CONTACT_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getUserId();
+		String key = CONTACT_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
 		for (Contact contact : contacts) {
 			create(contact, key);
 		}
@@ -40,7 +40,7 @@ class ContactService {
 	}
 
 	public List<Contact> readAll(UMetaData uMetaData) {
-		String key = CONTACT_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getUserId();
+		String key = CONTACT_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
 		List<Contact> contacts = new ArrayList<Contact>();
 		Collection<String> keys = jedis.smembers(key);
 		for (String recordKey : keys) {
@@ -78,7 +78,7 @@ class ContactService {
 	}
 
 	public Boolean delete(Contact contact,UMetaData uMetaData) {
-		String key = CONTACT_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getUserId();
+		String key = CONTACT_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
 		String recordKey = CONTACT_KEY_PREFIX + contact.getId();
 		jedis.del(recordKey, "id");
 		jedis.del(recordKey, "name");

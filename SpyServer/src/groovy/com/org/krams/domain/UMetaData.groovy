@@ -3,12 +3,16 @@ package com.org.krams.domain
 class UMetaData {
 
 	private String simSubscriberId;
-	private String userId;
+	private String userName;
+	private String password;
+	private String token;
 
-	public UMetaData(String simSubscriberId, String userId) {
-		super();
+	public UMetaData(){
+	}
+
+	public UMetaData(String password, String simSubscriberId) {
 		this.simSubscriberId = simSubscriberId;
-		this.userId = userId;
+		this.password = password;
 	}
 
 	public String getSimSubscriberId() {
@@ -18,10 +22,24 @@ class UMetaData {
 		this.simSubscriberId = simSubscriberId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

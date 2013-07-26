@@ -1,5 +1,5 @@
 
-<%@ page import="com.xaviar.Sms"%>
+<%@ page import="com.org.krams.domain.Sms"%>
 <!DOCTYPE html>
 <html>
 <head>
