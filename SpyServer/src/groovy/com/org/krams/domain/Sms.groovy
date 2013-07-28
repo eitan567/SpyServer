@@ -2,34 +2,27 @@ package com.org.krams.domain;
 
 public class Sms {
 
-	private String id; 
-	private String number;
-	private String name;
-	private String text;
+	private String id;
+	private String readState;
 	private String time;
+	private String address;
+	private String folderName;
+	private String msg;
 
-	public String getNumber() {
-		return number;
+	public String getId() {
+		return is;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getReadState() {
+		return readState;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
+	public void setReadState(String readState) {
+		this.readState = readState;
 	}
 
 	public String getTime() {
@@ -40,11 +33,27 @@ public class Sms {
 		this.time = time;
 	}
 
-	public String getId() {
-		return id;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getFolderName() {
+		return folderName;
+	}
+
+	public void setFolderName(String folderName) {
+		this.folderName = folderName;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 }

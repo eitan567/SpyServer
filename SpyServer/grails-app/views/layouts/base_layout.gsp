@@ -52,59 +52,6 @@
 		<r:layoutResources />
 	</head>
 	<body>
-	 	
-	 	<!-- Panel -->
-		<div id="toppanel">
-			<div id="panel" class="notification success closeable">
-				<div class="content clearfix">
-					<div class="left">
-						<h1>Welcome to Web-Kreation</h1>
-						<h2>Sliding login panel Demo with jQuery</h2>		
-						<p class="grey">You can put anything you want in this sliding panel: videos, audio, images, forms... The only limit is your imagination!</p>
-						<h2>Download</h2>
-						<p class="grey">To download this script go back to <a href="http://web-kreation.com/index.php/tutorials/nice-clean-sliding-login-panel-built-with-jquery" title="Download">article &raquo;</a></p>
-					</div>
-					<div class="left">
-						<!-- Login Form -->
-						<form class="clearfix" action="#" method="post">
-							<h1>Member Login</h1>
-							<label class="grey" for="log">Username:</label>
-							<input class="field" type="text" name="log" id="log" value="" size="23" />
-							<label class="grey" for="pwd">Password:</label>
-							<input class="field" type="password" name="pwd" id="pwd" size="23" />
-			            	<label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
-		        			<div class="clear"></div>
-							<input type="submit" name="submit" value="Login" class="button color" />
-							<a class="lost-pwd" href="#">Lost your password?</a>
-						</form>
-					</div>
-					<div class="left right">			
-						<!-- Register Form -->
-						<form action="#" method="post">
-							<h1>Not a member yet? Sign Up!</h1>				
-							<label class="grey" for="signup">Username:</label>
-							<input class="field" type="text" name="signup" id="signup" value="" size="23" />
-							<label class="grey" for="email">Email:</label>
-							<input class="field" type="text" name="email" id="email" size="23" />
-							<label>A password will be e-mailed to you.</label>
-							<input type="submit" name="submit" value="Register" class="button color" />
-						</form>
-					</div>
-				</div>
-				</div> <!-- /login -->	
-				
-				<!-- The tab on top -->	
-				<div class="tab">
-					<ul class="login">
-						<li id="toggle">
-							<a id="openMe"  style="border-top: medium none;background-color: white;border-radius:0px !important;box-shadow:none;" href="#" class="notification success closeable">Log In | Register</a>
-							<a id="closeMe" style="display: none; border-top: medium none;background-color: white;border-radius:0px !important;box-shadow:none;" href="#" class="notification success closeable">Close Panel</a>			
-						</li>
-					</ul> 
-				</div> <!-- / top -->
-				
-		</div> <!--panel -->
-	 	
 	 	 	
 		<!-- Header	================================================== -->
 		<header id="header">
@@ -126,7 +73,7 @@
 		
 					<li><a href="#"><g:message code="nav.applications" default="applications"/></a>
 						<ul>
-							<li><g:link controller="test" action="elements"><g:message code="nav.applications.spyboy" default="spyboy"/></g:link></li>
+							<li><g:link controller="spyBoy" action="elements"><g:message code="nav.applications.spyboy" default="spyboy"/></g:link></li>
 							<li><a href="typography.html"><g:message code="nav.applications.trivia" default="trivia"/></a></li>
 							<li><a href="pricing-tables.html"><g:message code="nav.applications.backandpack" default="backandpack"/></a></li>
 							<li><a href="icons.html"><g:message code="nav.applications.sevicecom" default="sevicecom"/></a></li>
@@ -205,7 +152,7 @@
 		
 		<!-- Footer
 		================================================== -->
-		<div id="footer">
+		<div id="footer" class="dark">
 		
 			<!-- Container -->
 			<div class="container">

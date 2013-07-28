@@ -8,25 +8,23 @@ class UserService {
 
 	def Jedis jedis = new Jedis("localhost");
 
-	def authOldUser(UMetaData uMetaData) {
-		if(!uMetaData.getToken().isEmpty()){
-			jedis.hvals(uMetaData.getUserName() + "_" + uMetaData.getPassword()).contains(uMetaData.getToken());
+	def boolean authOldUser(UMetaData uMetaData) {
+		if(uMetaData.getToken()!=null && jedis.smembers(uMetaData.getToken()).contains(uMetaData.getSimSubscriberId())){			
+			return true;
 		}else{
-			[validated:false]
+			return false;
 		}
-
-		[validated:true]
 	}
 
-	def authNewUser(UMetaData uMetaData){
-		if(!uMetaData.getUserName().isEmpty() && !uMetaData.getPassword().isEmpty()){
-			if(!jedis.hget(uMetaData.getUserName() + "_" + uMetaData.getPassword(),"token").isEmpty()){
-				[validated:true]
+	def boolean authNewUser(UMetaData uMetaData){
+		if(uMetaData.getUserName()!=null && uMetaData.getPassword()!=null){
+			if(jedis.hget(uMetaData.getUserName() + "_" + uMetaData.getPassword(),"token")!=null){
+				return true;
 			}else{
-				[validated:false]
+				return false;
 			}
 		}else{
-			[validated:false]
+			return false;
 		}
 	}
 
@@ -36,13 +34,13 @@ class UserService {
 	}
 
 	def initDammyUsers(){
-		if(jedis.hget("username123_password123","token").isEmpty()){
+		if(jedis.hget("username123_password123","token")==null){
 			jedis.hset("username123_password123", "token","token123");
 			jedis.sadd("token123", "simSubscriberId123","simSubscriberId456");
 		}
 	}
 
-	def authenticateUser(UMetaData uMetaData){
+	def boolean authenticateUser(UMetaData uMetaData){
 		if(authOldUser(uMetaData)){
 			return true;
 		}

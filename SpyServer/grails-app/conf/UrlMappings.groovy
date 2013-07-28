@@ -7,7 +7,7 @@ class UrlMappings {
 			}
 		}	
 		
-		"/spyC/createdata"(controller: "spyC",parseRequest:true) {
+		"/spy/createdata"(controller: "spy",parseRequest:true) {
 			action = [POST: "createdata"]
 		}
 		

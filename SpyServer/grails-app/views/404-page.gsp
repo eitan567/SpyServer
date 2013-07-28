@@ -15,7 +15,7 @@
 			<div class="container">
 
 				<div class="eight columns">
-					<h2>404 Page Not Found</h2>
+					<h2><g:message code="page404.error.short.message" default="404 Page Not Found" /></h2>
 				</div>
 
 				<div class="eight columns">
@@ -23,7 +23,7 @@
 						<ul>
 							<li>You are here:</li>
 							<li><a href="#">Home</a></li>
-							<li>404 Page Not Found</li>
+							<li><g:message code="page404.error.short.message" default="404 Page Not Found" /></li>
 						</ul>
 					</nav>
 				</div>
@@ -43,10 +43,10 @@
 
 				<section id="not-found">
 					<h2>
-						404 <i class="icon-question-sign"></i>
+						<g:message code="page404.error.404" default="404" /><i class="icon-question-sign"></i>
 					</h2>
-					<p>We're sorry, but the page you were looking for doesn't
-						exist.</p>
+					<p><g:message code="page404.error.message" default="We're sorry, but the page you were looking for doesn't
+						exist." /></p>
 				</section>
 
 			</div>

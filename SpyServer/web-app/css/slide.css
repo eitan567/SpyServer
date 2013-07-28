@@ -40,13 +40,15 @@ Version: 1.0
   	#font-weight: bold;
 	line-height: 42px;
 	margin: 0;
-	right: 72%;
+	right: 100px;
   	color: black;
   	#font-size: 80%;
 	text-align: center;
 	background-color: #FFFFFF;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    width:168px;
+    border:0px 1px 1px 1px solid #B3DC82;
 }
 
 .tab ul.login li.left {
@@ -56,7 +58,7 @@ Version: 1.0
 	padding: 0;
 	margin: 0;
   	display: block;
-	float: left;
+	float: right;
 }
 
 .tab ul.login li.right {
@@ -66,14 +68,14 @@ Version: 1.0
 	padding: 0;
 	margin: 0;
   	display: block;
-	float: left;
+	float: right;
 }
 
 .tab ul.login li {
- 	text-align: left;
+ 	text-align: right;
   	#padding: 0 2px;
 	display: block;
-	float: left;
+	float: right;
 	height: 42px;
   	#background: url(../images/tab_m.png) repeat-x 0 0;
   	line-height: 42px;
@@ -81,6 +83,7 @@ Version: 1.0
 
 .tab ul.login li a {
 	#color: #15ADFF;
+	border:none;
 }
 
 .tab ul.login li a:hover {
@@ -132,7 +135,7 @@ Version: 1.0
 }
 
 #panel h1 {
-	font-size: 1.6em;
+	font-size: 2em;
 	padding: 5px 0 10px;
 	margin: 0;
 	#color: white;
@@ -237,8 +240,8 @@ Version: 1.0
 
 #panel .lost-pwd {
 	display: block;
-	float:left;
-	clear: right;
+	float:right;
+	clear: left;
 	padding: 9px 5px;
 	font-size: 0.95em;
 	text-decoration: underline;

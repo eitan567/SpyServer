@@ -286,7 +286,7 @@
 
 	jQuery('#testimonials').showbizpro({
 		dragAndScroll:"off",
-		visibleElementsArray:[1,1,1,1],
+		visibleElementsArray:[3,3,3,3],
 		carousel:"off",
 		entrySizeOffset:0,
 		allEntryAtOnce:"off"
@@ -294,7 +294,7 @@
 
 	jQuery('#happy-clients').showbizpro({
 		dragAndScroll:"on",
-		visibleElementsArray:[7,7,7,7],
+		visibleElementsArray:[10,10,10,10],
 		carousel:"on",
 		entrySizeOffset:0,
 		allEntryAtOnce:"on"

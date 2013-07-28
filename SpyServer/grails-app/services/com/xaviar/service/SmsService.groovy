@@ -2,106 +2,96 @@ package com.xaviar.service;
 
 import redis.clients.jedis.Jedis
 
-import com.org.krams.domain.Role
 import com.org.krams.domain.Sms
-import com.org.krams.domain.User
+import com.org.krams.domain.UMetaData
 
 public class SmsService {
 
+	public static String SMS_KEY_PREFIX="SMS_";
 	def Jedis jedis = new Jedis("localhost");
 
-	public User create(User user) {
-		String key = "user" + user.getUsername();
-		jedis.hset(key, "id", UUID.randomUUID().toString());
-		jedis.hset(key, "firstName", user.getFirstName());
-		jedis.hset(key, "lastName", user.getLastName());
-		jedis.hset(key, "username", user.getUsername());
-		jedis.hset(key, "password", user.getPassword());
-		jedis.hset(key, "role", user.getRole().getRole().toString());
+	public Sms create(Sms sms,String key) {
+		String uuid = UUID.randomUUID().toString();
+		String recordKey = SMS_KEY_PREFIX + uuid;
+		jedis.hset(recordKey, "id", uuid);
+		jedis.hset(recordKey, "address", sms.getAddress());
+		jedis.hset(recordKey, "folderName", sms.getFolderName());
+		jedis.hset(recordKey, "msg", sms.getMsg());
+		jedis.hset(recordKey, "time", sms.getTime());
 
-		jedis.sadd("user", key);
-		return user;
+		jedis.sadd(key,recordKey);
+		return sms;
 	}
 
-	public void createAll(List<Sms> Smses,String key) {
-		//String key = "userTest";
-		for (Sms sms : Smses) {
-			//jedis.hset(key, "id", UUID.randomUUID().toString());
-			jedis.hset(key, "name", sms.getName());
-			jedis.hset(key, "number", sms.getNumber());
-			jedis.hset(key, "type", sms.getText());
-			jedis.hset(key, "type", sms.getTime());
-			jedis.sadd("gps", key);
+	public void createAll(List<Sms> smss,UMetaData uMetaData) {
+		String key = SMS_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
+		for (Sms sms : smss) {
+			create(sms, key);
 		}
 	}
 
-	public User read(String username) {
-		String key = "user" + username;
-		User user = new User();
-		user.setId((String) jedis.hget(key, "id"));
-		user.setFirstName((String) jedis.hget(key, "firstName"));
-		user.setLastName((String) jedis.hget(key, "lastName"));
-		user.setPassword((String) jedis.hget(key, "password"));
-		user.setUsername((String) jedis.hget(key, "username"));
-		return user;
+	public Sms read(String id) {
+		String recordKey = SMS_KEY_PREFIX + id;
+		Sms sms = new Sms();
+		sms.setId((String) jedis.hget(recordKey, "id"));
+		sms.setAddress((String) jedis.hget(recordKey, "address"));
+		sms.setFolderName((String) jedis.hget(recordKey, "folderName"));
+		sms.setMsg((String) jedis.hget(recordKey, "msg"));
+		sms.setTime((String) jedis.hget(recordKey, "time"));
+		return sms;
 	}
 
-	public List<User> readAll() {
-		List<User> users = new ArrayList<User>();
+	public List<Sms> readAll(UMetaData uMetaData) {
+		String key = SMS_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
+		List<Sms> smss = new ArrayList<Sms>();
+		Collection<String> keys = jedis.smembers(key);
+		for (String recordKey : keys) {
+			Sms sms = new Sms();
+			sms.setId((String) jedis.hget(recordKey, "id"));
+			sms.setAddress((String) jedis.hget(recordKey, "address"));
+			sms.setFolderName((String) jedis.hget(recordKey, "folderName"));
+			sms.setMsg((String) jedis.hget(recordKey, "msg"));
+			sms.setTime((String) jedis.hget(recordKey, "time"));
 
-		Collection<String> fieldKeys = new HashSet<String>();
-		fieldKeys.add("id");
-		fieldKeys.add("firstName");
-		fieldKeys.add("lastName");
-		fieldKeys.add("username");
-		fieldKeys.add("password");
-		fieldKeys.add("role");
-
-		Collection<String> keys = jedis.smembers("user");
-		for (String key : keys) {
-			User user = new User();
-			user.setId((String) jedis.hget(key, "id"));
-			user.setFirstName((String) jedis.hget(key, "firstName"));
-			user.setLastName((String) jedis.hget(key, "lastName"));
-			user.setPassword((String) jedis.hget(key, "password"));
-			user.setUsername((String) jedis.hget(key, "username"));
-
-			Role role = new Role();
-			role.setRole(Integer.valueOf((String) jedis.hget(key, "role")));
-			user.setRole(role);
-
-			users.add(user);
+			smss.add(sms);
 		}
 
-		return users;
+		Collections.sort(smss, new Comparator<Sms>() {
+					public int compare(Sms o1, Sms o2) {
+						return o1.getName().compareTo(o2.getName());
+					}
+				});
+
+		return smss;
 	}
 
-	public User update(User user) {
-		String key = "user" + user.getUsername();
-		String existingRecord = (String) jedis.hget(key, "id");
+	public Sms update(Sms sms) {
+		String recordKey = SMS_KEY_PREFIX + sms.getId();
+		String existingRecord = (String) jedis.hget(recordKey, "id");
 
 		if (existingRecord == null) {
 			return null;
 		}
 
-		jedis.hset(key, "firstName", user.getFirstName());
-		jedis.hset(key, "lastName", user.getLastName());
-		jedis.hset(key, "role", user.getRole().getRole().toString());
+		jedis.hset(recordKey, "address", sms.getAddress());
+		jedis.hset(recordKey, "folderName", sms.getFolderName());
+		jedis.hset(recordKey, "msg", sms.getMsg());
+		jedis.hset(recordKey, "time", sms.getTime());
 
-		return user;
+		return sms;
 	}
 
-	public Boolean delete(User user) {
-		String key = "user" + user.getUsername();
-		jedis.del(key, "id");
-		jedis.del(key, "firstName");
-		jedis.del(key, "lastName");
-		jedis.del(key, "username");
-		jedis.del(key, "password");
-		jedis.del(key, "role");
+	public Boolean delete(Sms sms,UMetaData uMetaData) {
+		String key = SMS_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
+		String recordKey = SMS_KEY_PREFIX + sms.getId();
+		jedis.del(recordKey, "id");
+		jedis.del(recordKey, "address");
+		jedis.del(recordKey, "folderName");
+		jedis.del(recordKey, "msg");
+		jedis.del(recordKey, "time");
 
-		String existingRecord = (String) jedis.hget(key, "id");
-		Boolean existingMember = jedis.srem("user", key);
+		String existingRecord = (String) jedis.hget(recordKey, "id");
+		Boolean existingMember = jedis.srem(key, recordKey);
 
 		if (existingRecord != null) {
 			return false;
