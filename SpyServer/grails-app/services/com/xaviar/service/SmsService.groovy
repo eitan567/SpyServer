@@ -58,7 +58,7 @@ public class SmsService {
 
 		Collections.sort(smss, new Comparator<Sms>() {
 					public int compare(Sms o1, Sms o2) {
-						return o1.getName().compareTo(o2.getName());
+						return o1.getTime().compareTo(o2.getTime());
 					}
 				});
 

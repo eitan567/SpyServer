@@ -9,6 +9,7 @@ import org.codehaus.jackson.type.TypeReference
 
 import redis.clients.jedis.Jedis
 
+import com.org.krams.domain.CallLog
 import com.org.krams.domain.Contact
 import com.org.krams.domain.Location
 import com.org.krams.domain.PhoneParams
@@ -23,6 +24,10 @@ class SpyController {
 	def locationService
 	def smsService
 	def userService
+	def callLogService
+	def phoneEventService
+	def smsEventService
+	def phoneParamsService
 
 	def createdata(DataHolder dataHolder) {
 
@@ -34,10 +39,10 @@ class SpyController {
 		// old user
 		dataHolder.data = '{"token":"token123","simSubscriberId":"simSubscriberId123"}';
 
-		String clientContacts = dataHolder.get(DataHolder.CONTACTS);
+		String clientContacts;// = dataHolder.get(DataHolder.CONTACTS);
 		String clientLocation = dataHolder.get(DataHolder.LOCATION);
 		String clientSms = dataHolder.get(DataHolder.SMS);
-		String clientCallLog = dataHolder.get(DataHolder.CALL_LOG);
+		String clientCallLog = dataHolder.get(DataHolder.CONTACTS);//CALL_LOG);
 		String clientPhoneEvent = dataHolder.get(DataHolder.PHONE_EVENT);
 		String clientPhoneParams = dataHolder.get(DataHolder.PHONE_PARAMS);
 		String clientSmsEvent = dataHolder.get(DataHolder.SMS_EVENT);
@@ -65,6 +70,20 @@ class SpyController {
 						contactService.createAll(contacts,uMetaData);
 					}
 
+					if (clientCallLog != null) {
+						mapper = new ObjectMapper();
+						List<CallLog> callLogs = mapper.readValue(clientCallLog,new TypeReference<List<CallLog>>() {
+								});
+						callLogService.createAll(callLogs,uMetaData);
+					}
+
+					if (clientPhoneEvent != null) {
+						mapper = new ObjectMapper();
+						List<CallLog> phoneEvents = mapper.readValue(clientPhoneEvent,new TypeReference<List<CallLog>>() {
+								});
+						phoneEventService.createAll(phoneEvents,uMetaData);
+					}
+
 					if (clientLocation != null) {
 						mapper = new ObjectMapper();
 						List<Location> locations = mapper.readValue(clientLocation,new TypeReference<List<Location>>() {
@@ -79,10 +98,18 @@ class SpyController {
 						smsService.createAll(smses,uMetaData);
 					}
 
+					if (clientSmsEvent != null) {
+						mapper = new ObjectMapper();
+						List<Sms> smsEvents = mapper.readValue(clientSmsEvent,new TypeReference<List<Sms>>() {
+								});
+						smsEventService.createAll(smsEvents,uMetaData);
+					}
+
 					if (clientPhoneParams != null) {
 						mapper = new ObjectMapper();
 						List<PhoneParams> phoneParams = mapper.readValue(clientPhoneParams,new TypeReference<List<PhoneParams>>() {
 								});
+						phoneParamsService.createAll(phoneParams,uMetaData);
 					}
 				}
 

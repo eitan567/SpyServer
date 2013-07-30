@@ -3,102 +3,89 @@ package com.xaviar.service;
 import redis.clients.jedis.Jedis
 
 import com.org.krams.domain.Location
-import com.org.krams.domain.Role
-import com.org.krams.domain.User
+import com.org.krams.domain.UMetaData
 
 public class LocationService {
 
+	public static String LOCATION_KEY_PREFIX="LOCATION_";
 	def Jedis jedis = new Jedis("localhost");
 
-	public User create(User user) {
-		String key = "user" + user.getUsername();
-		jedis.hset(key, "id", UUID.randomUUID().toString());
-		jedis.hset(key, "firstName", user.getFirstName());
-		jedis.hset(key, "lastName", user.getLastName());
-		jedis.hset(key, "username", user.getUsername());
-		jedis.hset(key, "password", user.getPassword());
-		jedis.hset(key, "role", user.getRole().getRole().toString());
-
-		jedis.sadd("user", key);
-		return user;
+	public Location create(Location location,String key) {
+		String uuid = UUID.randomUUID().toString();
+		String recordKey = LOCATION_KEY_PREFIX + uuid;
+		jedis.hset(recordKey, "id", uuid);
+		jedis.hset(recordKey, "latitude", location.getLatitude());
+		jedis.hset(recordKey, "longitude", location.getLongitude());
+		jedis.hset(recordKey, "time", location.getTime());
+		jedis.sadd(key,recordKey);
+		return location;
 	}
 
-	public void createAll(List<Location> gpss,String key) {
-		//String key = "userTest";
-		for (Location gps : gpss) {
-			//jedis.hset(key, "id", id);
-			jedis.hset(key, "name", gps.getLocation());
-			jedis.sadd("gps", key);
+	public void createAll(List<Location> locations,UMetaData uMetaData) {
+		String key = LOCATION_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
+		for (Location location : locations) {
+			create(location, key);
 		}
 	}
 
-	public User read(String username) {
-		String key = "user" + username;
-		User user = new User();
-		user.setId((String) jedis.hget(key, "id"));
-		user.setFirstName((String) jedis.hget(key, "firstName"));
-		user.setLastName((String) jedis.hget(key, "lastName"));
-		user.setPassword((String) jedis.hget(key, "password"));
-		user.setUsername((String) jedis.hget(key, "username"));
-		return user;
+	public Location read(String id) {
+		String recordKey = LOCATION_KEY_PREFIX + id;
+		Location location = new Location();
+		location.setId((String) jedis.hget(recordKey, "id"));
+		location.setLatitude((String) jedis.hget(recordKey, "latitude"));
+		location.setLongitude((String) jedis.hget(recordKey, "longitude"));
+		location.setTime((String) jedis.hget(recordKey, "time"));
+		return location;
 	}
 
-	public List<User> readAll() {
-		List<User> users = new ArrayList<User>();
+	public List<Location> readAll(UMetaData uMetaData) {
+		String key = LOCATION_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
+		List<Location> locations = new ArrayList<Location>();
+		Collection<String> keys = jedis.smembers(key);
+		for (String recordKey : keys) {
+			Location location = new Location();
+			location.setId((String) jedis.hget(recordKey, "id"));
+			location.setLatitude((String) jedis.hget(recordKey, "latitude"));
+			location.setLongitude((String) jedis.hget(recordKey, "longitude"));
+			location.setTime((String) jedis.hget(recordKey, "time"));
 
-		Collection<String> fieldKeys = new HashSet<String>();
-		fieldKeys.add("id");
-		fieldKeys.add("firstName");
-		fieldKeys.add("lastName");
-		fieldKeys.add("username");
-		fieldKeys.add("password");
-		fieldKeys.add("role");
-
-		Collection<String> keys = jedis.smembers("user");
-		for (String key : keys) {
-			User user = new User();
-			user.setId((String) jedis.hget(key, "id"));
-			user.setFirstName((String) jedis.hget(key, "firstName"));
-			user.setLastName((String) jedis.hget(key, "lastName"));
-			user.setPassword((String) jedis.hget(key, "password"));
-			user.setUsername((String) jedis.hget(key, "username"));
-
-			Role role = new Role();
-			role.setRole(Integer.valueOf((String) jedis.hget(key, "role")));
-			user.setRole(role);
-
-			users.add(user);
+			locations.add(location);
 		}
 
-		return users;
+		Collections.sort(locations, new Comparator<Location>() {
+					public int compare(Location o1, Location o2) {
+						return o1.getTime().compareTo(o2.getTime());
+					}
+				});
+
+		return locations;
 	}
 
-	public User update(User user) {
-		String key = "user" + user.getUsername();
-		String existingRecord = (String) jedis.hget(key, "id");
+	public Location update(Location location) {
+		String recordKey = LOCATION_KEY_PREFIX + location.getId();
+		String existingRecord = (String) jedis.hget(recordKey, "id");
 
 		if (existingRecord == null) {
 			return null;
 		}
 
-		jedis.hset(key, "firstName", user.getFirstName());
-		jedis.hset(key, "lastName", user.getLastName());
-		jedis.hset(key, "role", user.getRole().getRole().toString());
+		jedis.hset(recordKey, "latitude", location.getLatitude());
+		jedis.hset(recordKey, "longitude", location.getLongitude());
+		jedis.hset(recordKey, "time", location.getTime());
 
-		return user;
+		return location;
 	}
 
-	public Boolean delete(User user) {
-		String key = "user" + user.getUsername();
-		jedis.del(key, "id");
-		jedis.del(key, "firstName");
-		jedis.del(key, "lastName");
-		jedis.del(key, "username");
-		jedis.del(key, "password");
-		jedis.del(key, "role");
+	public Boolean delete(Location location,UMetaData uMetaData) {
+		String key = LOCATION_KEY_PREFIX + uMetaData.getSimSubscriberId()+"_"+uMetaData.getToken();
+		String recordKey = LOCATION_KEY_PREFIX + location.getId();
+		jedis.del(recordKey, "id");
+		jedis.del(recordKey, "latitude");
+		jedis.del(recordKey, "longitude");
+		jedis.del(recordKey, "time");
 
-		String existingRecord = (String) jedis.hget(key, "id");
-		Boolean existingMember = jedis.srem("user", key);
+		String existingRecord = (String) jedis.hget(recordKey, "id");
+		Boolean existingMember = jedis.srem(key, recordKey);
 
 		if (existingRecord != null) {
 			return false;

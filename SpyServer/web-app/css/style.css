@@ -3251,7 +3251,7 @@ table.standard-table {
 table.standard-table th {
 	border: 1px solid #e4e4e4;
 	border-left: none;
-	background-color: #fafafa;
+	background-color: #ddd;
 	text-align: right;
 	padding: 10px 15px;
 	color: #444;
@@ -3278,7 +3278,7 @@ table.standard-table td {
 	border-left: none;
 }
 
-table.standard-table tr:hover td { background-color: #fafafa; }
+table.standard-table tr:hover td { background-color: #ddd; }
 table.standard-table tr { border-radius: 3px }
 
 

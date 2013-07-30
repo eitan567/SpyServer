@@ -23,26 +23,13 @@ class ContactController extends BaseController{
 		redirect(action: "list", params: params)
 	}
 
-	def list(Integer max) {
-		//        def contacts = redisService.withRedis { Jedis redis ->
-		//			redis.get("CONTACTS")
-		//		}
-
-		Set<String> subscribers = userService.getUserInfo("129");
-		UMetaData  uMetaData = new UMetaData(subscribers.toArray()[0],"129");
+	def list(Integer max) {		
+		Set<String> subscribers = userService.getUserInfo("token123");
+		UMetaData  uMetaData = new UMetaData(subscribers.toArray()[0],"token123");
 
 		def contacts = contactService.readAll(uMetaData);
 
-		if(contacts!=null){
-			//			def jsonContacts = JSON.parse(contacts)
-			//			int i=1;
-			//			//Map<String,String> typeMapper = new HashMap<String,String>();
-			//			//typeMapper.put("MOBILE",  message(code: "default.mapper.mobile.value", default:""));
-			//			//typeMapper.put("WORK",  message(code: "default.mapper.work.value", default:""));
-			//			//typeMapper.put("HOME",  message(code: "default.mapper.home.value", default:""));
-			//			def contactsList = jsonContacts.collect {JSONObject jsonObject ->
-			//				new Contact(name: jsonObject.get("name"),number:jsonObject.get("number"),type:jsonObject.getAt("type"))
-			//			}
+		if(contacts!=null){			
 			params.max = Math.min(max ?: 10, 100)
 			int startOffset = params.get("offset")!=null ? Integer.parseInt(params.get("offset")) : 0 ;
 			int toElement=10;

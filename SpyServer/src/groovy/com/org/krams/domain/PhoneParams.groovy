@@ -2,6 +2,7 @@ package com.org.krams.domain;
 
 public class PhoneParams {
 
+	private String id;
 	private String simSubscriberId;
 	private String networkOperatorName;
 	private String simSerialNumber;
@@ -18,6 +19,13 @@ public class PhoneParams {
 	private String line1Number;
 	private String cellLocation;
 
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public String getCellLocation() {
 		return cellLocation;
 	}

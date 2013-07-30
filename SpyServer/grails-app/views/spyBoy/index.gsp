@@ -75,7 +75,7 @@
 								<g:include controller="spyBoy" action="sms" id="smsAction"/>				
 							</div>
 							<div class="tab-content" id="callLogTab">
-								<g:include controller="spyBoy" action="callLog" id="callLogAction"/>
+								<g:include controller="spyBoy" action="callLog" id="callLogAction" params="[max:10,subscriberId:'simSubscriberId123']"/>
 							</div>
 							<div class="tab-content" id="locationTab">
 								<g:include controller="spyBoy" action="location" id="locationAction"/>
