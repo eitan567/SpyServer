@@ -1,35 +1,29 @@
 package com.xaviar
 
-import grails.converters.JSON
-
-import org.codehaus.groovy.grails.web.json.JSONObject
-import org.junit.Before;
 import org.springframework.dao.DataIntegrityViolationException
 
-import redis.clients.jedis.Jedis
-
-import com.org.krams.domain.Contact
-import com.org.krams.domain.UMetaData
+import com.org.krams.domain.UMetaData;
+import com.xaviar.domain.Contact;
 
 class ContactController extends BaseController{
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	
+
 	def redisService
 	def contactService
 	def userService
-	
+
 	def index() {
 		redirect(action: "list", params: params)
 	}
 
-	def list(Integer max) {		
+	def list(Integer max) {
 		Set<String> subscribers = userService.getUserInfo("token123");
-		UMetaData  uMetaData = new UMetaData(subscribers.toArray()[0],"token123");
+		UMetaData uMetaData = new UMetaData(subscribers.toArray()[0],"token123");
 
 		def contacts = contactService.readAll(uMetaData);
 
-		if(contacts!=null){			
+		if(contacts!=null){
 			params.max = Math.min(max ?: 10, 100)
 			int startOffset = params.get("offset")!=null ? Integer.parseInt(params.get("offset")) : 0 ;
 			int toElement=10;

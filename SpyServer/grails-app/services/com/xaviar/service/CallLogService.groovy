@@ -1,11 +1,14 @@
 package com.xaviar.service
 
-import redis.clients.jedis.Jedis
+import java.util.Comparator;
+import java.util.List;
 
-import com.org.krams.domain.CallLog
-import com.org.krams.domain.UMetaData
+import redis.clients.jedis.Jedis;
 
-class CallLogService {
+import com.org.krams.domain.UMetaData;
+import com.xaviar.domain.CallLog;
+
+class CallLogService{
 
 	public static String CALLLOG_KEY_PREFIX="CALLLOG_";
 	def Jedis jedis = new Jedis("localhost");
@@ -15,13 +18,9 @@ class CallLogService {
 		String recordKey = CALLLOG_KEY_PREFIX + uuid;
 		jedis.hset(recordKey, "id", uuid);
 		jedis.hset(recordKey, "phoneNumber", callLog.getPhoneNumber());
-		if(callLog.getType()!=null){
-			jedis.hset(recordKey, "type", callLog.getType());
-		}else{
-			jedis.hset(recordKey, "type", "");
-		}
-		jedis.hset(recordKey, "duration", callLog.getDuration());
-		jedis.hset(recordKey, "timeSeconds", callLog.getTimeSeconds());
+		jedis.hset(recordKey, "type", callLog.getType());
+		jedis.hset(recordKey, "duration", callLog.getDuration().longValue());
+		jedis.hset(recordKey, "timeSeconds", callLog.getTimeSeconds().longValue());
 		jedis.sadd(key,recordKey);
 		return callLog;
 	}
@@ -33,14 +32,14 @@ class CallLogService {
 		}
 	}
 
-	public CallLog read(String id) {
-		String recordKey = CALLLOG_KEY_PREFIX + id;
+	public CallLog read(String recordKey) {
+		//String recordKey = CALLLOG_KEY_PREFIX + id;
 		CallLog callLog = new CallLog();
 		callLog.setId((String) jedis.hget(recordKey, "id"));
 		callLog.setPhoneNumber((String) jedis.hget(recordKey, "phoneNumber"));
-		callLog.setType((String) jedis.hget(recordKey, "type"));
-		callLog.setDuration((String) jedis.hget(recordKey, "duration"));
-		callLog.setTimeSeconds((String) jedis.hget(recordKey, "timeSeconds"));
+		//callLog.setType((CallLog.Type) jedis.hget(recordKey, "type"));
+		callLog.setDuration(jedis.hget(recordKey, "duration"));
+		callLog.setTimeSeconds(jedis.hget(recordKey, "timeSeconds"));
 		return callLog;
 	}
 
@@ -49,14 +48,7 @@ class CallLogService {
 		List<CallLog> callLogs = new ArrayList<CallLog>();
 		Collection<String> keys = jedis.smembers(key);
 		for (String recordKey : keys) {
-			CallLog callLog = new CallLog();
-			callLog.setId((String) jedis.hget(recordKey, "id"));
-			callLog.setPhoneNumber((String) jedis.hget(recordKey, "phoneNumber"));
-			callLog.setType((String) jedis.hget(recordKey, "type"));
-			callLog.setDuration((String) jedis.hget(recordKey, "duration"));
-			callLog.setTimeSeconds((String) jedis.hget(recordKey, "timeSeconds"));
-
-			callLogs.add(callLog);
+			callLogs.add(read(recordKey));
 		}
 
 		Collections.sort(callLogs, new Comparator<CallLog>() {

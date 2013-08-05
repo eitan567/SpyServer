@@ -48,6 +48,8 @@
 		<script src="${resource(dir: 'js', file: 'custom.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'jquery.emoji-0.1.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'slide.js')}"></script>
+		<script src="http://maps.google.com/maps/api/js?sensor=true&amp;language=he"></script>
+		<script src="${resource(dir: 'js', file: 'jquery.gmaps.min.js')}"></script>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
@@ -65,9 +67,6 @@
 		
 			<nav id="navigation" class="menu">
 				<ul id="responsive">
-		
-					
-					<!-- <li style="background-color:rgb(182, 231, 162)"><g:link controller="deview" action="index" ><g:message code="navigation.Deview" default="Dev View - Testing Page"/></g:link></li>-->
 		
 					<li><g:link action="index" id="current"><g:message code="nav.home" default="Home"/></g:link></li>
 		
@@ -109,6 +108,8 @@
 					</li>
 		
 					<li><a href="contact.html"><g:message code="nav.contact-us" default="Contact Us"/></a></li>
+					
+					<li style="background-color:rgb(182, 231, 162)"><g:link controller="deview" action="index" ><g:message code="navigation.Deview" default="Dev View - Testing Page"/></g:link></li>
 					
 					<!-- Search Form -->		
 					<li class="search-container">

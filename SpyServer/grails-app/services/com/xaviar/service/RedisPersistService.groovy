@@ -2,7 +2,7 @@ package com.xaviar.service
 
 import redis.clients.jedis.Jedis
 
-import com.org.krams.domain.Contact
+import com.xaviar.domain.Contact
 
 class RedisPersistService {
 

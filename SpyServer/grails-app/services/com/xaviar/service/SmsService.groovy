@@ -2,8 +2,8 @@ package com.xaviar.service;
 
 import redis.clients.jedis.Jedis
 
-import com.org.krams.domain.Sms
 import com.org.krams.domain.UMetaData
+import com.xaviar.domain.Sms
 
 public class SmsService {
 

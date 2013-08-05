@@ -21,76 +21,14 @@
 		<div class="overflowholder">
 
 			<ul>
-
+				<g:each in="${contactInstanceList}" status="i" var="contactInstance">
 				<li>
 					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-01.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">איתן ברון</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-02.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ברון איתן</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-03.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ארז ברון</div>
-				</li>
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-01.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">איתן ברון</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-02.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ברון איתן</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-03.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ארז ברון</div>
-				</li>
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-01.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">איתן ברון</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-02.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ברון איתן</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-03.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ארז ברון</div>
-				</li>
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-01.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">איתן ברון</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-02.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ברון איתן</div>
-				</li>
-				
-				<li>
-					<div class="happy-clients-photo"><img src="${resource(dir: 'images', file: 'happy-clients-03.jpg')}" alt="" /></div>
-					<div class="happy-clients-cite">054-3033425</div>
-					<div class="happy-clients-author">ארז ברון</div>
-				</li>
-
+					<div class="happy-clients-cite">${fieldValue(bean: contactInstance, field: "number")}</div>
+					<div class="happy-clients-cite">${fieldValue(bean: contactInstance, field: "type")}</div>
+					<div class="happy-clients-author"><g:remoteLink update="callLogTab" controller="spyBoy" action="callLog" params="${[number:contactInstance.number]}" id="${contactInstance.number}">${fieldValue(bean: contactInstance, field: "name")}</g:remoteLink></div>
+				</li>	
+				</g:each>
 			</ul>
 			<div class="clearfix"></div>
 

@@ -36,7 +36,7 @@ class UserService {
 	def initDammyUsers(){
 		if(jedis.hget("username123_password123","token")==null){
 			jedis.hset("username123_password123", "token","token123");
-			jedis.sadd("token123", "simSubscriberId123","simSubscriberId456");
+			jedis.sadd("token123", "simSubscriberId123","425071021121744");
 		}
 	}
 

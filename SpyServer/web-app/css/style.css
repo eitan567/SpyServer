@@ -1949,7 +1949,7 @@ html[xmlns] .slides {display: block;}
 }
 
 .showbiz.our-clients ul li {
-	margin: 10px 0 0 0;
+	#margin: 10px 0 0 0;
 }
 
 .showbiz.our-clients {
@@ -1965,7 +1965,7 @@ html[xmlns] .slides {display: block;}
 }
 
 .showbiz .overflowholder ul {
-	width:100000px;
+	width:100000px !important;
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -3052,7 +3052,7 @@ input[type="submit"]:hover {
 }
 
 #tab1 .container {
-	padding-bottom: 10px;
+	#padding-bottom: 10px;
 }
 
 
@@ -3251,7 +3251,7 @@ table.standard-table {
 table.standard-table th {
 	border: 1px solid #e4e4e4;
 	border-left: none;
-	background-color: #ddd;
+	background-color: #F2F2F2;
 	text-align: right;
 	padding: 10px 15px;
 	color: #444;

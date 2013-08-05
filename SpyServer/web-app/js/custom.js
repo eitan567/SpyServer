@@ -294,8 +294,8 @@
 
 	jQuery('#happy-clients').showbizpro({
 		dragAndScroll:"on",
-		visibleElementsArray:[10,10,10,10],
-		carousel:"on",
+		visibleElementsArray:[7,7,7,7],
+		carousel:"on", 
 		entrySizeOffset:0,
 		allEntryAtOnce:"on"
 	});
@@ -479,7 +479,6 @@
 
 		$this.parent().next().children('.tab-content').stop(true,true).hide()
 		.siblings( $this.find('a').attr('href') ).fadeIn();
-
 		e.preventDefault();
 	});
 

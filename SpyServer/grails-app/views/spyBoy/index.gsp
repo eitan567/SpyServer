@@ -57,7 +57,7 @@
 			</ul> 
  
 			<!-- Tabs Content --> 
-			<div class="tabs-container">
+			<div class="tabs-container" style="min-height:700px;">
 				<div class="tab-content" id="tab1">
 					<g:include controller="spyBoy" action="contacts" id="contacts"/>
 					<!-- Tabs ================================================= -->
@@ -69,15 +69,15 @@
 							<li><a href="#locationTab">מיקום(GPS)</a></li>
 						</ul>
 			
-						<!-- Tabs Content -->
-						<div class="tabs-container">
+						<!-- Tabs Content -->	
+						<div class="tabs-container" style="min-height:500px;">
 							<div class="tab-content" id="smsTab">
 								<g:include controller="spyBoy" action="sms" id="smsAction"/>				
 							</div>
 							<div class="tab-content" id="callLogTab">
-								<g:include controller="spyBoy" action="callLog" id="callLogAction" params="[max:10,subscriberId:'simSubscriberId123']"/>
+								<g:include controller="spyBoy" action="callLog" id="callLogAction"/>
 							</div>
-							<div class="tab-content" id="locationTab">
+							<div class="tab-content" id="locationTab" style="height:500px;">
 								<g:include controller="spyBoy" action="location" id="locationAction"/>
 							</div>
 						</div>

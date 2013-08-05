@@ -12,8 +12,8 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "create" // one of 'create', 'create-drop','update'
-			url = "jdbc:mysql://localhost:3306/superitem?useUnicode=yes&characterEncoding=UTF-8"
+			dbCreate = "update" // one of 'create', 'create-drop','update'
+			url = "jdbc:mysql://localhost:3306/dev_spy_db?useUnicode=yes&characterEncoding=UTF-8&collation=utf8mb4_general_ci"
 			username = "root"
 			password = ""
 		}
@@ -23,8 +23,8 @@ environments {
 	}
 	test {
 		dataSource {
-			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-			url = "jdbc:mysql://localhost:3306/superitem?useUnicode=yes&characterEncoding=UTF-8"
+			dbCreate = "update" // one of 'create', 'create-drop','update'
+			url = "jdbc:mysql://localhost:3306/dev_spy_db?useUnicode=yes&characterEncoding=UTF-8&collation=utf8mb4_general_ci"
 			username = "root"
 			password = ""
 		}
@@ -32,7 +32,7 @@ environments {
 	production {
 		dataSource {
 			dbCreate = "update"
-			url = "jdbc:mysql://localhost:3306/superitem?useUnicode=yes&characterEncoding=UTF-8"
+			url = "jdbc:mysql://localhost:3306/dev_spy_db?useUnicode=yes&characterEncoding=UTF-8&collation=utf8mb4_general_ci"
 			username = "root"
 			password = ""
 		}

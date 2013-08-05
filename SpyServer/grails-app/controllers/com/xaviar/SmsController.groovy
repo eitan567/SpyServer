@@ -5,10 +5,10 @@ import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.springframework.dao.DataIntegrityViolationException
 
-import redis.clients.jedis.Jedis
+import com.xaviar.domain.Contact;
+import com.xaviar.domain.Sms;
 
-import com.org.krams.domain.Contact
-import com.org.krams.domain.Sms
+import redis.clients.jedis.Jedis
 
 class SmsController {
 
