@@ -1,5 +1,7 @@
 package com.xaviar.domain;
 
+import java.util.Date;
+
 public class Location {
 
 	Double latitude;

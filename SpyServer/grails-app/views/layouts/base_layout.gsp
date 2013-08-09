@@ -48,8 +48,11 @@
 		<script src="${resource(dir: 'js', file: 'custom.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'jquery.emoji-0.1.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'slide.js')}"></script>
-		<script src="http://maps.google.com/maps/api/js?sensor=true&amp;language=he"></script>
+		<script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=he"></script>
+		<script src="${resource(dir: 'js', file: 'StyledMarker.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'jquery.gmaps.min.js')}"></script>
+		<script src="${resource(dir: 'js', file: 'gmaps.js')}"></script>
+		<script src="${resource(dir: 'js', file: 'arcgislink.js')}"></script>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
@@ -72,7 +75,7 @@
 		
 					<li><a href="#"><g:message code="nav.applications" default="applications"/></a>
 						<ul>
-							<li><g:link controller="spyBoy" action="elements"><g:message code="nav.applications.spyboy" default="spyboy"/></g:link></li>
+							<li><g:link controller="spyBoy" action="index"><g:message code="nav.applications.spyboy" default="spyboy"/></g:link></li>
 							<li><a href="typography.html"><g:message code="nav.applications.trivia" default="trivia"/></a></li>
 							<li><a href="pricing-tables.html"><g:message code="nav.applications.backandpack" default="backandpack"/></a></li>
 							<li><a href="icons.html"><g:message code="nav.applications.sevicecom" default="sevicecom"/></a></li>
@@ -298,7 +301,4 @@
 		<g:javascript library="application"/>			
 		<r:layoutResources/>
 	</body>
-	<script type="text/javascript">
-	jQuery('.emoji').emoji();
-	</script>
 </html>

@@ -1,5 +1,5 @@
 
-<%@ page import="com.org.krams.domain.Sms"%>
+<%@ page import="com.xaviar.domain.Sms"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +31,7 @@
 				<h1 style="background: url('../images/skin/sorted_desc.gif') no-repeat scroll 0 10px transparent;font-weight: bold;padding-left: 20px;text-align: left;cursor: pointer;" onclick="jQuery('#${tables.get(i)}').toggle()">					
 					<div>${tables.get(i)} (${datalist.size}) <g:link class="clear" action="clearme" id="${i}" style="font-size:16px;color:red;">clear data</g:link></div>
 				</h1>
-				<table id="${tables.get(i)}" style="display:none;">
+				<table id="${tables.get(i)}" style="display:none;" class="emoji">
 					<thead>
 						<tr>
 							<g:each in="${columns[i]}" status="g" var="key">
@@ -55,4 +55,3 @@
 		</div>
 	</div>
 </body>
-</html>

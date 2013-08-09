@@ -1,8 +1,5 @@
 package com.xaviar.domain
 
-import liquibase.statement.AutoIncrementConstraint;
-
-import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 
 class TargetPhone  {
 
@@ -20,7 +17,8 @@ class TargetPhone  {
 	String simOperatorName;
 	String simCountryIso;
 	String line1Number;
-	String cellLocation;	
+	String cellLocation;
+	String alias;	
 		
 	static hasMany = [contacts:Contact,callLogs:CallLog,smss:Sms,locations:Location]
 	static hasOne =Token

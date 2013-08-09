@@ -3,10 +3,10 @@
 
 <!-- Container -->
 <div class="container">
-	<div class="sixteen columns">
+	<div class="fifteen columns">
 	
 		<!-- Headline -->
-		<h3 class="headline">יומן שיחות</h3><span class="line" style="margin-bottom:35px;"></span><div class="clearfix"></div>
+		<h3 class="headline">יומן שיחות (${callLogsInstanceTotal} רשומות) </h3><span class="line" style="margin-bottom:35px;"></span><div class="clearfix"></div>
 
 			<table class="standard-table">
 					<tr>					
@@ -19,26 +19,25 @@
 						<g:sortableColumn property="time" title="${message(code: 'callLog.time.label', default: 'time')}" />					
 					</tr>					
 				<g:each in="${callLogInstanceList}" status="i" var="callLogInstance">
-					<tr>
+					<tr>				
+						<td style="vertical-align: middle;width:200px;">
+							<img src="${resource(dir: 'images/callog', file: fieldValue(bean: callLogInstance, field: 'type')+'.png')}" alt="" style="width:45px;height:45px;float:right"/>
+							<g:link action="showCallLog" id="${callLogInstance.id}" style="color: #505050;font-weight: bold;direction: ltr;font-size:16px;vertical-align: middle;float:right;padding:15px 10px 0 0">${fieldValue(bean: callLogInstance, field: "formatedPhoneNumer")}</g:link>
+						</td>
 				
-						<td><g:link action="showCallLog" id="${callLogInstance.id}">${fieldValue(bean: callLogInstance, field: "phoneNumber")}</g:link></td>
+						<td style="vertical-align: middle;color: #505050;font-size: 16px;">${message(code: 'callLog.type.' + fieldValue(bean: callLogInstance, field: 'type') , default: 'type')}</td>
 				
-						<td>${fieldValue(bean: callLogInstance, field: "type")}</td>
-				
-						<td>${fieldValue(bean: callLogInstance, field: "duration")}</td>
+						<td style="vertical-align: middle;color: #505050;font-size: 16px;">${fieldValue(bean: callLogInstance, field: "formatedPeriod")}</td>
 						
-						<td>${fieldValue(bean: callLogInstance, field: "timeSeconds")}</td>
+						<td style="vertical-align: middle;color: #505050;font-size: 16px;">${fieldValue(bean: callLogInstance, field: "formatedDate")}</td>
 				
 					</tr>
 				</g:each>
 			</table>
-			<div class="instanceTotal">
-				<h5><g:message code="callLog.total.label" default='סה"כ רשומות: '/>${callLogsInstanceTotal}</h5>
-			</div>
 			
 			<div class="pagination">
 				<g:paginate total="${callLogsInstanceTotal}" />
-			</div>
+			</div>			
 		</div>
 </div>
 <!-- Container / End -->
