@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'style.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css/colors', file: 'green.css')}" type="text/css" id="colors">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'slide.css')}" type="text/css" media="screen" />
-		
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery.mCustomScrollbar.css')}" type="text/css">
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -53,6 +53,7 @@
 		<script src="${resource(dir: 'js', file: 'jquery.gmaps.min.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'gmaps.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'arcgislink.js')}"></script>
+		<script src="${resource(dir: 'js', file: 'jquery.mCustomScrollbar.js')}"></script>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>

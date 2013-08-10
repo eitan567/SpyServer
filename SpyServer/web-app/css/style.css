@@ -1944,7 +1944,7 @@ html[xmlns] .slides {display: block;}
 	-webkit-transform: translateZ(10);
 	-webkit-backface-visibility: hidden;
 	-webkit-perspective: 1000;
-	margin: 20px 20px 20px 0;
+	padding: 10px;
 
 }
 
@@ -4152,4 +4152,25 @@ body {
 	background-color: transparent;
 	color: #444444;
 	text-decoration: underline;
+}
+
+.content{clear: both;
+    height: 400px;
+    overflow: auto;
+    padding: 40px 0 40px 40px;}
+.content p:nth-child(even){color:#999; font-family:Georgia,serif; font-size:17px; font-style:italic;}
+.content p:nth-child(3n+0){color:#c96;}
+div.mCSB_dragger_bar{
+	width: 10px !important;
+}
+div.mCSB_dragger{
+	height:60px !important;
+}
+
+
+.selectedContact {
+    background-color: #F2F2F2;
+}
+.selectedContact div{
+    color: #white;
 }

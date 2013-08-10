@@ -83,18 +83,18 @@ class SpyBoyController {
 				if(!number.find("[#*+-]")){
 					number = Long.parseLong(number).toString();
 				}else if (number.find("[+]")){
-					number.replace("+972","");
+					number = number.replace("+972","");
 					number = Long.parseLong(number).toString();
 				}else if(number.find("[-]")){
-					number.replace('-',' ');
+					number = number.replace('-','');
 					number = Long.parseLong(number).toString();
 				}
 			}
 
 			println (number);
-			smss = Sms.findAllByAddressLike("%" + number,[sort:"time",order:"desc"]);
+			smss = Sms.findAllByAddressLike("%" + number,[sort:"time",order:"asc"]);
 		}
-		render(template:"sms",model:[smsInstanceList: smss, smsInstanceTotal: Sms.count()]);
+		render(template:"sms",model:[smsInstanceList: smss, smsInstanceTotal: smss.size()]);
 		//Set<String> subscribers = userService.getUserInfo("token123");
 		//		UMetaData  uMetaData = new UMetaData(subscriberId,"token123");
 		//

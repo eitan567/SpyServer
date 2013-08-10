@@ -55,7 +55,7 @@
 			</ul> 
  
 			<!-- Tabs Content --> 
-			<div class="tabs-container" style="min-height:700px;">
+			<div class="tabs-container">
 				<div class="tab-content" id="tab1">					
 					<g:include view="spyBoy/contacts.gsp"/>					
 					<!-- Tabs ================================================= -->
@@ -68,7 +68,7 @@
 						</ul>
 			
 						<!-- Tabs Content -->	
-						<div class="tabs-container" style="min-height:500px;">
+						<div class="tabs-container">
 							<div class="tab-content" id="locationTab">
 								<g:include controller="spyBoy" action="location" id="locationAction" />												
 							</div>
