@@ -1,43 +1,80 @@
 <!-- Regular Table
 ================================================== -->
+<div class="nine columns">
 
-<!-- Container -->
-<div class="container">
-	<div class="fifteen columns">
+	<!-- Headline -->
+	<h3 class="headline">יומן שיחות</h3>
+	<span class="line" style="float: right;
+    margin-bottom: 0;
+    position: relative;
+    top: 32px;
+    width: 48%;"></span><a id="callLog_scroll_to_top" class="button color" href="#" style="width:20%;float:left">גלול לתחילת הטבלה</a>
+
 	
-		<!-- Headline -->
-		<h3 class="headline">יומן שיחות (${callLogsInstanceTotal} רשומות) </h3><span class="line" style="margin-bottom:35px;"></span><div class="clearfix"></div>
-
-			<table class="standard-table">
-					<tr>					
-						<g:sortableColumn property="phoneNumber" title="${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}" />
-					
-						<g:sortableColumn property="type" title="${message(code: 'callLog.type.label', default: 'type')}" />
-					
-						<g:sortableColumn property="duration" title="${message(code: 'callLog.duration.label', default: 'duration')}" />
-						
-						<g:sortableColumn property="time" title="${message(code: 'callLog.time.label', default: 'time')}" />					
-					</tr>					
-				<g:each in="${callLogInstanceList}" status="i" var="callLogInstance">
-					<tr>				
-						<td style="vertical-align: middle;width:200px;">
-							<img src="${resource(dir: 'images/callog', file: fieldValue(bean: callLogInstance, field: 'type')+'.png')}" alt="" style="width:45px;height:45px;float:right"/>
-							<g:link action="showCallLog" id="${callLogInstance.id}" style="color: #505050;font-weight: bold;direction: ltr;font-size:16px;vertical-align: middle;float:right;padding:15px 10px 0 0">${fieldValue(bean: callLogInstance, field: "formatedPhoneNumer")}</g:link>
-						</td>
-				
-						<td style="vertical-align: middle;color: #505050;font-size: 16px;">${message(code: 'callLog.type.' + fieldValue(bean: callLogInstance, field: 'type') , default: 'type')}</td>
-				
-						<td style="vertical-align: middle;color: #505050;font-size: 16px;">${fieldValue(bean: callLogInstance, field: "formatedPeriod")}</td>
-						
-						<td style="vertical-align: middle;color: #505050;font-size: 16px;">${fieldValue(bean: callLogInstance, field: "formatedDate")}</td>
-				
-					</tr>
-				</g:each>
-			</table>
-			
-			<div class="pagination">
-				<g:paginate total="${callLogsInstanceTotal}" />
-			</div>			
+	<div class="clearfix"></div>
+	<table id="callLogHeader" class="standard-table" style="margin-bottom:0px !important;display:none;padding-top:20px;">
+		<tr>					
+			<g:sortableColumn style="width:134px" property="phoneNumber" title="${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}" />
+			<g:sortableColumn style="width:90px;" property="type" title="${message(code: 'callLog.type.label', default: 'type')}" />
+			<g:sortableColumn style="width:130px;" property="duration" title="${message(code: 'callLog.duration.label', default: 'duration')}" />
+			<g:sortableColumn style="width:190px;" property="time" title="${message(code: 'callLog.time.label', default: 'time')}" />					
+		</tr>
+	</table>	
+	<div id="content_2" class="content" style="">	
+		<div id="callLogAjaxTargetDiv">
+			<div class="notification success closeable" style="margin-top: 20px;text-align: center;">אין שיחות להצגה</div>			
 		</div>
+	</div>
 </div>
-<!-- Container / End -->
+<script>
+	(function($) {
+		$(window).load(function() {
+			$("#content_2").mCustomScrollbar({
+				set_width : false, /*optional element width: boolean, pixels, percentage*/
+				set_height : false, /*optional element height: boolean, pixels, percentage*/
+				horizontalScroll : false, /*scroll horizontally: boolean*/
+				scrollInertia : 950, /*scrolling inertia: integer (milliseconds)*/
+				mouseWheel : true, /*mousewheel support: boolean*/
+				mouseWheelPixels : "auto", /*mousewheel pixels amount: integer, "auto"*/
+				autoDraggerLength : true, /*auto-adjust scrollbar dragger length: boolean*/
+				autoHideScrollbar : false, /*auto-hide scrollbar when idle*/
+				scrollButtons : { /*scroll buttons*/
+					enable : true, /*scroll buttons support: boolean*/
+					scrollType : "pixels", /*scroll buttons scrolling type: "continuous", "pixels"*/
+					scrollSpeed : 100, /*scroll buttons continuous scrolling speed: integer, "auto"*/
+					scrollAmount : 450
+				/*scroll buttons pixels scroll amount: integer (pixels)*/
+				},
+				advanced : {
+					updateOnBrowserResize : true, /*update scrollbars on browser resize (for layouts based on percentages): boolean*/
+					updateOnContentResize : true, /*auto-update scrollbars on content resize (for dynamic content): boolean*/
+					autoExpandHorizontalScroll : false, /*auto-expand width for horizontal scrolling: boolean*/
+					autoScrollOnFocus : true, /*auto-scroll on focused elements: boolean*/
+					normalizeMouseWheelDelta : false
+				/*normalize mouse-wheel delta (-1/1)*/
+				},
+				contentTouchScroll : true, /*scrolling by touch-swipe content: boolean*/
+				callbacks : {
+					onScrollStart : function() {
+					}, /*user custom callback function on scroll start event*/
+					onScroll : function() {
+					}, /*user custom callback function on scroll event*/
+					onTotalScroll : function() {
+					}, /*user custom callback function on scroll end reached event*/
+					onTotalScrollBack : function() {
+					}, /*user custom callback function on scroll begin reached event*/
+					onTotalScrollOffset : 0, /*scroll end reached offset: integer (pixels)*/
+					onTotalScrollBackOffset : 0, /*scroll begin reached offset: integer (pixels)*/
+					whileScrolling : function() {
+					} /*user custom callback function on scrolling event*/
+				},
+				theme : "dark-thick" /*"light", "dark", "light-2", "dark-2", "light-thick", "dark-thick", "light-thin", "dark-thin"*/
+			});
+
+			$("#callLog_scroll_to_top").click(function(e){
+				e.preventDefault();
+				$("#content_2").mCustomScrollbar("scrollTo","top");
+			});
+		});
+	})(jQuery);
+</script>

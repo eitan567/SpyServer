@@ -19,7 +19,7 @@ public class SpyUtils {
 		try {
 			phoneNumberObj = phoneUtil.parse(phoneNumber, "IL");
 		} catch (NumberParseException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return phoneNumber;
 		}
 

@@ -28,22 +28,15 @@ class SpyBoyController {
 		//uMetaData.setSimSubscriberId(subscriberId);
 		//uMetaData.setToken("token123");
 		//def callLogs = CallLog.findByTargetPhone(subscriberId);//callLogService.readAll(uMetaData);
-		params.max = Math.min(params.max ? params.int('max') : 10, 100)
-		params.phoneNumber = "0543112117";
-
-		[callLogInstanceList:CallLog.list(params), callLogsInstanceTotal: CallLog.count()]
-
-		//		if(!callLogs.isEmpty()){
-		//			params.max = Math.min(max ?: 10, 100)
-		//			int startOffset = params.get("offset")!=null ? Integer.parseInt(params.get("offset")) : 0 ;
-		//			int toElement=10;
-		//			if(max!=null){
-		//				toElement = (startOffset + max) > callLogs.size() ? callLogs.size() : startOffset + max;
-		//			}
-		//			[callLogInstanceList: callLogs.subList(startOffset,toElement), callLogsInstanceTotal: callLogs.size()]
-		//		}else{
-		//			[callLogInstanceList: null, callLogInstanceTotal: 0]
-		//		}
+		//params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		String number = params.number;
+		def callLogs=null;
+		if(number!=null){
+			number = formatNumberForSQL(number);
+			println (number);
+			callLogs = CallLog.findAllByPhoneNumberLike("%" + number,[sort:"timeSeconds",order:"desc"]);
+		}
+		render(template:"callLog",model:[callLogInstanceList:callLogs, callLogsInstanceTotal: callLogs!=null ? callLogs.size():0]);
 	}
 
 
@@ -52,49 +45,22 @@ class SpyBoyController {
 
 	def contacts(){
 		params.max = Math.min(params.max ? params.int('max') : 50, 100)
-		render(template:"contacts",model:[contactInstanceList: Contact.list(sort:"name"), contactInstanceTotal: Contact.count()]);
-		//Set<String> subscribers = userService.getUserInfo("token123");
-		//		UMetaData  uMetaData = new UMetaData(subscriberId,"token123");
-		//
-		//		def contactList = contactService.readAll(uMetaData);
-		//
-		//		if(!contactList.isEmpty()){
-		//			params.max = Math.min(max ?: 10, 100)
-		//			int startOffset = params.get("offset")!=null ? Integer.parseInt(params.get("offset")) : 0 ;
-		//			int toElement=10;
-		//			if(max!=null){
-		//				toElement = (startOffset + max) > contactList.size() ? contactList.size() : startOffset + max;
-		//			}
-		//			[contactInstanceList: contactList.subList(startOffset,toElement), contactInstanceTotal: contactList.size()]
-		//		}else{
-		//			[contactInstanceList: null, contactInstanceTotal: 0]
-		//		}
+		render(template:"contacts",model:[contactInstanceList: Contact.list(sort:"name",order:"desc"), contactInstanceTotal: Contact.count()]);
+		//render(template:"contacts",model:[contactInstanceList: Contact.findAllByNumberLike("%524478017",[sort:"name",order:"desc"]), contactInstanceTotal: Contact.count()]);
 	}
 
 
 	def sms(){
-		params.max = Math.min(params.max ? params.int('max') : 50, 100)
-		//default sms of first contact
-		//List<Contact> firstContacts  = Contact.list(max:"1");
-		String number = params.number;//firstContacts.get(0).number;
+		//params.max = Math.min(params.max ? params.int('max') : 50, 100)
+		//default sms of first contact		
+		String number = params.number;
 		def smss=null;
 		if(number!=null){
-			if(number.length()>8){
-				if(!number.find("[#*+-]")){
-					number = Long.parseLong(number).toString();
-				}else if (number.find("[+]")){
-					number = number.replace("+972","");
-					number = Long.parseLong(number).toString();
-				}else if(number.find("[-]")){
-					number = number.replace('-','');
-					number = Long.parseLong(number).toString();
-				}
-			}
-
+			number = formatNumberForSQL(number);
 			println (number);
 			smss = Sms.findAllByAddressLike("%" + number,[sort:"time",order:"asc"]);
 		}
-		render(template:"sms",model:[smsInstanceList: smss, smsInstanceTotal: smss.size()]);
+		render(template:"sms",model:[smsInstanceList: smss, smsInstanceTotal: smss!=null ? smss.size():0]);
 		//Set<String> subscribers = userService.getUserInfo("token123");
 		//		UMetaData  uMetaData = new UMetaData(subscriberId,"token123");
 		//
@@ -111,6 +77,25 @@ class SpyBoyController {
 		//		}else{
 		//			[smsInstanceList: null, smsInstanceTotal: 0]
 		//		}
+	}
+
+	private String formatNumberForSQL(String number) {
+		if(number.length()>8){
+			if(number.find("[-]")){
+				number = number.replace('-','');
+				number = Long.parseLong(number).toString();
+			}	
+//			if(!number.find("[#*+-]")){
+//				number = Long.parseLong(number).toString();
+//			}else if (number.find("[+]")){
+//				number = number.replace("+972","");
+//				number = Long.parseLong(number).toString();
+//			}else if(number.find("[-]")){
+//				number = number.replace('-','');
+//				number = Long.parseLong(number).toString();
+//			}
+		}
+		return number
 	}
 
 

@@ -45,7 +45,7 @@
 
 <!-- Tabs
 ================================================= -->
-	<div class="sixteen columns" style="padding-top:10px;">
+	<div class="sixteen columns" style="padding-top:20px;">
 	
 			<!-- Tabs Navigation -->
 			<ul class="tabs-nav">
@@ -57,29 +57,14 @@
 			<!-- Tabs Content --> 
 			<div class="tabs-container">
 				<div class="tab-content" id="tab1">					
-					<g:include view="spyBoy/contacts.gsp"/>					
-					<!-- Tabs ================================================= -->
-					<div class="columns">						
-						<!-- Tabs Navigation -->
-						<ul class="tabs-nav">
-							<li class="active"><a href="#locationTab">מיקום(GPS)</a></li>
-							<li><a href="#callLogTab">יומן שיחות</a></li>
-							<li><a href="#smsTab">הודעות(SMS)</a></li>
-						</ul>
-			
-						<!-- Tabs Content -->	
-						<div class="tabs-container">
-							<div class="tab-content" id="locationTab">
-								<g:include controller="spyBoy" action="location" id="locationAction" />												
-							</div>
-							<div class="tab-content" id="callLogTab">
-								<g:include controller="spyBoy" action="callLog" id="callLogAction"/>
-							</div>
-							<div class="tab-content" id="smsTab">
-								<g:include view="spyBoy/sms.gsp"/>									
-							</div>
-						</div>
-				    </div>				
+					<g:include view="spyBoy/contacts.gsp"/>	
+					<div class="container">
+						<g:include view="spyBoy/callLog.gsp"/>
+						<g:include view="spyBoy/sms.gsp"/>
+					</div>			
+					<div class="container">	
+						<g:include controller="spyBoy" action="location" id="locationAction" />
+					</div>
 				</div>
 				<div class="tab-content" id="tab2">
 				</div>
@@ -95,8 +80,8 @@
 <!-- Content Wrapper / End -->
 
 	<script type="text/javascript">					
-	  <g:remoteFunction update="contactsAjaxTargetDiv" controller="spyBoy" action="contacts" before="spinner()"/>
-
+	  <g:remoteFunction update="contactsAjaxTargetDiv" controller="spyBoy" action="contacts" before="spinner()"/>	  
+	  
 	  function spinner(){
 		  (function($) {
 				$('#spinner').ajaxStart(function() {

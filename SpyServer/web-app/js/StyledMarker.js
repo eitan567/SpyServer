@@ -184,7 +184,7 @@ function inherits(childCtor, parentCtor) {
     getURL: function(props){
       var _url;
       var starcolor_=props.get('starcolor');
-      var text_=props.get('text');
+      var text1_=props.get('text1');
       var color_=props.get('color').replace(/#/,'');
       var fore_=props.get('fore').replace(/#/,'');
       if (starcolor_) {
@@ -192,10 +192,10 @@ function inherits(childCtor, parentCtor) {
       } else {
         _url = bu_ + 'd_map_pin_letter&chld=';
       }
-      if (text_) {
-        text_ = text_.substr(0,2);
-      }
-      _url+=text_+'|';
+      if (text1_) {
+        text1_ = text1_.substr(0,2);
+      }      
+      _url+=text1_+'|';     
       _url+=color_+'|';
       _url+=fore_;
       if (starcolor_) {
@@ -244,14 +244,15 @@ function inherits(childCtor, parentCtor) {
       fore:'ffffff'
     },
     getURL: function(props){
-      var _url = bu_ + 'd_bubble_text_small&chld=bb|';
-      _url+=props.get('text')+'|';
-      _url+=props.get('color').replace(/#/,'')+'|';
-      _url+=props.get('fore').replace(/#/,'');
+     var _url = bu_ + 'd_bubble_texts_big&chld=bb|';
+     _url+=props.get('color').replace(/#/,'')+'|';
+     _url+=props.get('fore').replace(/#/,'')+'|';
+     _url+=props.get('text1')+'|';
+     _url+=props.get('text2');
       return _url;
     },
     getShadowURL: function(props){
-      return bu_ + 'd_bubble_text_small_shadow&chld=bb|' + props.get('text');
+      return bu_ + 'd_bubble_texts_big&chld=bb|' +props.get('text1') +'|'+ props.get('text2');
     },
     getAnchor: function(props,width,height){
       return new google.maps.Point(0,42);

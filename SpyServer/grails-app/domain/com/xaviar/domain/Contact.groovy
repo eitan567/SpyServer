@@ -1,5 +1,7 @@
 package com.xaviar.domain;
 
+import com.spy.tools.SpyUtils
+
 public class Contact {
 
 	String name;
@@ -16,4 +18,7 @@ public class Contact {
 		type nullable :true;
 	}
 	
+	public String getFormatedPhoneNumer(){
+		return SpyUtils.formatPhoneNumber(this.number);
+	}	
 }

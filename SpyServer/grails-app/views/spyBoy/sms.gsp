@@ -1,12 +1,14 @@
-<div class="container">
-	<h3 class="headline">הודעות טקסט (SMS)</h3>
-	<span class="line" style="margin-bottom: 0;"></span>
-	<div class="fifteen columns">
-		<div id="content_1" class="content">	
-			<ul id="smsAjaxTargetDiv">
-				<div class="notification notice closeable" style="text-align: center; margin-top: 50px;">אין הודעות להצגה</div>			
-			</ul>
-		</div>
+<div class="seven columns" style="width: 470px;">
+<h3 class="headline">הודעות טקסט (SMS)</h3>
+<span class="line" style="float: right;
+    margin-bottom: 0;
+    position: relative;
+    top: 32px;
+    width: 35%;"></span><a id="scroll_to_bottom" class="button color" href="#" style="width:20%;float:left">גלול לסוף השיחה</a>
+	<div id="content_1" class="content">			
+		<ul id="smsAjaxTargetDiv">
+			<div class="notification success closeable" style="margin-top: 20px;text-align: center;">אין הודעות להצגה</div>			
+		</ul>
 	</div>
 </div>
 <script>
@@ -25,7 +27,7 @@
 					enable : true, /*scroll buttons support: boolean*/
 					scrollType : "pixels", /*scroll buttons scrolling type: "continuous", "pixels"*/
 					scrollSpeed : 100, /*scroll buttons continuous scrolling speed: integer, "auto"*/
-					scrollAmount : 400
+					scrollAmount : 450
 				/*scroll buttons pixels scroll amount: integer (pixels)*/
 				},
 				advanced : {
@@ -53,6 +55,12 @@
 				},
 				theme : "dark-thick" /*"light", "dark", "light-2", "dark-2", "light-thick", "dark-thick", "light-thin", "dark-thin"*/
 			});
+
+			$("#scroll_to_bottom").click(function(e){
+				e.preventDefault();
+				$("#content_1").mCustomScrollbar("scrollTo","bottom");
+			});
+		
 		});
 	})(jQuery);
 </script>

@@ -294,10 +294,10 @@
 
 	jQuery('#happy-clients').showbizpro({
 		dragAndScroll:"on",
-		visibleElementsArray:[7,7,7,7],
+		visibleElementsArray:[8,8,8,8],
 		carousel:"on", 
 		entrySizeOffset:0,
-		allEntryAtOnce:"on"
+		allEntryAtOnce:"off"
 	});
 
 	jQuery('#team').showbizpro({
