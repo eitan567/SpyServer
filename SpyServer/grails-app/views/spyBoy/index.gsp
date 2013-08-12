@@ -59,8 +59,8 @@
 				<div class="tab-content" id="tab1">					
 					<g:include view="spyBoy/contacts.gsp"/>	
 					<div class="container">
-						<g:include view="spyBoy/callLog.gsp"/>
 						<g:include view="spyBoy/sms.gsp"/>
+						<g:include view="spyBoy/callLog.gsp"/>
 					</div>			
 					<div class="container">	
 						<g:include controller="spyBoy" action="location" id="locationAction" />

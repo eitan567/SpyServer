@@ -16,7 +16,8 @@
 </table>
 </g:if>
 <g:else>
-	<div class="notification success closeable" style="margin-top: 20px;text-align: center;">אין שיחות להצגה</div>
+	<div id="callLogNotice" class="notification success closeable" style="margin-top: 20px;text-align: center;">אין שיחות להצגה</div>
+	<div id="callLogSpinner" class="spinner" style="display:block;"></div>
 </g:else>
 <script>	
 	jQuery(showHeader());

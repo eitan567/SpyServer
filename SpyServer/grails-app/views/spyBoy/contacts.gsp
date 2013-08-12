@@ -6,7 +6,6 @@
 	<div class="fifteen columns" style="margin-top: -5px;height:210px !important;">
 		<h3 class="headline">אנשי קשר</h3>
 		<span class="line" style="margin-bottom: 20px;"></span>
-		
 	<!-- Navigation / Left -->
 	<div id="showbiz_left_3" class="sb-navigation-left-2 alt"><i class="icon-angle-left"></i></div>
 

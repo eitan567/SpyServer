@@ -17,7 +17,8 @@
 </g:each>
 </g:if>
 <g:else>
-	<div class="notification success closeable" style="margin-top: 20px;text-align: center;">אין הודעות להצגה</div>
+	<div id="smsNotice" class="notification success closeable" style="text-align: center;">אין הודעות להצגה</div>
+	<div id="smsSpinner" class="spinner" style="display:none;"></div>
 </g:else>
 <script type="text/javascript">
 <!--

@@ -54,6 +54,7 @@
 		<script src="${resource(dir: 'js', file: 'gmaps.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'arcgislink.js')}"></script>
 		<script src="${resource(dir: 'js', file: 'jquery.mCustomScrollbar.js')}"></script>
+		<script src="${resource(dir: 'js', file: 'jquery.scrollTo-min.js')}"></script>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
