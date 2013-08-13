@@ -14,10 +14,10 @@
 	<div class="clearfix"></div>
 	<table id="callLogHeader" class="standard-table" style="margin-bottom:0px !important;display:none;padding-top:20px;">
 		<tr>					
-			<g:sortableColumn style="width:134px" property="phoneNumber" title="${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}" />
-			<g:sortableColumn style="width:90px;" property="type" title="${message(code: 'callLog.type.label', default: 'type')}" />
-			<g:sortableColumn style="width:130px;" property="duration" title="${message(code: 'callLog.duration.label', default: 'duration')}" />
-			<g:sortableColumn style="width:190px;" property="time" title="${message(code: 'callLog.time.label', default: 'time')}" />					
+			<g:sortableColumn id="col1" style="width:139px" property="phoneNumber" title="${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}" />
+			<g:sortableColumn id="col2" style="width:101px" property="type" title="${message(code: 'callLog.type.label', default: 'type')}" />
+			<g:sortableColumn id="col3" style="width:139px" property="duration" title="${message(code: 'callLog.duration.label', default: 'duration')}" />
+			<g:sortableColumn id="col4" style="" property="time" title="${message(code: 'callLog.time.label', default: 'time')}" />					
 		</tr>
 	</table>	
 	<div id="content_2" class="content" style="">	

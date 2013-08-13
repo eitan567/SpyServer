@@ -248,11 +248,12 @@ function inherits(childCtor, parentCtor) {
      _url+=props.get('color').replace(/#/,'')+'|';
      _url+=props.get('fore').replace(/#/,'')+'|';
      _url+=props.get('text1')+'|';
-     _url+=props.get('text2');
+     _url+=props.get('text2')+'|';
+     _url+=props.get('text3');
       return _url;
     },
     getShadowURL: function(props){
-      return bu_ + 'd_bubble_texts_big&chld=bb|' +props.get('text1') +'|'+ props.get('text2');
+      return bu_ + 'd_bubble_texts_big&chld=bb|' +props.get('text1') +'|'+ props.get('text2')+'|'+ props.get('text3');
     },
     getAnchor: function(props,width,height){
       return new google.maps.Point(0,42);

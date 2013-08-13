@@ -32,8 +32,17 @@
 
 		if(${callLogsInstanceTotal>14}){
 			jQuery("#callLogHeader").css("padding-right","30px");
+			jQuery("#col1").css("width","131px");
+			jQuery("#col2").css("width","96px");
+			jQuery("#col3").css("width","131px");
+			jQuery("#col4").css("width","181px");
+
 		}else{
 			jQuery("#callLogHeader").css("padding-right","0px");
+			jQuery("#col1").css("width","139px");
+			jQuery("#col2").css("width","101px");
+			jQuery("#col3").css("width","139px");
+			jQuery("#col4").css("width","");
 		}
 	}
 </script>

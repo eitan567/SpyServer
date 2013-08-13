@@ -35,7 +35,7 @@
 					//stops=new Array(${locationInstanceTotal});	
 					var i=0;	
 
-					setTimedInterval(jsonList,4*2000+100)
+					setTimedInterval(jsonList,4*1100)
 					
 					//var timer = setInterval(function(){						
 					//	if(i<total)
@@ -44,13 +44,13 @@
 					//		window.clearInterval(timer);						
 					//	},2000);
 					
-					// for(var i=0;i<${locationInstanceTotal};i++){						
-					//	barriers[i]=new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude);							
+					for(var i=0;i<${locationInstanceTotal};i++){						
+						barriers[i]=new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude);							
 					//	new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.BUBBLE,{color:"73B819",text:(jsonList[i].time + " " + address)}),position:new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude),map:map});
-					//}
-					//stops[0]=new google.maps.LatLng(0, 0);
-					//stops[1]=new google.maps.LatLng(100, 100);
-					
+					}
+					stops[0]=new google.maps.LatLng(jsonList[0].latitude, jsonList[0].longitude);
+					stops[1]=new google.maps.LatLng(jsonList[${locationInstanceTotal-1}].latitude, jsonList[${locationInstanceTotal-1}].longitude);
+					//debugger;
 					//route();
 					//var styleMaker1 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"00ff00",text:"A"}),position:myLatLng,map:map});
 					//var styleMaker3 = new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"0000ff"}),position:new google.maps.LatLng(37.263477473067, -121.880502070713),map:map});
@@ -59,7 +59,7 @@
 
 				  function setTimedInterval(jsonList, timeout){
 					    var i=0;
-					    var id=setInterval(function(){codeLatLng(jsonList,i++)}, 2000);
+					    var id=setInterval(function(){codeLatLng(jsonList,i++)}, 1000);
 					    setTimeout(function(){
 					        clearInterval(id);
 					    }, timeout);
@@ -74,8 +74,8 @@
 		                findBestSequence: true,
 		                overlayOptions: {
 		                  strokeColor: '#0000BB',
-		                  strokeWeight: 8,
-		                  strokeOpacity: 0.5
+		                  strokeWeight: 5,
+		                  strokeOpacity: 8
 		                }
 		              }, processResults, handleErr);
 		              
@@ -102,10 +102,10 @@
 		              geocoder.geocode({'latLng': new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude)}, function(results, status) {
 		                if (status == google.maps.GeocoderStatus.OK) {					                           
 		                  if (results[0]) {			                 
-							 new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.BUBBLE,{color:"73B819",text1:jsonList[i].time,text2:results[0].formatted_address}),position:new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude),map:map});								
+							 new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.BUBBLE,{color:"73B819",text1:"    ( נקודה מספר "+(i+1)+" )",text2:jsonList[i].time,text3:results[0].formatted_address}),position:new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude),map:map});								
 		                  }
 		                } else {
-		                  alert("Geocoder failed due to: " + status);
+		                  //alert("Geocoder failed due to: " + status);
 		                }
 		              });
 		            }

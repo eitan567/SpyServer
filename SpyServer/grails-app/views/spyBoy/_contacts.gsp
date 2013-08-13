@@ -7,8 +7,12 @@
 		<%-- <div id="spinner${contactInstance.id}" class="spinner" style="display:block;top:20%"></div> --%>
 				
 		<div class="happy-clients-photo">
-			<img
-				src="${createLink(controller:'spyBoy', action:'getImageBytes', params : [picname: contactInstance.formatedPhoneNumer])}"/>
+			<g:if test='${contactInstance.image!=""}'>
+				<img src="data:image/gif;base64,${contactInstance.image}"/>
+			</g:if>
+			<g:else>
+				<img src="${resource(dir: 'images', file: 'happy-clients-01.jpg')}" alt="" />
+			</g:else>	
 			<%--<img src="${resource(dir: 'images', file: 'happy-clients-01.jpg')}" alt="" />--%>
 		</div>
 		<div class="happy-clients-cite">
