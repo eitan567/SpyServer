@@ -7,7 +7,7 @@
 		<%-- <div id="spinner${contactInstance.id}" class="spinner" style="display:block;top:20%"></div> --%>
 				
 		<div class="happy-clients-photo">
-			<g:if test='${contactInstance.image!=""}'>
+			<g:if test='${contactInstance.image!=null && contactInstance.image!=""}'>
 				<img src="data:image/gif;base64,${contactInstance.image}"/>
 			</g:if>
 			<g:else>
