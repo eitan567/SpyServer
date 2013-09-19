@@ -2,7 +2,8 @@ package xaviar.server
 
 class HomeController {
 
-    def index() { 
-				
+	def index() {
 	}
+	
+	def blog_item(){}
 }

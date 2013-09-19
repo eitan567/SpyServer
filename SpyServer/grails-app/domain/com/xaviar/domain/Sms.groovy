@@ -10,12 +10,14 @@ public class Sms {
 	String address;
 	String folderName;
 	String msg;
+	String countryCode;
 
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = {
-		version false
-		id generator: 'assigned'
+		version false;
+		id generator: 'assigned';
 		msg sqlType:'text(50000) collate utf8mb4_general_ci';
+		cache true;
 	}
 
 	static constraints = {
@@ -24,6 +26,7 @@ public class Sms {
 		address nullable :true;
 		folderName nullable :true;
 		msg nullable :true;
+		countryCode nullable :true;
 	}
 	
 	public String getFormatedPhoneNumer(){
@@ -32,5 +35,9 @@ public class Sms {
 	
 	public String getFormatedDate(){
 		return this.time.format("EEEE d MMMM yyyy ,HH:mm");
+	}
+	
+	public setAddress(String address){
+		this.address = SpyUtils.formatPhoneNumber(address);
 	}
 }

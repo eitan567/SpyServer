@@ -1,10 +1,13 @@
 package com.xaviar.domain;
 
-//@XmlRootElement
-//@Entity
 public class Role {
 
-	Integer role;
-	
-	static hasMany = [permissions:Permission]	
+String name
+
+    static hasMany = [ users: User, permissions: String ]
+    static belongsTo = User
+
+    static constraints = {
+        name(nullable: false, blank: false, unique: true)
+    }
 }

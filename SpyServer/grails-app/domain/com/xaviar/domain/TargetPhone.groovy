@@ -1,5 +1,6 @@
 package com.xaviar.domain
 
+import org.apache.commons.codec.binary.Base64
 
 class TargetPhone  {
 
@@ -18,8 +19,9 @@ class TargetPhone  {
 	String simCountryIso;
 	String line1Number;
 	String cellLocation;
-	String alias;	
-		
+	String alias;
+	String image;
+	
 	static hasMany = [contacts:Contact,callLogs:CallLog,smss:Sms,locations:Location]
 	static hasOne =Token
 	static belongsTo = [user:User]
@@ -46,10 +48,19 @@ class TargetPhone  {
 		simCountryIso nullable :true;
 		line1Number nullable :true;
 		cellLocation nullable :true;
+		alias nullable :true;
+		image nullable :true;
     }
 	
 	static mapping = {
-		id name:'simSubscriberId', type:'string', generator: 'assigned'
-		version false
+		id name:'simSubscriberId', type:'string', generator: 'assigned';
+		image sqlType:'text(4294967295)';
+		version false;
+		cache true;
+	}
+	
+	public byte[] getDecodedImage(){
+		byte[] decodedImage = Base64.decodeBase64(this.image.getBytes());
+		return decodedImage;
 	}
 }

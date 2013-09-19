@@ -13,10 +13,18 @@ public class DataHolder {
 	public static final String SMS = "SMS";
 	public static final String LOCATION = "LOCATION";
 	public static final String PHONE_PARAMS = "PHONE_PARAMS";
-	public static final String CALL_LOG = "CALL_LOG";	
+	public static final String CALL_LOG = "CALL_LOG";
+	
 	public static final String SMS_EVENT = "SMS_EVENT";
 	public static final String PHONE_EVENT = "PHONE_EVENT";
-	public static final String BIN_ZIP_PICTURES = "BIN_ZIP_PICTURES";	
+	
+	public static final String BIN_ZIP_PICTURES = "BIN_ZIP_PICTURES";
+	public static final String FLOWER = "FLOWER";
+	
+	//for test only
+//	public String username="admin";
+//	public String password="password";
+//	public String simSubscriberId="4250710211217441";//"425071021121744";
 	
 	public String data;
 	private int id;

@@ -58,6 +58,7 @@ grails.exceptionresolver.params.exclude = ['password']
 
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
+security.shiro.authc.required = false
 
 environments {
     development {

@@ -40,6 +40,9 @@ function inherits(childCtor, parentCtor) {
 }
  
 (function() {
+	if (window.google == undefined || window.google.maps == undefined) {
+		  throw 'Google Maps API is required. Please register the following JavaScript library http://maps.google.com/maps/api/js?sensor=true.'
+		}
   var bu_ = 'https://chart.googleapis.com/chart?chst=';
   var gm_ = google.maps;
   var gp_ = gm_.Point;
@@ -184,7 +187,7 @@ function inherits(childCtor, parentCtor) {
     getURL: function(props){
       var _url;
       var starcolor_=props.get('starcolor');
-      var text1_=props.get('text1');
+      var text_=props.get('text');
       var color_=props.get('color').replace(/#/,'');
       var fore_=props.get('fore').replace(/#/,'');
       if (starcolor_) {
@@ -192,10 +195,10 @@ function inherits(childCtor, parentCtor) {
       } else {
         _url = bu_ + 'd_map_pin_letter&chld=';
       }
-      if (text1_) {
-        text1_ = text1_.substr(0,2);
+      if (text_) {
+        text_ = text_.substr(0,2);
       }      
-      _url+=text1_+'|';     
+      _url+=text_+'|';     
       _url+=color_+'|';
       _url+=fore_;
       if (starcolor_) {

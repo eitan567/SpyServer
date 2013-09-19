@@ -17,6 +17,7 @@ class FileData {
 		version false
 		id name:'name', type:'string', generator: 'assigned'
 		data sqlType:'text(4294967295)';
+		cache true;
 	}
 
 	static constraints = {

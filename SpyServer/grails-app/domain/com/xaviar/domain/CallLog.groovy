@@ -7,15 +7,17 @@ class CallLog {
 
 	String id
 	String phoneNumber;
-	//ActionType actionType;
 	String type;
-	String duration;
+	int duration;
 	Date timeSeconds;
-
+	String countryCode;
+	String formatedDuration;
+	
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = {
-		version false
-		id generator: 'assigned',type:'string',name:'id'
+		version false;
+		id generator: 'assigned',type:'string',name:'id';
+		cache true;
 	}
 
 	static constraints = {
@@ -23,6 +25,8 @@ class CallLog {
 		type nullable :true;
 		duration nullable :true;
 		timeSeconds nullable :true;
+		countryCode nullable :true; 
+		formatedDuration nullable :true;
 	}
 
 	public String getFormatedPhoneNumer(){
@@ -38,4 +42,17 @@ class CallLog {
 		return this.timeSeconds.format("EEEE d MMMM yyyy ,HH:mm");
 	}
 
+	public setPhoneNumber(String number){
+		this.phoneNumber = SpyUtils.formatPhoneNumber(number);
+	}	
+	
+	public void setDuration(int duration){		
+		this.duration = duration;
+		this.formatedDuration = SpyUtils.formatPeriod(duration);
+	}
+	
+	public int getDuration(){
+		return this.duration;
+	}
+	
 }

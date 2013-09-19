@@ -1,7 +1,7 @@
 
 <!-- Headline -->
 <div class="sixteen columns" style="margin-top: 15px;">
-	<h3 class="headline">מקום(GPS)</h3>
+	<h3 class="headline">מקום (GPS - הנקודות ממוספרות על פי מועד הדגימה)</h3>
 	<span class="line" style="margin-bottom: 20px;"></span>
 </div>
 

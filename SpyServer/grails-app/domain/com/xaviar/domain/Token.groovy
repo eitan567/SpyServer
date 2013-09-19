@@ -6,4 +6,9 @@ class Token {
 	
     static constraints = {
     }
+	
+	static mapping = {
+		version false;
+		cache true;
+	}
 }

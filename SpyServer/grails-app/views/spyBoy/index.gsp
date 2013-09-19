@@ -96,8 +96,7 @@
 		  jQuery('.emoji').emoji();
 	  }
 	  
-	  $(document).ready(function(){runEmoji();});
-	  
+	  $(document).ready(function(){runEmoji();}); 
 	</script>
 	</body>
 </html>

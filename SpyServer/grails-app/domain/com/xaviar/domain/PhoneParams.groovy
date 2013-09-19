@@ -16,4 +16,9 @@ public class PhoneParams {
 	String simCountryIso;
 	String line1Number;
 	String cellLocation;
+	
+	static mapping = {
+		version false;
+		cache true;
+	}
 }

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta name="layout" content="base_layout" />
+<meta name="layout" content="main_layout" />
 </head>
 <body>
 	<!-- Content Wrapper / Start -->

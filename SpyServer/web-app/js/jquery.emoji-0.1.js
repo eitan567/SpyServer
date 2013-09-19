@@ -9,6 +9,6 @@ $.fn.emoji = function() {
 $.fn.emoji.replacer = function (str, p1) {
 	return p1.charCodeAt(0).toString(16).toUpperCase().replace(
 		/^([\da-f]+)$/i,
-		'<img src="..//images/emoji/emoji-$1.png" alt="emoji" />'
+		'<img src="..//images/emoji/emoji-$1.png" alt="" width="15px"/>'
 	);
 }
