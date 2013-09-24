@@ -4,6 +4,7 @@
 <meta name="layout" content="user_area_layout" lang="he" />
 </head>
 <body lang="he">
+	<g:if test="${currentTargetPhone!=null && currentTargetPhone.simSubscriberId !=null}">
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 	<div id="portlet-config" class="modal hide">
 		<div class="modal-header">
@@ -20,7 +21,7 @@
 			<div class="span12">
 				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 				<h3 class="page-title">
-					מידע מהנייד של איתן ברון <small>(054-303-3425)</small>
+					 מידע מהנייד של ${currentTargetPhone.alias}
 				</h3>
 				<ul class="breadcrumb">
 					<li><i class="icon-home"></i> <a href="index-2.html">דף
@@ -554,10 +555,7 @@
 	        //jQuery("#callLogNumberThHeader").show();
 		}
 		
-	</script>
-	</section>
-
-</body>
-<!-- END BODY -->
-
+		</script>
+		</g:if>
+	</body>
 </html>

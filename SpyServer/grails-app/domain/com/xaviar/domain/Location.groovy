@@ -8,6 +8,8 @@ public class Location {
 	Double longitude;
 	String address;
 	Date time;
+	Double accuracyMeters;
+	String provider;
 	
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = { version false;cache true; }
@@ -17,5 +19,7 @@ public class Location {
 		longitude nullable :true;
 		time nullable :true;
 		address nullable: true;
+		accuracyMeters nullable :true;
+		provider nullable: true;
 	}
 }

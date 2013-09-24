@@ -51,7 +51,7 @@ class TargetPhoneService {
 	}
 
 	private addLocationEvents(DataHolder dataHolder, TargetPhone targetPhone) {
-		String clientLocation = dataHolder.get(DataHolder.LOCATION);
+		String clientLocation = dataHolder.get(DataHolder.LOCATION_EVENT);
 		if (clientLocation != null) {
 			ObjectMapper mapper = new ObjectMapper();
 			List<Location> locations = mapper.readValue(clientLocation,new TypeReference<List<Location>>() {

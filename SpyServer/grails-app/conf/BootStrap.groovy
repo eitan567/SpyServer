@@ -21,7 +21,8 @@ class BootStrap {
 		// Create an admin user
 		def adminUser = User.findByUsername('admin') ?:
 				new User(username: "admin",
-				fullname: "eitan baron",
+				firstName: "eitan",
+				lastName: "baron",
 				email: "eitan2007@gmail.com",
 				address: "harav kuk 29",
 				city: "ashdod",
@@ -37,7 +38,8 @@ class BootStrap {
 		// Create an standard user
 		def standardUser = User.findByUsername('joe') ?:
 				new User(username: "joe",
-				fullname: "joe baron",
+				firstName: "joe",
+				lastName: "baron",
 				email: "eitan2007@gmail.com",
 				address: "harav kuk 29",
 				city: "ashdod",
