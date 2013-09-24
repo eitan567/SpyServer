@@ -371,19 +371,19 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					<li class="dropdown user">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<img src="${resource(dir: 'uaassets/img', file: 'avatar1_small.jpg')}" alt="" />
-						<span class="username">${user.fullname}</span>
+						<img src="data:image/png;base64,${user.image}" alt="" width="29px" height="29px"/>
+						<span class="username">${user.firstName + " " + user.lastName}</span>
 						<i class="icon-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-							<li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-							<li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox <span class="badge badge-important">3</span></a></li>
-							<li><a href="#"><i class="icon-tasks"></i> My Tasks <span class="badge badge-success">8</span></a></li>
+							<li><g:link action="profile" controller="spyBoy"><i class="icon-user"></i> הפרופיל שלי </g:link></li>
+							<li><a href="page_calendar.html"><i class="icon-calendar"></i> יומן אישי </a></li>
+							<li><a href="inbox.html"><i class="icon-envelope"></i> דואר אישי <span class="badge badge-important">3</span></a></li>
+							<li><a href="#"><i class="icon-tasks"></i> המשימות שלי <span class="badge badge-success">8</span></a></li>
 							<li class="divider"></li>
-							<li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> Full Screen</a></li>
-							<li><g:link controller="auth" action="lockscreen"><i class="icon-lock"></i> Lock Screen</g:link></li>
-							<li><g:link action="signOut" controller="auth"><i class="icon-key"></i> Log Out</g:link></li>
+							<li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> תצוגה במסך מלא </a></li>
+							<li><g:link controller="auth" action="lockscreen"><i class="icon-lock"></i> מסך נעילה </g:link></li>
+							<li><g:link action="signOut" controller="auth"><i class="icon-key"></i> התנתק </g:link></li>
 						</ul>
 					</li>
 					<!-- END USER LOGIN DROPDOWN -->
@@ -1002,8 +1002,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<script src="${resource(dir: 'uaassets/plugins/flot', file: 'jquery.flot.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/plugins/flot', file: 'jquery.flot.resize.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/plugins', file: 'jquery.pulsate.min.js')}" type="text/javascript"></script>
-	<script src="${resource(dir: 'uaassets/plugins/bootstrap-daterangepicker', file: 'date.js')}" type="text/javascript"></script>
-	<script src="${resource(dir: 'uaassets/plugins/bootstrap-daterangepicker', file: 'daterangepicker-rtl.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/plugins/gritter/js', file: 'jquery.gritter.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/plugins/fullcalendar/fullcalendar', file: 'fullcalendar.min.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/plugins/jquery-easy-pie-chart', file: 'jquery.easy-pie-chart.js')}" type="text/javascript"></script>
@@ -1014,13 +1012,38 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<script src="${resource(dir: 'uaassets/scripts', file: 'index.js')}" type="text/javascript"></script> 
 	<script src="${resource(dir: 'uaassets/scripts', file: 'tasks.js')}" type="text/javascript"></script>	 
 	<script src="${resource(dir: 'uaassets/scripts', file: 'ui-general.js')}" type="text/javascript"></script>	
-	<script src="${resource(dir: 'uaassets/scripts', file: 'app.js')}"></script>		
-	<script src="${resource(dir: 'uaassets/scripts', file: 'table-managed.js')}"></script>
-	<script src="${resource(dir: 'js', file: 'jquery.arctext.js')}"></script>
+	<script src="${resource(dir: 'uaassets/scripts', file: 'app.js')}" type="text/javascript"></script>		
+	<script src="${resource(dir: 'uaassets/scripts', file: 'table-managed.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'js', file: 'jquery.arctext.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/scripts', file: 'form-samples.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/plugins/gmaps', file: 'gmaps.js')}" type="text/javascript"></script>		
 	<script src="${resource(dir: 'uaassets/scripts', file: 'maps-google.js')}" type="text/javascript"></script>
-	<!-- <script src="${resource(dir: 'uaassets/plugins/bxslider', file: 'jquery.bxslider.js')}" type="text/javascript"></script> -->
+	<%-- <script src="${resource(dir: 'uaassets/plugins/bxslider', file: 'jquery.bxslider.js')}" type="text/javascript"></script> --%>
+	
+	
+	<script src="${resource(dir: 'uaassets/plugins/ckeditor', file: 'ckeditor.js')}" type="text/javascript"></script>  
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-fileupload', file: 'bootstrap-fileupload.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/chosen-bootstrap/chosen', file: 'chosen.jquery-rtl.min.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-wysihtml5', file: 'wysihtml5-0.3.0.js')}" type="text/javascript"></script> 
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-wysihtml5', file: 'bootstrap-wysihtml5.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/jquery-tags-input', file: 'jquery.tagsinput.min.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-toggle-buttons/static/js', file: 'jquery.toggle.buttons.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-datepicker/js', file: 'bootstrap-datepicker.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-datetimepicker/js', file: 'bootstrap-datetimepicker.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/clockface/js', file: 'clockface.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-daterangepicker', file: 'date.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-daterangepicker', file: 'daterangepicker-rtl.js')}" type="text/javascript"></script> 
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-colorpicker/js', file: 'bootstrap-colorpicker.js')}" type="text/javascript"></script>  
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-timepicker/js', file: 'bootstrap-timepicker.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/jquery-inputmask', file: 'jquery.inputmask.bundle.min.js')}" type="text/javascript"></script>   
+	<script src="${resource(dir: 'uaassets/plugins', file: 'jquery.input-ip-address-control-1.0.min.js')}" type="text/javascript"></script>   
+	<script src="${resource(dir: 'uaassets/plugins/jquery-multi-select/js', file: 'jquery.multi-select-rtl.js')}" type="text/javascript"></script>   
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-modal/js', file: 'bootstrap-modal.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-modal/js', file: 'bootstrap-modalmanager.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/jquery.pwstrength.bootstrap/src', file: 'pwstrength.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/bootstrap-switch/static/js', file: 'bootstrap-switch.js')}" type="text/javascript"></script>
+	<script src="${resource(dir: 'uaassets/plugins/jquery-tags-input', file: 'jquery.tagsinput.min.js')}" type="text/javascript"></script>	
+	<script src="${resource(dir: 'uaassets/scripts', file: 'form-components.js')}" type="text/javascript"></script>
 	
 	<script>
 		var ajaxCounter=0;

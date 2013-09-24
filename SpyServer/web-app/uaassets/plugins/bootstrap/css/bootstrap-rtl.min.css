@@ -891,7 +891,7 @@ q:before,q:after,blockquote:before,blockquote:after {
 
 address {
 	display: block;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	font-style: normal;
 	line-height: 20px
 }

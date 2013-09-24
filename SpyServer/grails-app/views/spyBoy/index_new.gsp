@@ -113,6 +113,69 @@
 				</div>
 			</div>--%>
 
+
+			<div class="row-fluid">
+				<div class="span12" style="direction:ltr;">	
+					<h3>Target Phone Parameters (פרטי מכשיר)</h3>
+					<div class="well" style="float:left;margin-right: 10px;">					
+						<address> 
+							<strong>Sim Subscriber Id : </strong> ${currentTargetPhone.simSubscriberId}
+						</address>
+						<address> 
+							<strong>Alias : </strong> ${currentTargetPhone.alias}
+						</address>
+						<address> 
+							<strong>Call State : </strong> ${currentTargetPhone.callState}
+						</address>
+						<address> 
+							<strong>Cell Location : </strong> ${currentTargetPhone.cellLocation}
+						</address>
+					</div>
+					<div class="well" style="float:left;margin-right: 10px;">
+						<address> 
+							<strong>Device ID : </strong> ${currentTargetPhone.deviceID}
+						</address>					
+						<address> 
+							<strong>Device Software Version : </strong> ${currentTargetPhone.deviceSoftwareVersion}
+						</address>
+						<address> 
+							<strong>Sim state : </strong> ${currentTargetPhone.simstate}
+						</address>
+						<address> 
+							<strong>Line 1 Number : </strong> ${currentTargetPhone.line1Number}
+						</address>
+					</div>
+					<div class="well" style="float:left;margin-right: 10px;">
+						<address> 
+							<strong>Network Country Iso : </strong> ${currentTargetPhone.networkCountryIso}
+						</address>
+						<address> 
+							<strong>Network Operator : </strong> ${currentTargetPhone.networkOperator}
+						</address>	
+						<address> 
+							<strong>Network Operator Name : </strong> ${currentTargetPhone.networkOperatorName}
+						</address>
+						<address> 
+							<strong>Phone Type : </strong> ${currentTargetPhone.phoneType}
+						</address>
+					</div>
+					<div class="well" style="float:left;margin-right: 10px;">
+						<address> 
+							<strong>Sim Country Iso : </strong> ${currentTargetPhone.simCountryIso}
+						</address>
+						<address> 
+							<strong>Sim Operator : </strong> ${currentTargetPhone.simOperator}
+						</address>
+						<address> 
+							<strong>Sim Operator Name : </strong> ${currentTargetPhone.simOperatorName}
+						</address>
+						<address> 
+							<strong>Sim Serial Number : </strong> ${currentTargetPhone.simSerialNumber}
+						</address>
+					</div>					
+				</div>
+			</div>
+
 			<!-- END DASHBOARD STATS -->
 			<div class="clearfix"></div>
 
@@ -164,9 +227,55 @@
 		</div>
 
 		<div class="clearfix"></div>
-
+		
 		<div class="row-fluid">
 			<div class="span6 responsive">
+				<!-- BEGIN EXAMPLE TABLE PORTLET-->
+				<div class="portlet box grey">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-book"></i>שיחות
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a> <a
+								href="#portlet-config" data-toggle="modal" class="config"></a> <a
+								href="javascript:;" class="reload"></a> <a href="javascript:;"
+								class="remove"></a>
+						</div>
+					</div>
+					<div id="callLogAjaxTargetDiv" class="portlet-body">
+						<table
+							class="table table-striped table-bordered table-hover table-full-width"
+							id="sample_3">
+							<thead>
+								<tr>
+									<th id="callLogNumberThHeader"
+										style="min-width: 120px; display: none;">
+										${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}
+									</th>
+									<th class="hidden-480" style="min-width: 110px;">
+										${message(code: 'callLog.type.label', default: 'type')}
+									</th>
+									<th class="hidden-480" style="min-width: 120px;">
+										${
+											message(code: 'callLog.duration.label', default: 'duration')
+										}
+									</th>
+									<th class="hidden-480" style="min-width: 180px !important;">
+										${message(code: 'callLog.time.label', default: 'time')}
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<!-- <div id="callLogSpinner" class="bx-loading"></div> -->
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE PORTLET-->
+			</div>
+		
+			<div class="span6 responsive" style="display:none;">
 				<!-- BEGIN PORTLET -->
 				<div class="portlet box grey">
 					<div class="portlet-title line">
@@ -226,98 +335,7 @@
 				<!-- END PORTLET-->
 			</div>
 		</div>
-
-		<div class="clearfix"></div>
-
-		<div class="row-fluid">
-			<div class="span6 responsive">
-				<!-- BEGIN EXAMPLE TABLE PORTLET-->
-				<div class="portlet box grey">
-					<div class="portlet-title">
-						<div class="caption">
-							<i class="icon-book"></i>שיחות
-						</div>
-						<div class="tools">
-							<a href="javascript:;" class="collapse"></a> <a
-								href="#portlet-config" data-toggle="modal" class="config"></a> <a
-								href="javascript:;" class="reload"></a> <a href="javascript:;"
-								class="remove"></a>
-						</div>
-					</div>
-					<div id="callLogAjaxTargetDiv" class="portlet-body">
-						<table
-							class="table table-striped table-bordered table-hover table-full-width"
-							id="sample_3">
-							<thead>
-								<tr>
-									<th id="callLogNumberThHeader"
-										style="min-width: 120px; display: none;">
-										${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}
-									</th>
-									<th class="hidden-480" style="min-width: 110px;">
-										${message(code: 'callLog.type.label', default: 'type')}
-									</th>
-									<th class="hidden-480" style="min-width: 120px;">
-										${
-											message(code: 'callLog.duration.label', default: 'duration')
-										}
-									</th>
-									<th class="hidden-480" style="min-width: 180px !important;">
-										${message(code: 'callLog.time.label', default: 'time')}
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						<!-- <div id="callLogSpinner" class="bx-loading"></div> -->
-					</div>
-				</div>
-				<!-- END EXAMPLE TABLE PORTLET-->
-			</div>
-
-		<%-- <div class="span6">
-				<!-- BEGIN MARKERS PORTLET-->
-				<div class="portlet box grey">
-					<div class="portlet-title">
-						<div class="caption">
-							<i class="icon-globe"></i>מיקום (GPS)
-						</div>
-						<div class="tools">
-							<a href="javascript:;" class="collapse"></a> <a
-								href="#portlet-config" data-toggle="modal" class="config"></a> <a
-								href="javascript:;" class="reload"></a> <a href="javascript:;"
-								class="remove"></a>
-						</div>
-					</div>
-					<div class="portlet-body">
-						<div id="gmap_table">
-							<table
-								class="table table-striped table-bordered table-hover table-full-width"
-								id="sample_4">
-								<thead>
-									<tr>
-										<th class="hidden-480" style="max-width: 40px !important;">
-											${message(code: 'location.point.label', default: 'נקודה')}
-										</th>
-										<th class="hidden-480">
-											${message(code: 'location.address.label', default: 'כתובת')}
-										</th>
-										<th class="hidden-480">
-											${message(code: 'location.time.label', default: 'תאריך')}
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- END MARKERS PORTLET-->
-			</div>--%>
-		</div>
-
+		
 		<div class="clearfix"></div>
 
 		<div class="row-fluid">
@@ -336,7 +354,7 @@
 						</div>
 					</div>
 					<div class="portlet-body">						
-						<div id="gmap_table"  style="width:48%;float: right;">
+						<div id="gmap_table"  style="width:48.9%;float: right;">
 							<table
 								class="table table-striped table-bordered table-hover table-full-width"
 								id="sample_4">
@@ -358,7 +376,7 @@
 							</table>
 						</div>
 						<div style="border-right: 1px solid #9D9C9C;float: right;height: 500px;margin-left: 18px;margin-right: 18px;"></div>						
-						<div id="gmap_marker" class="gmaps" style="width:49.5%;"></div>
+						<div id="gmap_marker" class="gmaps" style="width:47%;"></div>
 					</div>
 				</div>
 				<!-- END MARKERS PORTLET-->
@@ -465,8 +483,6 @@
 				initialize();
 			}
 			loadLocation(${activeSimSubscriberId});
-			
-			
 		});	
 
 		function centerMap(latitude,longitude){

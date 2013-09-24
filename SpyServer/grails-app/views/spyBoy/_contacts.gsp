@@ -77,14 +77,14 @@
 	  		                   // defaults to the column being worked with, in this case is the first
 	  		                   // Using `row[0]` is equivalent.
 	  		                   "bVisible":false,
-	  		             	   "mRender": function ( data, type, row ) {
-		  		                   var result = '';		  		                   
-		  		                  if(row.type!=null && row.type!=''){
-		  		                	 result = '<img src="../images/callog/'+ row.type +'.png" alt="" style="width: 25px; height: 25px; float: right;padding-left: 10px;" />';
-			  		               }
-			  		               result +='<a href="#" style="vertical-align: middle;">' + data + '</a>';
-	  		                       return result;
-	  		                   },
+	  		             	   //"mRender": function ( data, type, row ) {
+		  		               //   var result = '';		  		                   
+		  		               //   if(row.type!=null && row.type!=''){
+		  		               // 	 result = '<img src="../images/callog/'+ row.type +'.png" alt="" style="width: 25px; height: 25px; float: right;padding-left: 10px;" />';
+			  		           //    }
+			  		           //    result +='<a href="#" style="vertical-align: middle;">' + data + '</a>';
+	  		                   //    return result;
+	  		                   //},
 	  		                   "sClass": "hidden-480",
 	  		                  "aTargets": [ 0 ]
 	  		               },
@@ -92,7 +92,7 @@
 		  		               "mRender": function ( data, type, row ) {		
 			  		               	switch(data){
 				  		               	case "OUTGOING":return '<span class="label label-warning">' + OUTGOING + '</span>'; break;
-					  		            case "INCOMING":return '<span class="label label-success">' + INCOMING + '</span>'; break;
+					  		            case "INCOMING":return '<spa n class="label label-success">' + INCOMING + '</span>'; break;
 					  		            case "MISSED":return '<span class="label label-important">' + MISSED+ '</span>'; break;
 			  		               	}							
 				  		            return "";
@@ -101,7 +101,7 @@
 	  		               },
 	  		               { 
 		  		               "mRender": function ( data, type, row ) { return row.formatedDuration;}
-		  		               ,"sClass": "hidden-480","aTargets": [ 2 ]
+		  		               ,"aTargets": [ 2 ]
 		  		           }
 	  		], 		
             "aLengthMenu": [

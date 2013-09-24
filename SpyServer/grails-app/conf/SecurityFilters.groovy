@@ -22,6 +22,7 @@ class SecurityFilters {
      */
     static authenticatedActions = [
             [controller: 'spyBoy', action: 'index_new', roles: ['ROLE_ADMIN', 'ROLE_USER']],
+			[controller: 'spyBoy', action: 'profile', roles: ['ROLE_ADMIN', 'ROLE_USER']],
             [controller: 'spyBoy', action: 'index', roles: ['ROLE_ADMIN']]
     ]
 

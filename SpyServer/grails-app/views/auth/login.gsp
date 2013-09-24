@@ -172,8 +172,18 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-font"></i> <input class="m-wrap placeholder-no-fix"
-							type="text" placeholder="שם מלא" name="fullname"
-							value="${user.fullname}" />
+							type="text" placeholder="שם פרטי" name="firstname"
+							value="${user.firstName}" />
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label visible-ie8 visible-ie9">שם מלא</label>
+				<div class="controls">
+					<div class="input-icon left">
+						<i class="icon-font"></i> <input class="m-wrap placeholder-no-fix"
+							type="text" placeholder="שם משפחה" name="lastname"
+							value="${user.lastName}" />
 					</div>
 				</div>
 			</div>

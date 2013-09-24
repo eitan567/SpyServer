@@ -729,9 +729,9 @@ var FormComponents = function () {
             handleToggleButtons();
             handleTagsInput();
             handleDatePickers();
-            handleTimePickers();
-            handleDatetimePicker();
             handleDateRangePickers();
+            handleDatetimePicker();
+            handleTimePickers();
             handleClockfaceTimePickers();
             handleColorPicker();
             handleSelect2();

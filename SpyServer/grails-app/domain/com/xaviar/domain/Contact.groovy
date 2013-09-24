@@ -20,11 +20,11 @@ public class Contact {
 	}
 
 	static constraints = {
-		name nullable :true;
-		number nullable :true;
-		type nullable :true;
-		image nullable :true;
-		countryCode nullable :true;
+		name(nullable: true, blank: true)
+		number(nullable: true, blank: true)
+		type(nullable: true, blank: true)
+		image(nullable: true, blank: true)
+		countryCode(nullable: true, blank: true)
 	}
 
 	public String getFormatedPhoneNumer(){

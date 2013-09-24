@@ -26,7 +26,7 @@
 	</div>
 </g:if>--%>
 <g:if test="${smsInstanceTotal>0  && !isAllSmses}">
-	<div class="scroller" style="height: 312px" data-always-visible="1"
+	<div class="scroller" style="height: 322px" data-always-visible="1"
 		data-rail-visible1="1">
 		<ul class="chats">
 			<g:each in="${smsInstanceList}" status="i" var="smsInstance">

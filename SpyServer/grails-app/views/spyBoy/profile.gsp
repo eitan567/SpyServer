@@ -1,821 +1,15 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<!-- BEGIN HEAD -->
-
-<!-- Mirrored from www.keenthemes.com/preview/metronic_admin_rtl/extra_profile.html by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 14 Aug 2013 15:37:25 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
-	<meta charset="utf-8" />
-	<title>Metronic | Extra - User Profile</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-	<link href="assets/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/plugins/bootstrap/css/bootstrap-responsive-rtl.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/style-metro-rtl.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/style-rtl.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/style-responsive-rtl.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/css/themes/default-rtl.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN PAGE LEVEL STYLES -->
-	<link href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" type="text/css" />
-	<link href="assets/plugins/chosen-bootstrap/chosen/chosen-rtl.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/pages/profile-rtl.css" rel="stylesheet" type="text/css" />
-	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="favicon.ico" />
-</head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<body class="page-header-fixed">
-	<!-- BEGIN HEADER -->   
-	<div class="header navbar navbar-inverse navbar-fixed-top">
-		<!-- BEGIN TOP NAVIGATION BAR -->
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<!-- BEGIN LOGO -->
-				<a class="brand" href="index-2.html">
-				<img src="assets/img/logo.png" alt="logo" />
-				</a>
-				<!-- END LOGO -->
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-				<img src="assets/img/menu-toggler.png" alt="" />
-				</a>          
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-				<ul class="nav pull-left">
-					<!-- BEGIN NOTIFICATION DROPDOWN -->   
-					<li class="dropdown" id="header_notification_bar">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-warning-sign"></i>
-						<span class="badge">6</span>
-						</a>
-						<ul class="dropdown-menu extended notification">
-							<li>
-								<p>You have 14 new notifications</p>
-							</li>
-							<li>
-								<ul class="dropdown-menu-list scroller" style="height:250px">
-									<li>
-										<a href="#">
-										<span class="label label-success"><i class="icon-plus"></i></span>
-										New user registered. 
-										<span class="time">Just now</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-important"><i class="icon-bolt"></i></span>
-										Server #12 overloaded. 
-										<span class="time">15 mins</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-warning"><i class="icon-bell"></i></span>
-										Server #2 not responding.
-										<span class="time">22 mins</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-info"><i class="icon-bullhorn"></i></span>
-										Application error.
-										<span class="time">40 mins</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-important"><i class="icon-bolt"></i></span>
-										Database overloaded 68%. 
-										<span class="time">2 hrs</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-important"><i class="icon-bolt"></i></span>
-										2 user IP blocked.
-										<span class="time">5 hrs</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-warning"><i class="icon-bell"></i></span>
-										Storage Server #4 not responding.
-										<span class="time">45 mins</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-info"><i class="icon-bullhorn"></i></span>
-										System Error.
-										<span class="time">55 mins</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="label label-important"><i class="icon-bolt"></i></span>
-										Database overloaded 68%. 
-										<span class="time">2 hrs</span>
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="external">
-								<a href="#">See all notifications <i class="m-icon-swapright"></i></a>
-							</li>
-						</ul>
-					</li>
-					<!-- END NOTIFICATION DROPDOWN -->
-					<!-- BEGIN INBOX DROPDOWN -->
-					<li class="dropdown" id="header_inbox_bar">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-envelope"></i>
-						<span class="badge">5</span>
-						</a>
-						<ul class="dropdown-menu extended inbox">
-							<li>
-								<p>You have 12 new messages</p>
-							</li>
-							<li>
-								<ul class="dropdown-menu-list scroller" style="height:250px">
-									<li>
-										<a href="inbox14c8.html?a=view">
-										<span class="photo"><img src="assets/img/avatar2.jpg" alt="" /></span>
-										<span class="subject">
-										<span class="from">Lisa Wong</span>
-										<span class="time">Just Now</span>
-										</span>
-										<span class="message">
-										Vivamus sed auctor nibh congue nibh. auctor nibh
-										auctor nibh...
-										</span>  
-										</a>
-									</li>
-									<li>
-										<a href="inbox14c8.html?a=view">
-										<span class="photo"><img src="assets/img/avatar3.jpg" alt="" /></span>
-										<span class="subject">
-										<span class="from">Richard Doe</span>
-										<span class="time">16 mins</span>
-										</span>
-										<span class="message">
-										Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
-										auctor nibh...
-										</span>  
-										</a>
-									</li>
-									<li>
-										<a href="inbox14c8.html?a=view">
-										<span class="photo"><img src="assets/img/avatar1.jpg" alt="" /></span>
-										<span class="subject">
-										<span class="from">Bob Nilson</span>
-										<span class="time">2 hrs</span>
-										</span>
-										<span class="message">
-										Vivamus sed nibh auctor nibh congue nibh. auctor nibh
-										auctor nibh...
-										</span>  
-										</a>
-									</li>
-									<li>
-										<a href="inbox14c8.html?a=view">
-										<span class="photo"><img src="assets/img/avatar2.jpg" alt="" /></span>
-										<span class="subject">
-										<span class="from">Lisa Wong</span>
-										<span class="time">40 mins</span>
-										</span>
-										<span class="message">
-										Vivamus sed auctor 40% nibh congue nibh...
-										</span>  
-										</a>
-									</li>
-									<li>
-										<a href="inbox14c8.html?a=view">
-										<span class="photo"><img src="assets/img/avatar3.jpg" alt="" /></span>
-										<span class="subject">
-										<span class="from">Richard Doe</span>
-										<span class="time">46 mins</span>
-										</span>
-										<span class="message">
-										Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
-										auctor nibh...
-										</span>  
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="external">
-								<a href="inbox.html">See all messages <i class="m-icon-swapright"></i></a>
-							</li>
-						</ul>
-					</li>
-					<!-- END INBOX DROPDOWN -->
-					<!-- BEGIN TODO DROPDOWN -->
-					<li class="dropdown" id="header_task_bar">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<i class="icon-tasks"></i>
-						<span class="badge">5</span>
-						</a>
-						<ul class="dropdown-menu extended tasks">
-							<li>
-								<p>You have 12 pending tasks</p>
-							</li>
-							<li>
-								<ul class="dropdown-menu-list scroller" style="height:250px">
-									<li>
-										<a href="#">
-										<span class="task">
-										<span class="desc">New release v1.2</span>
-										<span class="percent">30%</span>
-										</span>
-										<span class="progress progress-success ">
-										<span style="width: 30%;" class="bar"></span>
-										</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="task">
-										<span class="desc">Application deployment</span>
-										<span class="percent">65%</span>
-										</span>
-										<span class="progress progress-danger progress-striped active">
-										<span style="width: 65%;" class="bar"></span>
-										</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="task">
-										<span class="desc">Mobile app release</span>
-										<span class="percent">98%</span>
-										</span>
-										<span class="progress progress-success">
-										<span style="width: 98%;" class="bar"></span>
-										</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="task">
-										<span class="desc">Database migration</span>
-										<span class="percent">10%</span>
-										</span>
-										<span class="progress progress-warning progress-striped">
-										<span style="width: 10%;" class="bar"></span>
-										</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="task">
-										<span class="desc">Web server upgrade</span>
-										<span class="percent">58%</span>
-										</span>
-										<span class="progress progress-info">
-										<span style="width: 58%;" class="bar"></span>
-										</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="task">
-										<span class="desc">Mobile development</span>
-										<span class="percent">85%</span>
-										</span>
-										<span class="progress progress-success">
-										<span style="width: 85%;" class="bar"></span>
-										</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-										<span class="task">
-										<span class="desc">New UI release</span>
-										<span class="percent">18%</span>
-										</span>
-										<span class="progress progress-important">
-										<span style="width: 18%;" class="bar"></span>
-										</span>
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="external">
-								<a href="#">See all tasks <i class="m-icon-swapright"></i></a>
-							</li>
-						</ul>
-					</li>
-					<!-- END TODO DROPDOWN -->               
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-					<li class="dropdown user">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<img alt="" src="assets/img/avatar1_small.jpg" />
-						<span class="username">Bob Nilson</span>
-						<i class="icon-angle-down"></i>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-							<li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-							<li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox <span class="badge badge-important">3</span></a></li>
-							<li><a href="#"><i class="icon-tasks"></i> My Tasks <span class="badge badge-success">8</span></a></li>
-							<li class="divider"></li>
-							<li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> Full Screen</a></li>
-							<li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
-							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-						</ul>
-					</li>
-					<!-- END USER LOGIN DROPDOWN -->
-					<!-- END USER LOGIN DROPDOWN -->
-				</ul>
-				<!-- END TOP NAVIGATION MENU --> 
-			</div>
-		</div>
-		<!-- END TOP NAVIGATION BAR -->
-	</div>
-	<!-- END HEADER -->
-	<!-- BEGIN CONTAINER -->   
-	<div class="page-container row-fluid">
-		<!-- BEGIN SIDEBAR -->
-		<div class="page-sidebar nav-collapse collapse">
-			<!-- BEGIN SIDEBAR MENU -->        
-			<ul class="page-sidebar-menu">
-				<li>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler hidden-phone"></div>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-				</li>
-				<li>
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search">
-						<div class="input-box">
-							<a href="javascript:;" class="remove"></a>
-							<input type="text" placeholder="Search..." />
-							<input type="button" class="submit" value=" " />
-						</div>
-					</form>
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-				</li>
-				<li class="start ">
-					<a href="index-2.html">
-					<i class="icon-home"></i> 
-					<span class="title">Dashboard</span>
-					</a>
-				</li>
-				<li >
-					<a href="javascript:;">
-					<i class="icon-cogs"></i> 
-					<span class="title">Layouts</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="layout_language_bar.html">
-							<span class="badge badge-roundless badge-important">new</span>Language Switch Bar</a>
-						</li>
-						<li >
-							<a href="layout_horizontal_sidebar_menu.html">
-							Horizontal & Sidebar Menu</a>
-						</li>
-						<li >
-							<a href="layout_horizontal_menu1.html">
-							Horizontal Menu 1</a>
-						</li>
-						<li >
-							<a href="layout_horizontal_menu2.html">
-							Horizontal Menu 2</a>
-						</li>
-						<li >
-							<a href="layout_promo.html">
-							Promo Page</a>
-						</li>
-						<li >
-							<a href="layout_email.html">
-							Email Templates</a>
-						</li>
-						<li >
-							<a href="layout_ajax.html">
-							Content Loading via Ajax</a>
-						</li>
-						<li >
-							<a href="layout_sidebar_closed.html">
-							Sidebar Closed Page</a>
-						</li>
-						<li >
-							<a href="layout_blank_page.html">
-							Blank Page</a>
-						</li>
-						<li >
-							<a href="layout_boxed_page.html">
-							Boxed Page</a>
-						</li>
-						<li >
-							<a href="layout_boxed_not_responsive.html">
-							Non-Responsive Boxed Layout</a>
-						</li>
-					</ul>
-				</li>
-				<!-- BEGIN FRONT DEMO -->
-				<li class="tooltips" data-placement="left" data-original-title="Frontend&nbsp;Theme&nbsp;For&nbsp;Metronic&nbsp;Admin">
-					<a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend_rtl" target="_blank">
-					<i class="icon-gift"></i> 
-					<span class="title">Frontend Theme</span>
-					</a>
-				</li>
-				<!-- END FRONT DEMO -->
-				<li >
-					<a href="javascript:;">
-					<i class="icon-bookmark-empty"></i> 
-					<span class="title">UI Features</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="ui_general.html">
-							General</a>
-						</li>
-						<li >
-							<a href="ui_buttons.html">
-							Buttons</a>
-						</li>
-						<li >
-							<a href="ui_modals.html">
-							Enhanced Modals</a>
-						</li>
-						<li >
-							<a href="ui_tabs_accordions.html">
-							Tabs & Accordions</a>
-						</li>
-						<li >
-							<a href="ui_jqueryui.html">
-							jQuery UI Components</a>
-						</li>
-						<li >
-							<a href="ui_sliders.html">
-							Sliders</a>
-						</li>
-						<li >
-							<a href="ui_tiles.html">
-							Tiles</a>
-						</li>
-						<li >
-							<a href="ui_typography.html">
-							Typography</a>
-						</li>
-						<li >
-							<a href="ui_tree.html">
-							Tree View</a>
-						</li>
-						<li >
-							<a href="ui_nestable.html">
-							Nestable List</a>
-						</li>
-					</ul>
-				</li>
-				<li >
-					<a href="javascript:;">
-					<i class="icon-table"></i> 
-					<span class="title">Form Stuff</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="form_layout.html">
-							Form Layouts</a>
-						</li>
-						<li >
-							<a href="form_samples.html">
-							Advance Form Samples</a>
-						</li>
-						<li >
-							<a href="form_component.html">
-							Form Components</a>
-						</li>
-						<li >
-							<a href="form_editable.html">
-							<span class="badge badge-roundless badge-warning">new</span>Form X-editable</a>
-						</li>
-						<li >
-							<a href="form_wizard.html">
-							Form Wizard</a>
-						</li>
-						<li >
-							<a href="form_validation.html">
-							Form Validation</a>
-						</li>
-						<li >
-							<a href="form_image_crop.html">
-							<span class="badge badge-roundless badge-important">new</span>Image Cropping</a>
-						</li>
-						<li >
-							<a href="form_fileupload.html">
-							Multiple File Upload</a>
-						</li>
-						<li >
-							<a href="form_dropzone.html">
-							Dropzone File Upload</a>
-						</li>
-					</ul>
-				</li>
-				<li >
-					<a href="javascript:;">
-					<i class="icon-briefcase"></i> 
-					<span class="title">Pages</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="page_timeline.html">
-							<i class="icon-time"></i>
-							<span class="badge badge-info">4</span>Timeline</a>
-						</li>
-						<li >
-							<a href="page_coming_soon.html">
-							<i class="icon-cogs"></i>
-							Coming Soon</a>
-						</li>
-						<li >
-							<a href="page_blog.html">
-							<i class="icon-comments"></i>
-							Blog</a>
-						</li>
-						<li >
-							<a href="page_blog_item.html">
-							<i class="icon-font"></i>
-							Blog Post</a>
-						</li>
-						<li >
-							<a href="page_news.html">
-							<i class="icon-coffee"></i>
-							<span class="badge badge-success">9</span>News</a>
-						</li>
-						<li >
-							<a href="page_news_item.html">
-							<i class="icon-bell"></i>
-							News View</a>
-						</li>
-						<li >
-							<a href="page_about.html">
-							<i class="icon-group"></i>
-							About Us</a>
-						</li>
-						<li >
-							<a href="page_contact.html">
-							<i class="icon-envelope-alt"></i>
-							Contact Us</a>
-						</li>
-						<li >
-							<a href="page_calendar.html">
-							<i class="icon-calendar"></i>
-							<span class="badge badge-important">14</span>Calendar</a>
-						</li>
-					</ul>
-				</li>
-				<li class="active ">
-					<a href="javascript:;">
-					<i class="icon-gift"></i> 
-					<span class="title">Extra</span>
-					<span class="selected"></span>
-					<span class="arrow open"></span>
-					</a>
-					<ul class="sub-menu">
-						<li class="active">
-							<a href="extra_profile.html">
-							User Profile</a>
-						</li>
-						<li >
-							<a href="extra_lock.html">
-							Lock Screen</a>
-						</li>
-						<li >
-							<a href="extra_faq.html">
-							FAQ</a>
-						</li>
-						<li >
-							<a href="inbox.html">
-							<span class="badge badge-important">4</span>Inbox</a>
-						</li>
-						<li >
-							<a href="extra_search.html">
-							Search Results</a>
-						</li>
-						<li >
-							<a href="extra_invoice.html">
-							Invoice</a>
-						</li>
-						<li >
-							<a href="extra_pricing_table.html">
-							Pricing Tables</a>
-						</li>
-						<li >
-							<a href="extra_image_manager.html">
-							Image Manager</a>
-						</li>
-						<li >
-							<a href="extra_404_option1.html">
-							404 Page Option 1</a>
-						</li>
-						<li >
-							<a href="extra_404_option2.html">
-							404 Page Option 2</a>
-						</li>
-						<li >
-							<a href="extra_404_option3.html">
-							404 Page Option 3</a>
-						</li>
-						<li >
-							<a href="extra_500_option1.html">
-							500 Page Option 1</a>
-						</li>
-						<li >
-							<a href="extra_500_option2.html">
-							500 Page Option 2</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a class="active" href="javascript:;">
-					<i class="icon-sitemap"></i> 
-					<span class="title">3 Level Menu</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="javascript:;">
-							Item 1
-							<span class="arrow"></span>
-							</a>
-							<ul class="sub-menu">
-								<li><a href="#">Sample Link 1</a></li>
-								<li><a href="#">Sample Link 2</a></li>
-								<li><a href="#">Sample Link 3</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="javascript:;">
-							Item 1
-							<span class="arrow"></span>
-							</a>
-							<ul class="sub-menu">
-								<li><a href="#">Sample Link 1</a></li>
-								<li><a href="#">Sample Link 1</a></li>
-								<li><a href="#">Sample Link 1</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">
-							Item 3
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-folder-open"></i> 
-					<span class="title">4 Level Menu</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="javascript:;">
-							<i class="icon-cogs"></i> 
-							Item 1
-							<span class="arrow"></span>
-							</a>
-							<ul class="sub-menu">
-								<li>
-									<a href="javascript:;">
-									<i class="icon-user"></i>
-									Sample Link 1
-									<span class="arrow"></span>
-									</a>
-									<ul class="sub-menu">
-										<li><a href="#"><i class="icon-remove"></i> Sample Link 1</a></li>
-										<li><a href="#"><i class="icon-pencil"></i> Sample Link 1</a></li>
-										<li><a href="#"><i class="icon-edit"></i> Sample Link 1</a></li>
-									</ul>
-								</li>
-								<li><a href="#"><i class="icon-user"></i>  Sample Link 1</a></li>
-								<li><a href="#"><i class="icon-external-link"></i>  Sample Link 2</a></li>
-								<li><a href="#"><i class="icon-bell"></i>  Sample Link 3</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="javascript:;">
-							<i class="icon-globe"></i> 
-							Item 2
-							<span class="arrow"></span>
-							</a>
-							<ul class="sub-menu">
-								<li><a href="#"><i class="icon-user"></i>  Sample Link 1</a></li>
-								<li><a href="#"><i class="icon-external-link"></i>  Sample Link 1</a></li>
-								<li><a href="#"><i class="icon-bell"></i>  Sample Link 1</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">
-							<i class="icon-folder-open"></i>
-							Item 3
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li >
-					<a href="javascript:;">
-					<i class="icon-user"></i> 
-					<span class="title">Login Options</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="login.html">
-							Login Form 1</a>
-						</li>
-						<li >
-							<a href="login_soft.html">
-							Login Form 2</a>
-						</li>
-					</ul>
-				</li>
-				<li >
-					<a href="javascript:;">
-					<i class="icon-th"></i> 
-					<span class="title">Data Tables</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="table_basic.html">
-							Basic Tables</a>
-						</li>
-						<li >
-							<a href="table_responsive.html">
-							Responsive Tables</a>
-						</li>
-						<li >
-							<a href="table_managed.html">
-							Managed Tables</a>
-						</li>
-						<li >
-							<a href="table_editable.html">
-							Editable Tables</a>
-						</li>
-						<li >
-							<a href="table_advanced.html">
-							Advanced Tables</a>
-						</li>
-					</ul>
-				</li>
-				<li >
-					<a href="javascript:;">
-					<i class="icon-file-text"></i> 
-					<span class="title">Portlets</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="portlet_general.html">
-							General Portlets</a>
-						</li>
-						<li >
-							<a href="portlet_draggable.html">
-							Draggable Portlets</a>
-						</li>
-					</ul>
-				</li>
-				<li >
-					<a href="javascript:;">
-					<i class="icon-map-marker"></i> 
-					<span class="title">Maps</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="maps_google.html">
-							Google Maps</a>
-						</li>
-						<li >
-							<a href="maps_vector.html">
-							Vector Maps</a>
-						</li>
-					</ul>
-				</li>
-				<li class="last ">
-					<a href="charts.html">
-					<i class="icon-bar-chart"></i> 
-					<span class="title">Visual Charts</span>
-					</a>
-				</li>
-			</ul>
-			<!-- END SIDEBAR MENU -->
-		</div>
-		<!-- END SIDEBAR -->
+<html lang="he">
+	<head>
+		<meta name="layout" content="user_area_layout" lang="he" />
+		<!-- BEGIN PAGE LEVEL STYLES -->
+		<link rel="stylesheet" href="${resource(dir: 'uaassets/plugins/bootstrap-fileupload/', file: 'bootstrap-fileupload.css')}" type="text/css"/>
+		<link rel="stylesheet" href="${resource(dir: 'uaassets/plugins/chosen-bootstrap/chosen', file: 'chosen-rtl.css')}" type="text/css"/>
+		<link rel="stylesheet" href="${resource(dir: 'uaassets/css/pages', file: 'profile-rtl.css')}" type="text/css"/>
+		<link rel="stylesheet" href="${resource(dir: 'uaassets/plugins/bootstrap-datepicker/css', file: 'datepicker.css')}" type="text/css"/>
+		<!-- END PAGE LEVEL STYLES -->
+	</head>
+	<body lang="he">
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -915,7 +109,7 @@
 							<div class="tab-content">
 								<div class="tab-pane row-fluid active" id="tab_1_1">
 									<ul class="unstyled profile-nav span3">
-										<li><img src="assets/img/profile/profile-img.png" alt="" /> <a href="#" class="profile-edit">edit</a></li>
+										<li><img src="${resource(dir: 'uaassets/img/profile', file: 'profile-img.png')}" alt="" /> <a href="#" class="profile-edit">edit</a></li>
 										<li><a href="#">Projects</a></li>
 										<li><a href="#">Messages <span>3</span></a></li>
 										<li><a href="#">Friends</a></li>
@@ -1455,19 +649,19 @@
 								</div>
 								<!--end tab-pane-->
 								<div class="tab-pane profile-classic row-fluid" id="tab_1_2">
-									<div class="span2"><img src="assets/img/profile/profile-img.png" alt="" /> <a href="#" class="profile-edit">edit</a></div>
+									<div class="span2"><img src="data:image/png;base64,${user.image}" alt="" width="168px"/> <a href="#" class="profile-edit">edit</a></div>
 									<ul class="unstyled span10">
-										<li><span>User Name:</span> JDuser</li>
-										<li><span>First Name:</span> John</li>
-										<li><span>Last Name:</span> Doe</li>
-										<li><span>Counrty:</span> Spain</li>
-										<li><span>Birthday:</span> 18 Jan 1982</li>
-										<li><span>Occupation:</span> Web Developer</li>
-										<li><span>Email:</span> <a href="#">john@mywebsite.com</a></li>
-										<li><span>Interests:</span> Design, Web etc.</li>
-										<li><span>Website Url:</span> <a href="#">http://www.mywebsite.com</a></li>
-										<li><span>Mobile Number:</span> +1 646 580 DEMO (6284)</li>
-										<li><span>About:</span> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</li>
+										<li><span>שם משתמש:</span> ${user.username}</li>
+										<li><span>שם פרטי:</span> ${user.firstName}</li>
+										<li><span>שם משפחה:</span> ${user.lastName}</li>
+										<li><span>מדינה:</span> ${user.country}</li>
+										<li><span>תאריך לידה:</span> ${user.birthDate}</li>
+										<li><span>מקצוע:</span> ${user.occupation}</li>
+										<li><span>דואר אלקטרוני:</span> <a href="#">${user.email}</a></li>
+										<li><span>כתובת אתר אישי:</span> <a href="#">${user.siteURL}</a></li>
+										<li><span>טלפון:</span>${user.number}</li>
+										<li><span>סוג:</span>${user.type}</li>
+										<li><span>פרטים נוספים:</span> ${user.more}</li>
 									</ul>
 								</div>
 								<!--tab_1_2-->
@@ -1479,13 +673,13 @@
 													<li class="active">
 														<a data-toggle="tab" href="#tab_1-1">
 														<i class="icon-cog"></i> 
-														Personal info
+														פרטים אישיים
 														</a> 
 														<span class="after"></span>                                    
 													</li>
-													<li ><a data-toggle="tab" href="#tab_2-2"><i class="icon-picture"></i> Change Avatar</a></li>
-													<li ><a data-toggle="tab" href="#tab_3-3"><i class="icon-lock"></i> Change Password</a></li>
-													<li ><a data-toggle="tab" href="#tab_4-4"><i class="icon-eye-open"></i> Privacity Settings</a></li>
+													<li ><a data-toggle="tab" href="#tab_2-2"><i class="icon-picture"></i> שנה תמונה</a></li>
+													<li ><a data-toggle="tab" href="#tab_3-3"><i class="icon-lock"></i> שנה סיסמה</a></li>
+													<li ><a data-toggle="tab" href="#tab_4-4"><i class="icon-eye-open"></i> מאפיינים אישיים</a></li>
 												</ul>
 											</div>
 											<div class="span9">
@@ -1493,28 +687,37 @@
 													<div id="tab_1-1" class="tab-pane active">
 														<div style="height: auto;" id="accordion1-1" class="accordion collapse">
 															<form action="#">
-																<label class="control-label">First Name</label>
-																<input type="text" placeholder="John" class="m-wrap span8" />
-																<label class="control-label">Last Name</label>
-																<input type="text" placeholder="Doe" class="m-wrap span8" />
-																<label class="control-label">Mobile Number</label>
-																<input type="text" placeholder="+1 646 580 DEMO (6284)" class="m-wrap span8" />
-																<label class="control-label">Interests</label>
-																<input type="text" placeholder="Design, Web etc." class="m-wrap span8" />
-																<label class="control-label">Occupation</label>
-																<input type="text" placeholder="Web Developer" class="m-wrap span8" />
-																<label class="control-label">Counrty</label>
-																<div class="controls">
-																	<input type="text" class="span8 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;US&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
-																	<p class="help-block"><span class="muted">Start typing to auto complete!. E.g: US</span></p>
+																<label class="control-label">שם פרטי</label>
+																<input type="text" placeholder="פלוני" class="m-wrap span8" />
+																<label class="control-label">שם משפחה</label>
+																<input type="text" placeholder="אלמוני" class="m-wrap span8" />
+																<div class="control-group">
+																	<label class="control-label">תאריך לידה</label>
+																	<div class="controls">
+																		<input class="m-wrap m-ctrl-medium date-picker" readonly size="16" type="text" value="" />
+																	</div>
 																</div>
-																<label class="control-label">About</label>
+																<label class="control-label">טלפון</label>
+																<input type="text" placeholder="+1 646 580 DEMO (6284)" class="m-wrap span8" />
+																<label class="control-label">סוג</label>
+																<div class="controls">
+																	<input type="text" class="span8 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;נייד&quot;,&quot;נייח&quot;]" />
+																	<p class="help-block"><span class="muted">התחל להקליד להשלמה אוטומטית. לדוגמה: נייד.</span></p>
+																</div>																
+																<label class="control-label">מקצוע</label>
+																<input type="text" placeholder="מפתח WEB" class="m-wrap span8" />
+																<label class="control-label">מדינה</label>
+																<div class="controls">
+																	<input type="text" class="span8 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;ישראל&quot;]" />
+																	<p class="help-block"><span class="muted">התחל להקליד להשלמה אוטומטית לדוגמה US</span></p>
+																</div>
+																<label class="control-label">פרטים נוספים</label>
 																<textarea class="span8 m-wrap" rows="3"></textarea>
-																<label class="control-label">Website Url</label>
+																<label class="control-label">כתובת אתר אישי</label>
 																<input type="text" placeholder="http://www.mywebsite.com" class="m-wrap span8" />
 																<div class="submit-btn">
-																	<a href="#" class="btn green">Save Changes</a>
-																	<a href="#" class="btn">Cancel</a>
+																	<a href="#" class="btn green">שמור שינויים</a>
+																	<a href="#" class="btn">בטל</a>
 																</div>
 															</form>
 														</div>
@@ -1676,7 +879,7 @@
 									<!--end add-portfolio-->
 									<div class="row-fluid portfolio-block">
 										<div class="span5 portfolio-text">
-											<img src="assets/img/profile/portfolio/logo_metronic.jpg" alt="" />
+											  <img src="${resource(dir: 'uaassets/img/profile/portfolio', file: 'logo_metronic.jpg')}" alt="" />
 											<div class="portfolio-text-info">
 												<h4>Metronic - Responsive Template</h4>
 												<p>Lorem ipsum dolor sit consectetuer adipiscing elit.</p>
@@ -1702,8 +905,8 @@
 									</div>
 									<!--end row-fluid-->
 									<div class="row-fluid portfolio-block">
-										<div class="span5 portfolio-text">
-											<img src="assets/img/profile/portfolio/logo_azteca.jpg" alt="" />
+										<div class="span5 portfolio-text">											
+											<img src="${resource(dir: 'uaassets/img/profile/portfolio', file: 'logo_azteca.jpg')}" alt="" />
 											<div class="portfolio-text-info">
 												<h4>Metronic - Responsive Template</h4>
 												<p>Lorem ipsum dolor sit consectetuer adipiscing elit.</p>
@@ -1730,7 +933,7 @@
 									<!--end row-fluid-->
 									<div class="row-fluid portfolio-block">
 										<div class="span5 portfolio-text">
-											<img src="assets/img/profile/portfolio/logo_conquer.jpg" alt="" />
+											<img src="${resource(dir: 'uaassets/img/profile/portfolio', file: 'logo_conquer.jpg')}" alt="" />
 											<div class="portfolio-text-info">
 												<h4>Metronic - Responsive Template</h4>
 												<p>Lorem ipsum dolor sit consectetuer adipiscing elit.</p>
@@ -2083,53 +1286,19 @@
 			</div>
 			<!-- END PAGE CONTAINER--> 
 		</div>
-		<!-- END PAGE -->    
-	</div>
-	<!-- END CONTAINER -->
-	<!-- BEGIN FOOTER -->
-	<div class="footer">
-		<div class="footer-inner">
-			2013 &copy; Metronic by keenthemes.
-		</div>
-		<div class="footer-tools">
-			<span class="go-top">
-			<i class="icon-angle-up"></i>
-			</span>
-		</div>
-	</div>
-	<!-- END FOOTER -->
-	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-	<!-- BEGIN CORE PLUGINS -->   <script src="assets/plugins/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-	<script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
-	<script src="assets/plugins/bootstrap/js/bootstrap-rtl.min.js" type="text/javascript"></script>
-	<script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
-	<!--[if lt IE 9]>
-	<script src="assets/plugins/excanvas.min.js"></script>
-	<script src="assets/plugins/respond.min.js"></script>  
-	<![endif]-->   
-	<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
-	<script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
-	<script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
-	<!-- END CORE PLUGINS -->
+	<!-- END PAGE --> 
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->	
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script type="text/javascript" src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
-	<script type="text/javascript" src="assets/plugins/chosen-bootstrap/chosen/chosen.jquery-rtl.min.js"></script>
+	
+	
 	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="assets/scripts/app.js"></script>      
-	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 		jQuery(document).ready(function() {       
 		   // initiate layout and plugins
 		   App.init();
+		   FormComponents.init();
 		});
 	</script>
-	<!-- END JAVASCRIPTS -->
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
-<!-- END BODY -->
-
-<!-- Mirrored from www.keenthemes.com/preview/metronic_admin_rtl/extra_profile.html by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 14 Aug 2013 15:37:25 GMT -->
+	</body>
+	<!-- END BODY -->
 </html>

@@ -997,7 +997,7 @@ Page breadcrumb
 	box-shadow: none;
 	padding-left: 0px;
 	padding-right: 8px;
-	margin-bottom: 25px;
+	margin-bottom: 0px;
 	border: 0px !important;
 	background-color: #eee;
 }
@@ -1167,8 +1167,8 @@ i.normal {
 Custom wells
 ***/
 .well {
-	background-color: #fafafa;
-	border: 1px solid #eee;
+	background-color: #eee;
+	border: 1px solid #ddd;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
