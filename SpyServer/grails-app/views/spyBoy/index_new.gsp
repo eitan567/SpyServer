@@ -251,18 +251,18 @@
 							<thead>
 								<tr>
 									<th id="callLogNumberThHeader"
-										style="min-width: 120px; display: none;">
+										style="display: none;"> <!-- min-width: 120px; -->
 										${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}
 									</th>
-									<th class="hidden-480" style="min-width: 110px;">
+									<th class="hidden-480"><!-- style="min-width: 110px;" -->
 										${message(code: 'callLog.type.label', default: 'type')}
 									</th>
-									<th class="hidden-480" style="min-width: 120px;">
+									<th class="hidden-480"><!--  style="min-width: 120px;" -->
 										${
 											message(code: 'callLog.duration.label', default: 'duration')
 										}
 									</th>
-									<th class="hidden-480" style="min-width: 180px !important;">
+									<th class="hidden-480"><!--  style="min-width: 180px !important;" -->
 										${message(code: 'callLog.time.label', default: 'time')}
 									</th>
 								</tr>
@@ -355,7 +355,7 @@
 						</div>
 					</div>
 					<div class="portlet-body">						
-						<div id="gmap_table"  style="width:48.9%;float: right;">
+						<div id="gmap_table"  style="width:49%;float: right;">
 							<table
 								class="table table-striped table-bordered table-hover table-full-width"
 								id="sample_4">
@@ -376,8 +376,8 @@
 								</tbody>
 							</table>
 						</div>
-						<div style="border-right: 1px solid #9D9C9C;float: right;height: 500px;margin-left: 18px;margin-right: 18px;"></div>						
-						<div id="gmap_marker" class="gmaps" style="width:47%;"></div>
+						<div style="border-right: 1px solid #9D9C9C;float: right;height: 500px;margin-left: 0.9%;margin-right: 0.9%;"></div>						
+						<div id="gmap_marker" class="gmaps" style="width:49%;"></div>
 					</div>
 				</div>
 				<!-- END MARKERS PORTLET-->
@@ -388,16 +388,29 @@
 
 		<div class="page-content-body"></div>
 	</div>
-	</div>
 	<!-- END PAGE CONTAINER-->
 	<script>	
 		var scrollingFinished=false;	
+		var firstTimeScroll= true;
+		var map, iw, task;
+		var jsonList  ${locationInstanceList !=null ? '=' + locationInstanceList :''};	
+		var total =${locationInstanceTotal};
+
+		jQuery(document).ready(function() {	
+			loadContacts(${activeSimSubscriberId});
+			if(${locationInstanceList!=null}){			
+				initialize();
+			}
+			loadLocation(${activeSimSubscriberId});
+		});			
+
+
+
 		function spinner(spinnerId){					  
 			$(spinnerId).show();						
 		}	
 
-		var firstTimeScroll= true;
-		//spinner('#contactSpinner');
+		// spinner('#contactSpinner');
 		function loadContacts(simSubscriberId){
 			
 			jQuery.ajax({
@@ -407,7 +420,7 @@
 					"simSubscriberId":simSubscriberId				
 				},
 				success : function(data, textStatus) {
-	
+
 					jQuery('#contactsAjaxTargetDiv').html(data);	
 						
 					jQuery("#content_1").mCustomScrollbar({
@@ -429,8 +442,8 @@
 					})										
 					jQuery(".badge").corner("12px");	
 					jQuery(".contact-picture").corner("12px");		
-	
-					scrollToElement("#contact-104");
+
+					scrollToElement("*all");
 							
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {	
@@ -445,17 +458,21 @@
 			var int=self.setInterval(function(){
 				if(scrollingFinished){
 				    window.clearInterval(int);
-				    jQuery(element).click(); 			   
+				    if(element=="*all"){
+				    	loadAllAjaxSections('*all','${currentTargetPhone.simSubscriberId}',null);
+					}else{
+				    	jQuery(element).click();
+					} 			   
 				}
 			 },1000);				
 		}
-		
-		//<g:remoteFunction update="chats" controller="spyBoy" action="sms" before="spinner('#smsSpinner')"/>
-		//<g:remoteFunction update="contactsAjaxTargetDiv" controller="spyBoy" action="contacts" before="spinner('#contactSpinner')" />
-		//<g:remoteFunction update="callLogAjaxTargetDiv" controller="spyBoy" action="callLog" before="spinner('#callLogSpinner')"/>
-		var map, iw, task;
-		var jsonList  ${locationInstanceList !=null ? '=' + locationInstanceList :''};	
-		var total =${locationInstanceTotal};
+
+		// <g:remoteFunction update="chats" controller="spyBoy" action="sms"
+		// before="spinner('#smsSpinner')"/>
+		// <g:remoteFunction update="contactsAjaxTargetDiv" controller="spyBoy"
+		// action="contacts" before="spinner('#contactSpinner')" />
+		// <g:remoteFunction update="callLogAjaxTargetDiv" controller="spyBoy"
+		// action="callLog" before="spinner('#callLogSpinner')"/>
 						
 		function initialize() {
 			try{					
@@ -463,42 +480,35 @@
 				var myLatLng = new google.maps.LatLng(jsonList[0].latitude, jsonList[0].longitude);
 				var myOptions = {zoom: 15,center: myLatLng,mapTypeId: google.maps.MapTypeId.ROADMAP};
 				map = new google.maps.Map(document.getElementById("gmap_marker"), myOptions);
-	
+
 				for(var i=0;i<${locationInstanceTotal};i++){
 
-					//new google.maps.Marker({
-					//	position: new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude),
-					//	map: map,
-					//    title: jsonList[i].address,
-					//    animation: google.maps.Animation.DROP					 
-					//});					
+					// new google.maps.Marker({
+					// position: new google.maps.LatLng(jsonList[i].latitude,
+					// jsonList[i].longitude),
+					// map: map,
+					// title: jsonList[i].address,
+					// animation: google.maps.Animation.DROP
+					// });
 					new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"73B819",text:jsonList[i].id+ "",starcolor:null,fore:'ffffff'}),position:new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude),map:map});	
 				}	
 			}catch(e){
 			}				
 		}
-		
-		jQuery(document).ready(function() {	
-			loadContacts(${activeSimSubscriberId});
-			if(${locationInstanceList!=null}){			
-				initialize();
-			}
-			loadLocation(${activeSimSubscriberId});
-		});	
 
 		function centerMap(latitude,longitude){
 			var pos = new google.maps.LatLng(latitude,longitude);
 			map.setCenter(pos);
 			map.setZoom(17);
 		}
-		
+
 		function loadLocation(simSubscriberId){				
-	        var oTable = $('#sample_4').dataTable({   
-	            "bDestroy":true,         
-	        	"bProcessing": true,
-	        	"bServerSide": true,
-	        	"bSearch":false,
-	        	"aaSorting": [[ 0, "asc" ]],					
+		    var oTable = $('#sample_4').dataTable({   
+		        "bDestroy":true,         
+		    	"bProcessing": true,
+		    	"bServerSide": true,
+		    	"bSearch":false,
+		    	"aaSorting": [[ 0, "asc" ]],					
 				"sAjaxSource": '/SpyServer/spyBoy/location',
 				"sAjaxDataProp" : "locationInstanceList",
 				"fnServerParams":  function ( aoData ) {
@@ -511,51 +521,72 @@
 				  			{ "mData": "longitude" }
 				],				 
 				"aoColumnDefs": [
-	  		               {
-	  		                   "mRender": function ( data, type, row ) {
+				               {
+				                   "mRender": function ( data, type, row ) {
 		  		                   result ='<div style="color:blue;cursor: pointer;" onclick="centerMap('+row.latitude + "," + row.longitude +')">' + data + '</div>';
-	  		                       return result;},
-	  		                  "aTargets": [ 0 ]
-	  		               },
-	  		               {"bVisible":false,"aTargets": [ 3 ]},
-	  		               {"bVisible":false,"aTargets": [ 4 ]}
-	  			], 		
-	            "aLengthMenu": [
-	                [5, 15, 20, -1],
-	                [5, 15, 20, "All"] // change per page values here
-	            ],
-	            // set the initial value
-	            "iDisplayLength": 5,
-	            "sDom": "<'row-fluid'<'span6'l><'span1'f>r>t<'row-fluid'<'span4'i><'span8'p>>", //"sDom": "<'row-fluid'<'span6'l><'span0'f>r>t<'row-fluid'<'span4'i><'span8'p>>",
-	            "sPaginationType": "bootstrap",
-	            "oLanguage": {
-	                "sLengthMenu": "מציג _MENU_ תוצאות לדף.",
-	                "sZeroRecords": "לא נמצאות תוצאות להצגה.",
-	                "sInfo": "מציג _START_ עד _END_ מתוך _TOTAL_",
-	                "sInfoEmpty": "מציג - 0  מ- 0 מתוך 0 רשומות",
-	                "sInfoFiltered": "",//"(מסונן מתוך _MAX_ סה''כ רשומות')",
-	                "sProcessing": "טוען נתונים...",
-	                "sSearch": "חיפוש :",
-	                "oPaginate": {
-	                    "sPrevious": "אחורה",
-	                    "sNext": "קדימה"
-	                }
-	            }
-	        });
+				                       return result;},
+				                  "aTargets": [ 0 ]
+				               },
+				               {"bVisible":false,"aTargets": [ 3 ]},
+				               {"bVisible":false,"aTargets": [ 4 ]}
+					], 		
+		        "aLengthMenu": [
+		            [5, 15, 20, -1],
+		            [5, 15, 20, "All"] // change per page values here
+		        ],
+		        // set the initial value
+		        "iDisplayLength": 5,
+		        "sDom": "<'row-fluid'<'span6'l><'span1'f>r>t<'row-fluid'<'span4'i><'span8'p>>", // "sDom":
+																								// "<'row-fluid'<'span6'l><'span0'f>r>t<'row-fluid'<'span4'i><'span8'p>>",
+		        "sPaginationType": "bootstrap",
+		        "oLanguage": {
+		            "sLengthMenu": "מציג _MENU_ תוצאות לדף.",
+		            "sZeroRecords": "לא נמצאות תוצאות להצגה.",
+		            "sInfo": "מציג _START_ עד _END_ מתוך _TOTAL_",
+		            "sInfoEmpty": "מציג - 0  מ- 0 מתוך 0 רשומות",
+		            "sInfoFiltered": "",// "(מסונן מתוך _MAX_ סה''כ רשומות')",
+		            "sProcessing": "טוען נתונים...",
+		            "sSearch": "חיפוש :",
+		            "oPaginate": {
+		                "sPrevious": "אחורה",
+		                "sNext": "קדימה"
+		            }
+		        }
+		    });
 
-	        jQuery('#sample_4_wrapper .dataTables_filter input').addClass("m-wrap small"); // modify table search input
-	        jQuery('#sample_4_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
-	        jQuery('#sample_4_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+		    jQuery('#sample_4_wrapper .dataTables_filter input').addClass("m-wrap small"); // modify
+																							// table
+																							// search
+																							// input
+		    jQuery('#sample_4_wrapper .dataTables_length select').addClass("m-wrap small"); // modify
+																							// table
+																							// per
+																							// page
+																							// dropdown
+		    jQuery('#sample_4_wrapper .dataTables_length select').select2(); // initialize
+																				// select2
+																				// dropdown
 
 
-	        //sho column for all callLog if needed.
-	        //***********************************************************
-	        //var bVis = oTable.fnSettings().aoColumns[0].bVisible;
-	        //oTable.fnSetColumnVis(0, (bVis ? false : true),true);
-	        //jQuery("#callLogNumberThHeader").show();
+		    // sho column for all callLog if needed.
+		    // ***********************************************************
+		    // var bVis = oTable.fnSettings().aoColumns[0].bVisible;
+		    // oTable.fnSetColumnVis(0, (bVis ? false : true),true);
+		    // jQuery("#callLogNumberThHeader").show();
 		}
 		
 		</script>
 		</g:if>
+		<g:else>
+			<style type="text/css">
+				#myoutercontainer { height: 100%; position: absolute; width: 97%; }
+				#myinnercontainer {  height: 100%;  position: relative;text-align: center;top:40%;width: 100%; }
+			</style>
+			<div id="myoutercontainer">
+				<div id="myinnercontainer">
+					<h3>אין נתונים להצגה</h3>
+				</div>
+			</div>
+		</g:else>
 	</body>
 </html>

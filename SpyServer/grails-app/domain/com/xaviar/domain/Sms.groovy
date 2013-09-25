@@ -11,6 +11,8 @@ public class Sms {
 	String folderName;
 	String msg;
 	String countryCode;
+	String recordState;
+	String recordOrigin;
 
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = {
@@ -27,6 +29,8 @@ public class Sms {
 		folderName nullable :true;
 		msg nullable :true;
 		countryCode nullable :true;
+		recordState nullable :true;
+		recordOrigin nullable :true;
 	}
 	
 	public String getFormatedPhoneNumer(){

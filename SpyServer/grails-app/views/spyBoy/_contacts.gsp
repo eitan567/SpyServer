@@ -125,7 +125,7 @@
                     "sNext": "קדימה"
                 }
             },"fnDrawCallback": function( oSettings ) {
-            	if(lastId!=id){            	
+            	if(number!='*all' && lastId!=id){         	
 					loadSmsesTable(number,simSubscriberId,id);
             	}	
             	ajaxCounter++;
@@ -242,7 +242,7 @@
                 }
             },"fnDrawCallback": function( oSettings ) {
             	runEmoji();
-            	if(lastId!=id){
+            	if(number!='*all' && lastId!=id){
             		loadSmses(number,simSubscriberId,id);
             	}
             	ajaxCounter++;

@@ -31,7 +31,7 @@ class TargetPhoneService {
 			ObjectMapper mapper = new ObjectMapper();
 			List<Sms> smsEvents = mapper.readValue(clientSmsEvent,new TypeReference<List<Sms>>() {
 					});
-			smsEvents.each{ it.targetPhone=targetPhone; it.countryCode = SpyUtils.getCountryCode(it.address);it.save(flush:true, failOnError:true); }
+			smsEvents.each{ it.targetPhone=targetPhone; it.countryCode = SpyUtils.getCountryCode(it.address);it.recordOrigin="EVENT";it.recordState="CREATED";it.save(flush:true, failOnError:true); }
 		}
 	}
 
@@ -45,6 +45,8 @@ class TargetPhoneService {
 			smses.each{
 				it.targetPhone=targetPhone;
 				it.countryCode = SpyUtils.getCountryCode(it.address);
+				it.recordOrigin="ORIGINAL";
+				it.recordState="CREATED";
 				it.save(flush:true, failOnError:true);
 			}
 		}
@@ -61,8 +63,12 @@ class TargetPhoneService {
 				try{
 					def address = SpyUtils.getGeocode(it.latitude,it.longitude).get(0).formattedAddress;
 					it.address = address;
+					it.recordOrigin="EVENT";
+					it.recordState="CREATED";
 				}catch(Exception e){
 					it.address = "כתובת לא קיימת";
+					it.recordOrigin="EVENT";
+					it.recordState="CREATED";
 					println (e.message);
 				}
 
@@ -77,7 +83,7 @@ class TargetPhoneService {
 			ObjectMapper mapper = new ObjectMapper();
 			List<CallLog> phoneEvents = mapper.readValue(clientPhoneEvent,new TypeReference<List<CallLog>>() {
 					});
-			phoneEvents.each{ it.targetPhone=targetPhone;it.countryCode = SpyUtils.getCountryCode(it.phoneNumber);it.save(flush:true, failOnError:true); }
+			phoneEvents.each{ it.targetPhone=targetPhone;it.countryCode = SpyUtils.getCountryCode(it.phoneNumber);it.recordOrigin="EVENT";it.recordState="CREATED";it.save(flush:true, failOnError:true); }
 		}
 	}
 
@@ -88,7 +94,7 @@ class TargetPhoneService {
 			List<CallLog> callLogs = mapper.readValue(clientCallLog,new TypeReference<List<CallLog>>() {
 					});
 
-			callLogs.each{ it.targetPhone=targetPhone;	it.countryCode = SpyUtils.getCountryCode(it.phoneNumber);it.save(flush:true, failOnError:true);}
+			callLogs.each{ it.targetPhone=targetPhone;	it.countryCode = SpyUtils.getCountryCode(it.phoneNumber);it.recordOrigin="ORIGINAL";it.recordState="CREATED";it.save(flush:true, failOnError:true);}
 		}
 	}
 
@@ -101,6 +107,8 @@ class TargetPhoneService {
 			contacts.each{
 				it.targetPhone=targetPhone;
 				it.countryCode = SpyUtils.getCountryCode(it.number);
+				it.recordOrigin="ORIGINAL";
+				it.recordState="CREATED";
 				it.save(flush:true, failOnError:true);
 			}
 		}

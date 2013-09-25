@@ -11,6 +11,8 @@ public class Contact {
 	String type;
 	String image;
 	String countryCode;
+	String recordState;
+	String recordOrigin;
 
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = {
@@ -25,6 +27,8 @@ public class Contact {
 		type(nullable: true, blank: true)
 		image(nullable: true, blank: true)
 		countryCode(nullable: true, blank: true)
+		recordState(nullable: true, blank: true)
+		recordOrigin(nullable: true, blank: true)
 	}
 
 	public String getFormatedPhoneNumer(){

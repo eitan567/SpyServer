@@ -10,6 +10,8 @@ public class Location {
 	Date time;
 	Double accuracyMeters;
 	String provider;
+	String recordState;
+	String recordOrigin;
 	
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = { version false;cache true; }
@@ -21,5 +23,7 @@ public class Location {
 		address nullable: true;
 		accuracyMeters nullable :true;
 		provider nullable: true;
+		recordState nullable :true;
+		recordOrigin nullable :true;
 	}
 }

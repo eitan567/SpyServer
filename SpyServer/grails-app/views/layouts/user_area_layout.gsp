@@ -1012,7 +1012,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<script src="${resource(dir: 'uaassets/scripts', file: 'index.js')}" type="text/javascript"></script> 
 	<script src="${resource(dir: 'uaassets/scripts', file: 'tasks.js')}" type="text/javascript"></script>	 
 	<script src="${resource(dir: 'uaassets/scripts', file: 'ui-general.js')}" type="text/javascript"></script>	
-	<script src="${resource(dir: 'uaassets/scripts', file: 'app.js')}" type="text/javascript"></script>		
+	<script src="${resource(dir: 'uaassets/scripts', file: 'app.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/scripts', file: 'table-managed.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'js', file: 'jquery.arctext.js')}" type="text/javascript"></script>
 	<script src="${resource(dir: 'uaassets/scripts', file: 'form-samples.js')}" type="text/javascript"></script>

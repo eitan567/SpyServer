@@ -12,6 +12,8 @@ class CallLog {
 	Date timeSeconds;
 	String countryCode;
 	String formatedDuration;
+	String recordState;
+	String recordOrigin;
 	
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = {
@@ -27,6 +29,8 @@ class CallLog {
 		timeSeconds nullable :true;
 		countryCode nullable :true; 
 		formatedDuration nullable :true;
+		recordState nullable :true;
+		recordOrigin nullable :true;
 	}
 
 	public String getFormatedPhoneNumer(){

