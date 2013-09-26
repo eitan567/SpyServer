@@ -5,6 +5,7 @@ import com.spy.tools.SpyUtils;
 
 public class Sms {
 
+	String id;
 	String readState;
 	Date time;
 	String address;
@@ -17,7 +18,7 @@ public class Sms {
 	static belongsTo = [targetPhone:TargetPhone]
 	static mapping = {
 		version false;
-		id generator: 'assigned';
+		id generator: 'assigned',type:'string',name:'id';
 		msg sqlType:'text(50000) collate utf8mb4_general_ci';
 		cache true;
 	}

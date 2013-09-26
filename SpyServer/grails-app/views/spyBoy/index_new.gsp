@@ -367,6 +367,12 @@
 										<th class="hidden-480">
 											${message(code: 'location.address.label', default: 'כתובת')}
 										</th>
+										<th class="hidden-480" style="max-width: 50px !important;">
+											${message(code: 'location.address.label', default: 'דיוק(במטרים)')}
+										</th>
+										<th class="hidden-480" style="max-width: 50px !important;">
+											${message(code: 'location.address.label', default: 'מקור')}
+										</th>
 										<th class="hidden-480">
 											${message(code: 'location.time.label', default: 'תאריך')}
 										</th>
@@ -482,14 +488,13 @@
 				map = new google.maps.Map(document.getElementById("gmap_marker"), myOptions);
 
 				for(var i=0;i<${locationInstanceTotal};i++){
-
-					// new google.maps.Marker({
-					// position: new google.maps.LatLng(jsonList[i].latitude,
-					// jsonList[i].longitude),
-					// map: map,
-					// title: jsonList[i].address,
-					// animation: google.maps.Animation.DROP
-					// });
+					/** new google.maps.Marker({
+					 position: new google.maps.LatLng(jsonList[i].latitude,
+					 jsonList[i].longitude),
+					 map: map,
+					 title: jsonList[i].address,
+					 animation: google.maps.Animation.DROP
+					 });**/
 					new StyledMarker({styleIcon:new StyledIcon(StyledIconTypes.MARKER,{color:"73B819",text:jsonList[i].id+ "",starcolor:null,fore:'ffffff'}),position:new google.maps.LatLng(jsonList[i].latitude, jsonList[i].longitude),map:map});	
 				}	
 			}catch(e){
@@ -516,6 +521,8 @@
 				"aoColumns": [
 				  			{ "mData": "id"},
 				  			{ "mData": "address" },
+				  			{ "mData": "accuracyMeters" },
+				  			{ "mData": "provider" },
 				  			{ "mData": "time" },
 				  			{ "mData": "latitude" },
 				  			{ "mData": "longitude" }
@@ -527,17 +534,16 @@
 				                       return result;},
 				                  "aTargets": [ 0 ]
 				               },
-				               {"bVisible":false,"aTargets": [ 3 ]},
-				               {"bVisible":false,"aTargets": [ 4 ]}
+				               {"bVisible":false,"aTargets": [ 5 ]},
+				               {"bVisible":false,"aTargets": [ 6 ]}
 					], 		
 		        "aLengthMenu": [
-		            [5, 15, 20, -1],
-		            [5, 15, 20, "All"] // change per page values here
+		            [5, 10],
+		            [5, 10] // change per page values here
 		        ],
 		        // set the initial value
-		        "iDisplayLength": 5,
-		        "sDom": "<'row-fluid'<'span6'l><'span1'f>r>t<'row-fluid'<'span4'i><'span8'p>>", // "sDom":
-																								// "<'row-fluid'<'span6'l><'span0'f>r>t<'row-fluid'<'span4'i><'span8'p>>",
+		        "iDisplayLength": 10,
+		        "sDom": "<'row-fluid'<'span6'l><'span1'f>r>t<'row-fluid'<'span4'i><'span8'p>>", 
 		        "sPaginationType": "bootstrap",
 		        "oLanguage": {
 		            "sLengthMenu": "מציג _MENU_ תוצאות לדף.",
@@ -554,20 +560,10 @@
 		        }
 		    });
 
-		    jQuery('#sample_4_wrapper .dataTables_filter input').addClass("m-wrap small"); // modify
-																							// table
-																							// search
-																							// input
-		    jQuery('#sample_4_wrapper .dataTables_length select').addClass("m-wrap small"); // modify
-																							// table
-																							// per
-																							// page
-																							// dropdown
-		    jQuery('#sample_4_wrapper .dataTables_length select').select2(); // initialize
-																				// select2
-																				// dropdown
-
-
+		    jQuery('#sample_4_wrapper .dataTables_filter input').addClass("m-wrap small"); 
+		    jQuery('#sample_4_wrapper .dataTables_length select').addClass("m-wrap small");
+		    jQuery('#sample_4_wrapper .dataTables_length select').select2();
+		    
 		    // sho column for all callLog if needed.
 		    // ***********************************************************
 		    // var bVis = oTable.fnSettings().aoColumns[0].bVisible;

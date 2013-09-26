@@ -26,6 +26,7 @@ encoding//grails-app/i18n/messages_sv.properties=UTF-8
 encoding//grails-app/i18n/messages_th.properties=UTF-8
 encoding//grails-app/i18n/messages_zh_CN.properties=UTF-8
 encoding//grails-app/i18n/shiro.properties=UTF-8
+encoding//grails-app/services/com/xaviar/service/TargetPhoneService.groovy=UTF-8
 encoding//src/groovy/com/spy/tools/SpyUtils.groovy=UTF-8
 encoding//web-app/uaassets/plugins/jquery-validation/dist/jquery.validate.min.js=UTF-8
 encoding//web-app/uaassets/scripts/login.js=UTF-8

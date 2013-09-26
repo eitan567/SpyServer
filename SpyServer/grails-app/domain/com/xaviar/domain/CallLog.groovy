@@ -5,7 +5,7 @@ import com.spy.tools.SpyUtils
 
 class CallLog {
 
-	String id
+	String id;
 	String phoneNumber;
 	String type;
 	int duration;
