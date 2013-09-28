@@ -341,10 +341,10 @@ Header and header elements.
 .header .brand {
 	display: inline-block;
 	margin-top: -1px;
-	margin-left: 0;
+	margin-right: 0;
 	padding-left: 0;
 	padding-right: 0;
-	width: 225px;
+	#width: 225px;
 }
 
 .header .brand img {
@@ -377,7 +377,7 @@ Header and header elements.
 }
 
 .header .nav {
-	float: left;
+	float: right;
 }
 
 .header .nav>li {
@@ -390,7 +390,7 @@ Header and header elements.
 	padding-left: 4px;
 }
 
-.header .nav>li.dropdown:last-child {
+.header .nav>li.dropdown:first-child {
 	padding-left: 2px;
 	padding-top: 5px;
 }
@@ -5927,3 +5927,7 @@ BXSlider
 .testimonials-v1 .item span.testimonials-slide {
 	background: #f8f8f8 url(../../img/sliders/carousel/corners-blue-rtl.png) no-repeat left bottom;
 }	
+
+td.centerContent {
+    text-align: center;
+}

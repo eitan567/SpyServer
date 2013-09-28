@@ -26,7 +26,7 @@
 	</div>
 </g:if>--%>
 <g:if test="${smsInstanceTotal>0  && !isAllSmses}">
-	<div class="scroller" style="height: 322px" data-always-visible="1"
+	<div class="scroller" style="height: 348px" data-always-visible="1"
 		data-rail-visible1="1">
 		<ul class="chats">
 			<g:each in="${smsInstanceList}" status="i" var="smsInstance">
@@ -43,12 +43,10 @@
 							src="${resource(dir: 'uaassets/img', file: 'avatar.png')}" alt="" />
 					</g:else>
 					<div class="message">
-						<span class="charrow"></span> <a href="#" class="name tooltips"
-							data-original-title="${smsInstance.formatedPhoneNumer}"
-							data-container="body" data-placement="bottom"> ${smsInstance.folderName =='inbox' ? contactDetails.name : phoneOwnerData.alias}
-						</a> <span class="datetime"> ${smsInstance.formatedDate}
-						</span> <span class="body emoji" style="word-wrap: break-word;"> ${smsInstance.msg}
-						</span>
+						<span class="charrow"></span>
+							 <span style="cursor:pointer;color:#0D638F;" onclick="scrollToPhone('${smsInstance.formatedPhoneNumer}')" class="name tooltips" data-original-title="${smsInstance.formatedPhoneNumer}" data-container="body" data-placement="bottom">${smsInstance.folderName =='inbox' ? contactDetails.name : phoneOwnerData.alias}</span>
+							<span class="datetime"> ${smsInstance.formatedDate}</span>
+							<span class="body emoji" style="word-wrap: break-word;"> ${smsInstance.msg}</span>
 					</div></li>
 			</g:each>
 		</ul>
@@ -59,7 +57,7 @@
 </g:else>
 <script type="text/javascript">
 	$(document).ready(function() {
-		runEmoji();
+		runEmoji();		
 		App.initScrollers();
 	});
 </script>

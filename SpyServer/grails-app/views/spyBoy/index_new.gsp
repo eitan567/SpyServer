@@ -250,17 +250,14 @@
 							id="sample_3">
 							<thead>
 								<tr>
-									<th id="callLogNumberThHeader"
-										style="display: none;"> <!-- min-width: 120px; -->
+									<th id="callLogNumberThHeader" class="hidden-480" style="max-width: 120px;"> <!-- min-width: 120px; -->
 										${message(code: 'callLog.phoneNumber.label', default: 'phoneNumber')}
 									</th>
-									<th class="hidden-480"><!-- style="min-width: 110px;" -->
+									<th class="hidden-480" style="max-width: 100px;"><!-- style="min-width: 110px;" -->
 										${message(code: 'callLog.type.label', default: 'type')}
 									</th>
 									<th class="hidden-480"><!--  style="min-width: 120px;" -->
-										${
-											message(code: 'callLog.duration.label', default: 'duration')
-										}
+										${message(code: 'callLog.duration.label', default: 'duration')}
 									</th>
 									<th class="hidden-480"><!--  style="min-width: 180px !important;" -->
 										${message(code: 'callLog.time.label', default: 'time')}
@@ -473,6 +470,11 @@
 			 },1000);				
 		}
 
+		 function scrollToPhone(phone){
+		    	var arr = jQuery("p[data-slide='" + phone+"']");    	
+		    	jQuery("#content_1").mCustomScrollbar('scrollTo',"#" + arr[0].id);
+		    }
+		
 		// <g:remoteFunction update="chats" controller="spyBoy" action="sms"
 		// before="spinner('#smsSpinner')"/>
 		// <g:remoteFunction update="contactsAjaxTargetDiv" controller="spyBoy"

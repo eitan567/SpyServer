@@ -670,14 +670,14 @@ var Index = function () {
                         })]
                 },
                 opens: (App.isRTL() ? 'right' : 'left'),
-                format: 'MM/dd/yyyy',
+                format: 'dd/MM/yyyy',
                 separator: ' to ',
                 startDate: Date.today().add({
                     days: -29
                 }),
                 endDate: Date.today(),
                 minDate: '01/01/2012',
-                maxDate: '12/31/2014',
+                maxDate: '31/12/2014',
                 locale: {
                     applyLabel: 'Submit',
                     fromLabel: 'From',

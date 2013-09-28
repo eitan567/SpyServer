@@ -3,6 +3,7 @@ package com.xaviar.service
 import redis.clients.jedis.Jedis
 
 import com.org.krams.domain.UMetaData
+import com.xaviar.domain.User;
 
 class UserService {
 
@@ -50,5 +51,9 @@ class UserService {
 		}
 
 		return false;
+	}
+	
+	def updateUserDetails(User user){
+		user.save(flush:true, failOnError:true);
 	}
 }

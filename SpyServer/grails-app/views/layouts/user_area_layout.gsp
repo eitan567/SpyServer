@@ -70,40 +70,29 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<img src="${resource(dir: 'uaassets/img', file: 'logo.png')}" alt="logo" />
 				</a>
 				<!-- END LOGO -->
-				<!-- BEGIN HORIZANTAL MENU -->
-				<div class="navbar hor-menu hidden-phone hidden-tablet">
-					<div class="navbar-inner">
-						<ul class="nav">
-							<g:each in="${targetPhoneInstanceList}" status="i" var="targetPhoneInstance">							
-								<li class="${targetPhoneInstance.simSubscriberId==activeSimSubscriberId ? 'active':''}">
-									<g:link action="index_new" params="[simSubscriberId:targetPhoneInstance.simSubscriberId]">
-									${targetPhoneInstance.alias}
-									<span class="${targetPhoneInstance.simSubscriberId==activeSimSubscriberId ? 'selected':''}"></span>
-									</g:link>
-								</li>		
-							</g:each>					
-							<li>
-								<span class="hor-menu-search-form-toggler">&nbsp;</span>
-								<div class="search-form hidden-phone hidden-tablet">
-									<form class="form-search">
-										<div class="input-append">
-											<input type="text" placeholder="Search..." class="m-wrap">
-											<button type="button" class="btn"></button>
-										</div>
-									</form>
-								</div>
-							</li>
+								<!-- BEGIN TOP NAVIGATION MENU -->              
+				<ul class="nav pull-right">
+									<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<img src="data:image/png;base64,${user.image}" alt="" width="29px" height="29px"/>
+						<i class="icon-cogs"></i>
+						<span class="username">${user.firstName + " " + user.lastName}</span>
+						<i class="icon-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><g:link action="profile" controller="spyBoy"><i class="icon-user"></i> הפרופיל שלי </g:link></li>
+							<li><a href="page_calendar.html"><i class="icon-calendar"></i> יומן אישי </a></li>
+							<li><a href="inbox.html"><i class="icon-envelope"></i> דואר אישי <span class="badge badge-important">3</span></a></li>
+							<li><a href="#"><i class="icon-tasks"></i> המשימות שלי <span class="badge badge-success">8</span></a></li>
+							<li class="divider"></li>
+							<li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> תצוגה במסך מלא </a></li>
+							<li><g:link controller="auth" action="lockscreen"><i class="icon-lock"></i> מסך נעילה </g:link></li>
+							<li><g:link action="signOut" controller="auth"><i class="icon-key"></i> התנתק </g:link></li>
 						</ul>
-					</div>
-				</div>
-				<!-- END HORIZANTAL MENU -->
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-				<img src="${resource(dir: 'uaassets/img', file: 'menu-toggler.png')}" alt="" />
-				</a>          
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-				<ul class="nav pull-left">
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+					<!-- END USER LOGIN DROPDOWN -->
 					<!-- BEGIN NOTIFICATION DROPDOWN -->   
 					<li class="dropdown" id="header_notification_bar">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -367,29 +356,46 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							</li>
 						</ul>
 					</li>
-					<!-- END TODO DROPDOWN -->               
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-					<li class="dropdown user">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-						<img src="data:image/png;base64,${user.image}" alt="" width="29px" height="29px"/>
-						<span class="username">${user.firstName + " " + user.lastName}</span>
-						<i class="icon-angle-down"></i>
-						</a>
-						<ul class="dropdown-menu">
-							<li><g:link action="profile" controller="spyBoy"><i class="icon-user"></i> הפרופיל שלי </g:link></li>
-							<li><a href="page_calendar.html"><i class="icon-calendar"></i> יומן אישי </a></li>
-							<li><a href="inbox.html"><i class="icon-envelope"></i> דואר אישי <span class="badge badge-important">3</span></a></li>
-							<li><a href="#"><i class="icon-tasks"></i> המשימות שלי <span class="badge badge-success">8</span></a></li>
-							<li class="divider"></li>
-							<li><a href="javascript:;" id="trigger_fullscreen"><i class="icon-move"></i> תצוגה במסך מלא </a></li>
-							<li><g:link controller="auth" action="lockscreen"><i class="icon-lock"></i> מסך נעילה </g:link></li>
-							<li><g:link action="signOut" controller="auth"><i class="icon-key"></i> התנתק </g:link></li>
-						</ul>
-					</li>
-					<!-- END USER LOGIN DROPDOWN -->
-					<!-- END USER LOGIN DROPDOWN -->
+					<!-- END TODO DROPDOWN -->
 				</ul>
 				<!-- END TOP NAVIGATION MENU --> 
+				<!-- BEGIN HORIZANTAL MENU -->
+				<div class="navbar hor-menu hidden-phone hidden-tablet">
+					<div class="navbar-inner">
+						<ul class="nav">
+							<li>
+								<g:link action="index_new">
+								 שולחן עבודה
+								</g:link>
+							</li>
+							<g:each in="${targetPhoneInstanceList}" status="i" var="targetPhoneInstance">							
+								<li class="${targetPhoneInstance.simSubscriberId==activeSimSubscriberId ? 'active':''}">
+									<g:link action="index_new" params="[simSubscriberId:targetPhoneInstance.simSubscriberId]">
+									${targetPhoneInstance.alias}
+									<span class="${targetPhoneInstance.simSubscriberId==activeSimSubscriberId ? 'selected':''}"></span>
+									</g:link>
+								</li>		
+							</g:each>					
+							<!-- <li>
+								<span class="hor-menu-search-form-toggler">&nbsp;</span>
+								<div class="search-form hidden-phone hidden-tablet">
+									<form class="form-search">
+										<div class="input-append">
+											<input type="text" placeholder="Search..." class="m-wrap">
+											<button type="button" class="btn"></button>
+										</div>
+									</form>
+								</div>
+							</li>-->
+						</ul>
+					</div>
+				</div>
+				<!-- END HORIZANTAL MENU -->
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+				<img src="${resource(dir: 'uaassets/img', file: 'menu-toggler.png')}" alt="" />
+				</a>          
+				<!-- END RESPONSIVE MENU TOGGLER --> 
 			</div>
 		</div>
 		<!-- END TOP NAVIGATION BAR -->
@@ -418,11 +424,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start active ">
-					<a href="index-2.html">
+					<g:link controller="spyBoy" action="index_new">
 					<i class="icon-home"></i> 
 					<span class="title">שולחן עבודה</span>
 					<span class="selected"></span>
-					</a>
+					</g:link>
 				</li>
 				<li >
 					<a href="javascript:;">
@@ -977,8 +983,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		</div>
 	</div>
 	<!-- END FOOTER -->
-	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-
 	<g:javascript library="application"/>			
 	<r:layoutResources/>
 	

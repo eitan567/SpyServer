@@ -1,5 +1,5 @@
 <g:each in="${contactInstanceList}" status="i" var="contactInstance">
-	<p id="contact-${contactInstance.id}" class="dashboard-stat" 
+	<p id="contact-${contactInstance.id}" data-slide="${contactInstance.formatedPhoneNumer}" class="dashboard-stat" 
 	onclick="loadAllAjaxSections('${contactInstance.formatedPhoneNumer}','${contactInstance.targetPhone.simSubscriberId}',${contactInstance.id});cSelected(this);">
 		<g:if
 			test='${contactInstance.image!=null && contactInstance.image!=""}'>
@@ -75,33 +75,35 @@
 	  		               {
 	  		                   // `data` refers to the data for the cell (defined by `mData`, which
 	  		                   // defaults to the column being worked with, in this case is the first
-	  		                   // Using `row[0]` is equivalent.
-	  		                   "bVisible":false,
-	  		             	   //"mRender": function ( data, type, row ) {
-		  		               //   var result = '';		  		                   
-		  		               //   if(row.type!=null && row.type!=''){
-		  		               // 	 result = '<img src="../images/callog/'+ row.type +'.png" alt="" style="width: 25px; height: 25px; float: right;padding-left: 10px;" />';
-			  		           //    }
-			  		           //    result +='<a href="#" style="vertical-align: middle;">' + data + '</a>';
-	  		                   //    return result;
-	  		                   //},
-	  		                   "sClass": "hidden-480",
+	  		                   // Using `row[0]` is equivalent.	  		                  
+	  		             	   "mRender": function ( data, type, row ) {
+		  		                 var result = '';		  		                   
+		  		                 if(row.type!=null && row.type!=''){
+		  		                	 result = '<img src="../images/callog/'+ row.type +'.png" alt="" style="width: 25px; height: 25px; float: right;padding-left: 10px;" />';
+			  		               }
+			  		               result +='<div style="vertical-align: middle;cursor:pointer;color:#0D638F;" onclick="scrollToPhone(\''+data+'\');">' + data + '</div>';
+	  		                       return result;
+	  		                   },	  		                  
 	  		                  "aTargets": [ 0 ]
 	  		               },
 	  		               { 
 		  		               "mRender": function ( data, type, row ) {		
 			  		               	switch(data){
 				  		               	case "OUTGOING":return '<span class="label label-warning">' + OUTGOING + '</span>'; break;
-					  		            case "INCOMING":return '<spa n class="label label-success">' + INCOMING + '</span>'; break;
+					  		            case "INCOMING":return '<span class="label label-success">' + INCOMING + '</span>'; break;
 					  		            case "MISSED":return '<span class="label label-important">' + MISSED+ '</span>'; break;
 			  		               	}							
 				  		            return "";
 			  		            }
-	  		               	   ,"sClass": "hidden-480","aTargets": [ 1 ] 
+	  		               	   ,"sClass": "hidden-480 centerContent","aTargets": [ 1 ] 
 	  		               },
 	  		               { 
 		  		               "mRender": function ( data, type, row ) { return row.formatedDuration;}
 		  		               ,"aTargets": [ 2 ]
+		  		           },
+	  		               { 
+		  		               "mRender": function ( data, type, row ) { return row.timeSeconds;}
+		  		               ,"aTargets": [ 3 ]
 		  		           }
 	  		], 		
             "aLengthMenu": [
@@ -168,8 +170,6 @@
 			url : '/SpyServer/spyBoy/sms',
 			success : function(data, textStatus) {
 				jQuery('#chats').html(data);
-				jQuery('.popovers').popover();	
-
 				lastId=id;		
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -276,8 +276,10 @@
 
 	jQuery(document).ready(function() {		
 		runEmoji();
+		jQuery('.popovers').popover();
+		jQuery('.popovers').popover();		
 	});
-    
+   
 	//jQuery(document).ready(function(){
 		//jQuery('.popovers').popover();
 	//	$(".contact-name").each(function(index,value){$(this).arctext({radius: 50});});

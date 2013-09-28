@@ -48,7 +48,7 @@ public class DataHolder {
 		return map.get(key);
 	}
 
-	public String containsKey(String key) {
+	public boolean containsKey(String key) {
 		return map.containsKey(key);
 	}
 

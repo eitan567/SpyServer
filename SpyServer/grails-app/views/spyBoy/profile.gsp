@@ -10,8 +10,7 @@
 		<!-- END PAGE LEVEL STYLES -->
 	</head>
 	<body lang="he">
-		<!-- BEGIN PAGE -->
-		<div class="page-content">
+		<!-- BEGIN PAGE -->		
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<div id="portlet-config" class="modal hide">
 				<div class="modal-header">
@@ -75,20 +74,20 @@
 						<!-- END BEGIN STYLE CUSTOMIZER --> 
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							<small>user profile sample</small>
-							User Profile
+							פרופיל משתמש
+							<small> ${user.firstName + " " + user.lastName} </small>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a href="index-2.html">Home</a> 
+								<a href="index-2.html">דף הבית</a> 
 								<i class="icon-angle-left"></i>
 							</li>
 							<li>
-								<a href="#">Extra</a>
+								<a href="#">פרופיל</a>
 								<i class="icon-angle-left"></i>
 							</li>
-							<li><a href="#">User Profile</a></li>
+							<li><a href="#">פרופיל משתמש</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -100,40 +99,40 @@
 						<!--BEGIN TABS-->
 						<div class="tabbable tabbable-custom tabbable-full-width">
 							<ul class="nav nav-tabs">
-								<li class="active"><a href="#tab_1_1" data-toggle="tab">Overview</a></li>
-								<li><a href="#tab_1_2" data-toggle="tab">Profile Info</a></li>
-								<li><a href="#tab_1_3" data-toggle="tab">Account</a></li>
-								<li><a href="#tab_1_4" data-toggle="tab">Projects</a></li>
-								<li><a href="#tab_1_6" data-toggle="tab">Help</a></li>
+								<li class="active"><a href="#tab_1_1" data-toggle="tab">כללי</a></li>
+								<li><a href="#tab_1_2" data-toggle="tab">פרטי משתמש</a></li>
+								<li><a href="#tab_1_3" data-toggle="tab">עדכון פרטים</a></li>
+								<li><a href="#tab_1_4" data-toggle="tab">הגדרות החשבון</a></li>
+								<li><a href="#tab_1_6" data-toggle="tab">עזרה</a></li>
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane row-fluid active" id="tab_1_1">
-									<ul class="unstyled profile-nav span3">
-										<li><img src="${resource(dir: 'uaassets/img/profile', file: 'profile-img.png')}" alt="" /> <a href="#" class="profile-edit">edit</a></li>
-										<li><a href="#">Projects</a></li>
-										<li><a href="#">Messages <span>3</span></a></li>
-										<li><a href="#">Friends</a></li>
-										<li><a href="#">Settings</a></li>
+									<ul class="unstyled profile-nav span2">
+										<li><img src="data:image/png;base64,${user.image}" alt="" width="291px"/> <a href="#" class="profile-edit">עריכה</a></li>
+										<li><a href="#">אנשי קשר</a></li>
+										<li><a href="#">שיחות<span>3</span></a></li>
+										<li><a href="#">הודעות</a></li>
+										<li><a href="#">נקודות מיקום</a></li>
 									</ul>
 									<div class="span9">
 										<div class="row-fluid">
 											<div class="span8 profile-info">
-												<h1>John Doe</h1>
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.</p>
-												<p><a href="#">www.mywebsite.com</a></p>
+												<h1>${user.firstName + " " + user.lastName}</h1>
+												<p>${user.more}</p>
+												<p><a href="#">${user.siteURL}</a></p>
 												<ul class="unstyled inline">
-													<li><i class="icon-map-marker"></i> Spain</li>
-													<li><i class="icon-calendar"></i> 18 Jan 1982</li>
-													<li><i class="icon-briefcase"></i> Design</li>
-													<li><i class="icon-star"></i> Top Seller</li>
-													<li><i class="icon-heart"></i> BASE Jumping</li>
+													<li style="display:${user.country=='' ? 'none':''} !important;"><i class="icon-map-marker"></i> ${user.address + ", " + user.country}.</li>
+													<li style="display:${user.birthDate=='' ? 'none':''} !important;"><i class="icon-calendar"></i> <g:formatDate format="dd/MM/yyyy" date="${user.birthDate}"/></li>
+													<li style="display:${user.occupation=='' ? 'none':''} !important;"><i class="icon-briefcase"></i> ${user.occupation}</li>
+													<li><i class="icon-star"></i> חבילת זהב</li>
+													<li><i class="icon-heart"></i> דירוג לקוח 8</li>
 												</ul>
 											</div>
 											<!--end span8-->
 											<div class="span4">
 												<div class="portlet sale-summary">
 													<div class="portlet-title">
-														<div class="caption">Sales Summary</div>
+														<div class="caption">סה"כ עלות החבילות בש"ח</div>
 														<div class="tools">
 															<a class="reload" href="javascript:;"></a>
 														</div>
@@ -141,20 +140,20 @@
 													<div class="portlet-body">
 														<ul class="unstyled">
 															<li>
-																<span class="sale-info">TODAY SOLD <i class="icon-img-up"></i></span> 
+																<span class="sale-info">חבילת כסף <i class="icon-img-up"></i></span> 
 																<span class="sale-num">23</span>
 															</li>
 															<li>
-																<span class="sale-info">WEEKLY SALES <i class="icon-img-down"></i></span> 
+																<span class="sale-info">חבילת זהב <i class="icon-img-down"></i></span> 
 																<span class="sale-num">87</span>
 															</li>
 															<li>
-																<span class="sale-info">TOTAL SOLD</span> 
+																<span class="sale-info">סה"כ</span> 
 																<span class="sale-num">2377</span>
 															</li>
 															<li>
-																<span class="sale-info">EARNS</span> 
-																<span class="sale-num">$37.990</span>
+																<span class="sale-info">מע"מ</span> 
+																<span class="sale-num">37.990 ש"ח</span>
 															</li>
 														</ul>
 													</div>
@@ -165,8 +164,8 @@
 										<!--end row-fluid-->
 										<div class="tabbable tabbable-custom tabbable-custom-profile">
 											<ul class="nav nav-tabs">
-												<li class="active"><a href="#tab_1_11" data-toggle="tab">Latest Customers</a></li>
-												<li ><a href="#tab_1_22" data-toggle="tab">Feeds</a></li>
+												<li class="active"><a href="#tab_1_11" data-toggle="tab">חבילות לקוח</a></li>
+												<li ><a href="#tab_1_22" data-toggle="tab">עדכונים אחרונים</a></li>
 											</ul>
 											<div class="tab-content">
 												<div class="tab-pane active" id="tab_1_11">
@@ -174,9 +173,9 @@
 														<table class="table table-striped table-bordered table-advance table-hover">
 															<thead>
 																<tr>
-																	<th><i class="icon-briefcase"></i> Company</th>
-																	<th class="hidden-phone"><i class="icon-question-sign"></i> Descrition</th>
-																	<th><i class="icon-bookmark"></i> Amount</th>
+																	<th><i class="icon-briefcase"></i> שם החבילה</th>
+																	<th class="hidden-phone"><i class="icon-question-sign"></i> תיאור</th>
+																	<th><i class="icon-bookmark"></i> עלות בש"ח</th>
 																	<th></th>
 																</tr>
 															</thead>
@@ -185,7 +184,7 @@
 																	<td><a href="#">Pixel Ltd</a></td>
 																	<td class="hidden-phone">Server hardware purchase</td>
 																	<td>52560.10$ <span class="label label-success label-mini">Paid</span></td>
-																	<td><a class="btn mini green-stripe" href="#">View</a></td>
+																	<td><a class="btn mini green-stripe" href="#">הצג חשבונית</a></td>
 																</tr>
 																<tr>
 																	<td>
@@ -195,7 +194,7 @@
 																	</td>
 																	<td class="hidden-phone">Office furniture purchase</td>
 																	<td>5760.00$ <span class="label label-warning label-mini">Pending</span></td>
-																	<td><a class="btn mini blue-stripe" href="#">View</a></td>
+																	<td><a class="btn mini blue-stripe" href="#">הצג חשבונית</a></td>
 																</tr>
 																<tr>
 																	<td>
@@ -205,7 +204,7 @@
 																	</td>
 																	<td class="hidden-phone">Company Anual Dinner Catering</td>
 																	<td>12400.00$ <span class="label label-success label-mini">Paid</span></td>
-																	<td><a class="btn mini blue-stripe" href="#">View</a></td>
+																	<td><a class="btn mini blue-stripe" href="#">הצג חשבונית</a></td>
 																</tr>
 																<tr>
 																	<td>
@@ -215,13 +214,13 @@
 																	</td>
 																	<td class="hidden-phone">Payment for Jan 2013</td>
 																	<td>610.50$ <span class="label label-danger label-mini">Overdue</span></td>
-																	<td><a class="btn mini red-stripe" href="#">View</a></td>
+																	<td><a class="btn mini red-stripe" href="#">הצג חשבונית</a></td>
 																</tr>
 																<tr>
 																	<td><a href="#">Pixel Ltd</a></td>
 																	<td class="hidden-phone">Server hardware purchase</td>
 																	<td>52560.10$ <span class="label label-success label-mini">Paid</span></td>
-																	<td><a class="btn mini green-stripe" href="#">View</a></td>
+																	<td><a class="btn mini green-stripe" href="#">הצג חשבונית</a></td>
 																</tr>
 																<tr>
 																	<td>
@@ -231,7 +230,7 @@
 																	</td>
 																	<td class="hidden-phone">Office furniture purchase</td>
 																	<td>5760.00$ <span class="label label-warning label-mini">Pending</span></td>
-																	<td><a class="btn mini blue-stripe" href="#">View</a></td>
+																	<td><a class="btn mini blue-stripe" href="#">הצג חשבונית</a></td>
 																</tr>
 																<tr>
 																	<td>
@@ -241,7 +240,7 @@
 																	</td>
 																	<td class="hidden-phone">Company Anual Dinner Catering</td>
 																	<td>12400.00$ <span class="label label-success label-mini">Paid</span></td>
-																	<td><a class="btn mini blue-stripe" href="#">View</a></td>
+																	<td><a class="btn mini blue-stripe" href="#">הצג חשבונית</a></td>
 																</tr>
 															</tbody>
 														</table>
@@ -649,13 +648,13 @@
 								</div>
 								<!--end tab-pane-->
 								<div class="tab-pane profile-classic row-fluid" id="tab_1_2">
-									<div class="span2"><img src="data:image/png;base64,${user.image}" alt="" width="168px"/> <a href="#" class="profile-edit">edit</a></div>
+									<div class="span2"><img src="data:image/png;base64,${user.image}" alt="" width="291px"/> <a href="#" class="profile-edit">עריכה</a></div>
 									<ul class="unstyled span10">
 										<li><span>שם משתמש:</span> ${user.username}</li>
 										<li><span>שם פרטי:</span> ${user.firstName}</li>
 										<li><span>שם משפחה:</span> ${user.lastName}</li>
 										<li><span>מדינה:</span> ${user.country}</li>
-										<li><span>תאריך לידה:</span> ${user.birthDate}</li>
+										<li><span>תאריך לידה:</span> <g:formatDate format='dd/MM/yyyy' date='${user.birthDate}'/></li>
 										<li><span>מקצוע:</span> ${user.occupation}</li>
 										<li><span>דואר אלקטרוני:</span> <a href="#">${user.email}</a></li>
 										<li><span>כתובת אתר אישי:</span> <a href="#">${user.siteURL}</a></li>
@@ -668,7 +667,7 @@
 								<div class="tab-pane row-fluid profile-account" id="tab_1_3">
 									<div class="row-fluid">
 										<div class="span12">
-											<div class="span3">
+											<div class="span2">
 												<ul class="ver-inline-menu tabbable margin-bottom-10">
 													<li class="active">
 														<a data-toggle="tab" href="#tab_1-1">
@@ -685,54 +684,134 @@
 											<div class="span9">
 												<div class="tab-content">
 													<div id="tab_1-1" class="tab-pane active">
-														<div style="height: auto;" id="accordion1-1" class="accordion collapse">
-															<form action="#">
-																<label class="control-label">שם פרטי</label>
-																<input type="text" placeholder="פלוני" class="m-wrap span8" />
-																<label class="control-label">שם משפחה</label>
-																<input type="text" placeholder="אלמוני" class="m-wrap span8" />
-																<div class="control-group">
-																	<label class="control-label">תאריך לידה</label>
-																	<div class="controls">
-																		<input class="m-wrap m-ctrl-medium date-picker" readonly size="16" type="text" value="" />
+														<div style="height: auto;" id="accordion1-1" class="accordion collapse">															
+															<g:form name="userUpdateFrm" class="horizontal-form" controller="spyBoy" action="updateUserDetails" method="POST">
+																<div id="resultsDiv"></div>
+																<div class="row-fluid">
+																	<div class="span6">
+																		<div class="control-group">
+																			<label class="control-label" for="firstName">שם פרטי</label>
+																			<div class="controls">
+																				<input id="firstName" class="m-wrap span12" type="text" placeholder="פלוני" value="${user.firstName}" name="firstName">																				
+																			</div>
+																		</div>
+																	</div>
+																	<div class="span6">
+																		<div class="control-group">
+																			<label class="control-label" for="lastName">שם משפחה</label>
+																			<div class="controls">
+																				<input id="lastName" class="m-wrap span12" type="text" placeholder="אלמוני" value="${user.lastName}" name="lastName">																				
+																			</div>
+																		</div>
 																	</div>
 																</div>
-																<label class="control-label">טלפון</label>
-																<input type="text" placeholder="+1 646 580 DEMO (6284)" class="m-wrap span8" />
-																<label class="control-label">סוג</label>
-																<div class="controls">
-																	<input type="text" class="span8 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;נייד&quot;,&quot;נייח&quot;]" />
-																	<p class="help-block"><span class="muted">התחל להקליד להשלמה אוטומטית. לדוגמה: נייד.</span></p>
-																</div>																
-																<label class="control-label">מקצוע</label>
-																<input type="text" placeholder="מפתח WEB" class="m-wrap span8" />
-																<label class="control-label">מדינה</label>
-																<div class="controls">
-																	<input type="text" class="span8 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;ישראל&quot;]" />
-																	<p class="help-block"><span class="muted">התחל להקליד להשלמה אוטומטית לדוגמה US</span></p>
+																
+																<div class="row-fluid">
+																	<div class="span6">
+																		<div class="control-group">
+																			<label class="control-label" for="birthday">תאריך לידה</label>
+																			<div class="controls">
+																				<input class="m-wrap m-ctrl-medium date-picker" readonly size="16" type="text" value="<g:formatDate format='dd/MM/yyyy' date='${user.birthDate}'/>" name="birthDate"/>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="span6">
+																		<div class="control-group">
+																			<label class="control-label">טלפון</label>
+																			<div class="controls">
+																				<input type="text" placeholder="+1 646 580 DEMO (6284)" class="m-wrap span12" value="${user.number}" name="number"/>																				
+																			</div>
+																		</div>
+																	</div>
 																</div>
-																<label class="control-label">פרטים נוספים</label>
-																<textarea class="span8 m-wrap" rows="3"></textarea>
-																<label class="control-label">כתובת אתר אישי</label>
-																<input type="text" placeholder="http://www.mywebsite.com" class="m-wrap span8" />
-																<div class="submit-btn">
-																	<a href="#" class="btn green">שמור שינויים</a>
-																	<a href="#" class="btn">בטל</a>
+																
+																<div class="row-fluid">
+																	<div class="span6">
+																		<div class="control-group">
+																			<label class="control-label">סוג</label>
+																			<div class="controls">
+																				<input type="text" class="span12 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;נייד&quot;,&quot;נייח&quot;]" value="${user.type}" name="type"/>
+																				<p class="help-block"><span class="muted">התחל להקליד להשלמה אוטומטית. לדוגמה: נייד.</span></p>
+																			</div>
+																		</div>
+																	</div>																
+																	<div class="span6">
+																		<div class="control-group">																																
+																			<label class="control-label">מקצוע</label>
+																			<div class="controls">
+																				<input type="text" placeholder="מפתח WEB" class="m-wrap span12" value="${user.occupation}" name="occupation"/>
+																			</div>
+																		</div>
+																	</div>
 																</div>
-															</form>
+															
+															<div class="row-fluid">
+																<div class="span6">
+																	<div class="control-group">
+																		<label class="control-label">מדינה</label>
+																		<div class="controls">
+																			<input type="text" class="span12 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;ישראל&quot;]" value="${user.country}" name="country"/>
+																			<p class="help-block"><span class="muted">התחל להקליד להשלמה אוטומטית לדוגמה US</span></p>
+																		</div>
+																	</div>		
+																</div>
+																<div class="span6">
+																	<div class="control-group">		
+																		<label class="control-label">פרטים נוספים</label>
+																		<div class="controls">
+																			<textarea class="span12 m-wrap" rows="1" value="${user.more}" name="more"></textarea>
+																		</div>
+																	</div>
+																</div>		
+															</div>	
+															
+															<div class="row-fluid">
+																<div class="span6">
+																	<div class="control-group">
+																		<label class="control-label">כתובת אתר אישי</label>
+																		<div class="controls">
+																			<input type="text" placeholder="http://www.mywebsite.com" class="m-wrap span12" value="${user.siteURL}" name="siteURL"/>																			
+																		</div>
+																	</div>
+																</div>
+																<div class="span6">
+																	<div class="control-group">
+																		<label class="control-label">אימיילי</label>
+																		<div class="controls">
+																			<input type="text" placeholder="username@google.com" class="m-wrap span12" value="${user.email}" name="email"/>
+																		</div>
+																	</div>
+																</div>			
+															</div>
+															
+															<div class="row-fluid">
+																<div class="span12">
+																	<div class="control-group">
+																		<label class="control-label">כתובת</label>
+																		<div class="controls">
+																			<input type="text" placeholder="הרב קוק 20 ,תל אביב" class="m-wrap span12" value="${user.address}" name="address"/>
+																			<div class="submit-btn">																				
+																				<g:submitToRemote url="[controller: 'spyBoy', action:'updateUserDetails']" class="btn green" method="POST"  update="resultsDiv" value="שמור שינויים"/>																				
+																				<div class="btn">בטל</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>		
+															</div>															
+															</g:form>
 														</div>
 													</div>
 													<div id="tab_2-2" class="tab-pane">
 														<div style="height: auto;" id="accordion2-2" class="accordion collapse">
 															<form action="#">
-																<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+																<p>אנא הגדר תמונת משתמש.</p>
 																<br />
 																<div class="controls">
-																	<div class="thumbnail" style="width: 291px; height: 170px;">
-																		<img src="http://www.placehold.it/291x170/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+																	<div class="thumbnail" style="width: 291px; height: 291px;">
+																		<img src="data:image/png;base64,${user.image}" alt="" width="291px"/>																		
 																	</div>
 																</div>
-																<div class="space10"></div>
+																<div class="space20"></div>
 																<div class="fileupload fileupload-new" data-provides="fileupload">
 																	<div class="input-append">
 																		<div class="uneditable-input">
@@ -740,22 +819,22 @@
 																			<span class="fileupload-preview"></span>
 																		</div>
 																		<span class="btn btn-file">
-																		<span class="fileupload-new">Select file</span>
-																		<span class="fileupload-exists">Change</span>
+																		<span class="fileupload-new">בחר קובץ</span>
+																		<span class="fileupload-exists">שנה תמונה</span>
 																		<input type="file" class="default" />
 																		</span>
-																		<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+																		<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">הסר תמונה</a>
 																	</div>
 																</div>
 																<div class="clearfix"></div>
 																<div class="controls">
-																	<span class="label label-important">NOTE!</span>
-																	<span>You can write some information here..</span>
+																	<span class="label label-important">הערה !</span>
+																	<span>התמונה חסויה ומשמשת והינה לשימוש אישי בלבד.</span>
 																</div>
 																<div class="space10"></div>
 																<div class="submit-btn">
-																	<a href="#" class="btn green">Submit</a>
-																	<a href="#" class="btn">Cancel</a>
+																	<a href="#" class="btn green">אשר</a>
+																	<a href="#" class="btn">בטל</a>
 																</div>
 															</form>
 														</div>
@@ -763,15 +842,15 @@
 													<div id="tab_3-3" class="tab-pane">
 														<div style="height: auto;" id="accordion3-3" class="accordion collapse">
 															<form action="#">
-																<label class="control-label">Current Password</label>
+																<label class="control-label">סיסמה נוכחית</label>
 																<input type="password" class="m-wrap span8" />
-																<label class="control-label">New Password</label>
+																<label class="control-label">סיסמה חדשה</label>
 																<input type="password" class="m-wrap span8" />
-																<label class="control-label">Re-type New Password</label>
+																<label class="control-label">הזן סיסמה שנית</label>
 																<input type="password" class="m-wrap span8" />
 																<div class="submit-btn">
-																	<a href="#" class="btn green">Change Password</a>
-																	<a href="#" class="btn">Cancel</a>
+																	<a href="#" class="btn green">שנה סיסמה</a>
+																	<a href="#" class="btn">בטל</a>
 																</div>
 															</form>
 														</div>
@@ -780,73 +859,73 @@
 														<div style="height: auto;" id="accordion4-4" class="accordion collapse">
 															<form action="#">
 																<div class="profile-settings row-fluid">
-																	<div class="span9">
-																		<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus..</p>
+																	<div class="span2">
+																		<p>הצג התראות על מידע חדש</p>
 																	</div>
 																	<div class="control-group span3">
 																		<div class="controls">
 																			<label class="radio">
 																			<input type="radio" name="optionsRadios1" value="option1" />
-																			Yes
+																			כן
 																			</label>
 																			<label class="radio">
 																			<input type="radio" name="optionsRadios1" value="option2" checked />
-																			No
+																			לא
 																			</label>  
 																		</div>
 																	</div>
 																</div>
 																<!--end profile-settings-->
 																<div class="profile-settings row-fluid">
-																	<div class="span9">
-																		<p>Enim eiusmod high life accusamus terry richardson ad squid wolf moon</p>
+																	<div class="span2">
+																		<p>הקלט תחילת שיחות</p>
 																	</div>
 																	<div class="control-group span3">
 																		<div class="controls">
 																			<label class="checkbox">
-																			<input type="checkbox" value="" /> All
+																			<input type="checkbox" value="" /> 5 דקות ראשונות
 																			</label>
 																			<label class="checkbox">
-																			<input type="checkbox" value="" /> Friends
-																			</label>
-																		</div>
-																	</div>
-																</div>
-																<!--end profile-settings-->
-																<div class="profile-settings row-fluid">
-																	<div class="span9">
-																		<p>Pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson</p>
-																	</div>
-																	<div class="control-group span3">
-																		<div class="controls">
-																			<label class="checkbox">
-																			<input type="checkbox" value="" /> Yes
+																			<input type="checkbox" value="" /> 10 דקות ראשונות
 																			</label>
 																		</div>
 																	</div>
 																</div>
 																<!--end profile-settings-->
 																<div class="profile-settings row-fluid">
-																	<div class="span9">
-																		<p>Cliche reprehenderit enim eiusmod high life accusamus terry</p>
+																	<div class="span2">
+																		<p>בצע מעקב מיקום בזמן אמת</p>
 																	</div>
 																	<div class="control-group span3">
 																		<div class="controls">
 																			<label class="checkbox">
-																			<input type="checkbox" value="" /> Yes
+																			<input type="checkbox" value="" /> כן
 																			</label>
 																		</div>
 																	</div>
 																</div>
 																<!--end profile-settings-->
 																<div class="profile-settings row-fluid">
-																	<div class="span9">
-																		<p>Oiusmod high life accusamus terry richardson ad squid wolf fwopo</p>
+																	<div class="span2">
+																		<p>צלם תמונות</p>
 																	</div>
 																	<div class="control-group span3">
 																		<div class="controls">
 																			<label class="checkbox">
-																			<input type="checkbox" value="" /> Yes
+																			<input type="checkbox" value="" /> כן
+																			</label>
+																		</div>
+																	</div>
+																</div>
+																<!--end profile-settings-->
+																<div class="profile-settings row-fluid">
+																	<div class="span2">
+																		<p>צלם וידאו</p>
+																	</div>
+																	<div class="control-group span3">
+																		<div class="controls">
+																			<label class="checkbox">
+																			<input type="checkbox" value="" /> כן
 																			</label>
 																		</div>
 																	</div>
@@ -854,8 +933,8 @@
 																<!--end profile-settings-->
 																<div class="space5"></div>
 																<div class="submit-btn">
-																	<a href="#" class="btn green">Save Changes</a>
-																	<a href="#" class="btn">Cancel</a>
+																	<a href="#" class="btn green">שמור שינויים</a>
+																	<a href="#" class="btn">בטל</a>
 																</div>
 															</form>
 														</div>
@@ -1285,7 +1364,6 @@
 				<!-- END PAGE CONTENT-->
 			</div>
 			<!-- END PAGE CONTAINER--> 
-		</div>
 	<!-- END PAGE --> 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->	
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
