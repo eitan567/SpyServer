@@ -113,16 +113,23 @@ class AuthController {
 			else {
 				// Create user
 				user = new User(
-						username: params.username,
-						fullname: params.fullname,
-						email: params.email,
-						address: params.address,
-						city: params.city,
-						country:params.country,						
-						password: shiroSecurityService.encodePassword(params.password)
-						)
+					username: params.username,
+					firstName: params.firstName,
+					lastName: params.lastName,
+					birthDate: params.birthDate!=null ? new Date(params.birthDate):null,
+					occupation: params.occupation,
+					email: params.email,
+					number: params.number,
+					type: params.type,
+					country: params.country,
+					more: params.more,
+					siteURL: params.siteURL,
+					address: params.address,
+					city: params.city,
+					password: shiroSecurityService.encodePassword(params.password)
+				)
 
-				if (user.save()) {
+				if (user.save(flush: true, failOnError: true)) {
 
 					// Add USER role to new user
 					user.addToRoles(Role.findByName('ROLE_USER'))

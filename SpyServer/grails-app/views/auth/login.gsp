@@ -168,21 +168,21 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			<h3>רישום משתמש</h3>
 			<p>הזן את פרטיך האישיים מטה:</p>
 			<div class="control-group">
-				<label class="control-label visible-ie8 visible-ie9">שם מלא</label>
+				<label class="control-label visible-ie8 visible-ie9">שם פרטי</label>
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-font"></i> <input class="m-wrap placeholder-no-fix"
-							type="text" placeholder="שם פרטי" name="firstname"
+							type="text" placeholder="שם פרטי" name="firstName"
 							value="${user.firstName}" />
 					</div>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label visible-ie8 visible-ie9">שם מלא</label>
+				<label class="control-label visible-ie8 visible-ie9">שם משפחה</label>
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-font"></i> <input class="m-wrap placeholder-no-fix"
-							type="text" placeholder="שם משפחה" name="lastname"
+							type="text" placeholder="שם משפחה" name="lastName"
 							value="${user.lastName}" />
 					</div>
 				</div>
