@@ -1,3 +1,7 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import grails.converters.JSON
 
 import com.xaviar.domain.Role
@@ -52,14 +56,18 @@ class BootStrap {
 		.save(flush: true, failOnError: true)
 
 		JSON.registerObjectMarshaller(Date) {
-			return it?.format("EEEE d MMMM yyyy ,HH:mm")
-		}
+			SimpleDateFormat dateFormatHE = new SimpleDateFormat("EEEE d MMMM yyyy ,HH:mm", new Locale("he"));
+			//SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
-		//		JSON.registerObjectMarshaller(CallLog) {
-		//
-		//			String type= it.type;
-		//			return type;
-		//		}
+//			try {
+//				date = dateFormatHE.parse(it.toString());
+//			} catch (ParseException e) {
+//				log.warn("Input date was not correct. Can not localize it.");
+//				return it;
+//			}
+			return dateFormatHE.format(it);
+			//return it?.format("EEEE d MMMM yyyy ,HH:mm")
+		}		
 	}
 
 

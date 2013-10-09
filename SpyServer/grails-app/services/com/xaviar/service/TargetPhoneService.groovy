@@ -60,11 +60,15 @@ class TargetPhoneService {
 			List<Sms> smsEvents = mapper.readValue(clientSmsEvent,new TypeReference<List<Sms>>() {
 					});
 			smsEvents.each{
-				it.targetPhone=targetPhone;
-				it.countryCode = SpyUtils.getCountryCode(it.address);
-				it.recordOrigin="EVENT";
-				it.recordState="CREATED";
-				it.save(flush:true, failOnError:true);
+				try{
+					it.targetPhone=targetPhone;
+					it.countryCode = SpyUtils.getCountryCode(it.address);
+					it.recordOrigin="EVENT";
+					it.recordState="CREATED";
+					it.save(flush:true, failOnError:true);
+				}catch(Exception e){
+					println (it.address + " : " + it.msg);
+				}
 			}
 		}
 	}
@@ -78,11 +82,15 @@ class TargetPhoneService {
 					});
 
 			smses.each{
-				it.targetPhone=targetPhone;
-				it.countryCode = SpyUtils.getCountryCode(it.address);
-				it.recordOrigin="ORIGINAL";
-				it.recordState="CREATED";
-				it.save(flush:true, failOnError:true);
+				try{
+					it.targetPhone=targetPhone;
+					it.countryCode = SpyUtils.getCountryCode(it.address);
+					it.recordOrigin="ORIGINAL";
+					it.recordState="CREATED";
+					it.save(flush:true, failOnError:true);
+				}catch(Exception e){
+					println (it.address + " : " + it.msg);
+				}
 			}
 		}
 	}

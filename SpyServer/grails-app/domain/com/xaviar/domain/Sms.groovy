@@ -1,5 +1,7 @@
 package com.xaviar.domain;
 
+import java.text.SimpleDateFormat;
+
 import com.spy.tools.SpyUtils;
  
 
@@ -39,7 +41,8 @@ public class Sms {
 	}
 	
 	public String getFormatedDate(){
-		return this.time.format("EEEE d MMMM yyyy ,HH:mm");
+		SimpleDateFormat dateFormatHE = new SimpleDateFormat("EEEE d MMMM yyyy ,HH:mm", new Locale("he"));
+		return dateFormatHE.format(time);
 	}
 	
 	public setAddress(String address){

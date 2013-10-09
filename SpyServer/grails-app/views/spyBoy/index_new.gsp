@@ -365,7 +365,7 @@
 											${message(code: 'location.address.label', default: 'כתובת')}
 										</th>
 										<th class="hidden-480" style="max-width: 50px !important;">
-											${message(code: 'location.address.label', default: 'דיוק(במטרים)')}
+											${message(code: 'location.address.label', default: 'דיוק(במטר)')}
 										</th>
 										<th class="hidden-480" style="max-width: 50px !important;">
 											${message(code: 'location.address.label', default: 'מקור')}

@@ -1,5 +1,7 @@
 package com.xaviar.domain
 
+import java.text.SimpleDateFormat;
+
 import com.spy.tools.SpyUtils
 
 
@@ -43,7 +45,8 @@ class CallLog {
 	}
 	
 	public String getFormatedDate(){
-		return this.timeSeconds.format("EEEE d MMMM yyyy ,HH:mm");
+		SimpleDateFormat dateFormatHE = new SimpleDateFormat("EEEE d MMMM yyyy ,HH:mm", new Locale("he"));
+		return dateFormatHE.format(timeSeconds);
 	}
 
 	public setPhoneNumber(String number){
